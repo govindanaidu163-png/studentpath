@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath Quiz</title>
+
   <link rel="stylesheet" href="css/style.css">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Career Quiz</title>
 </head>
 
-<body>
+<body class="quiz-page">
+
+<canvas id="particles"></canvas>
 
 <div class="quiz-container">
 
-  <div class="quiz-card">
-    <h2>Career Quiz 🧠</h2>
+  <!-- PROGRESS -->
+  <div class="progress-wrapper">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span id="progressText">0%</span>
+  </div>
 
-    <div id="progress" class="progress"></div>
-
-    <div id="questionBox" class="question"></div>
-
-    <div id="optionsBox" class="options"></div>
-
+  <!-- QUESTION BOX -->
+  <div class="question-box" id="questionBox">
+    <h2 id="questionText"></h2>
+    <div class="options" id="optionsContainer"></div>
   </div>
 
 </div>
 
 <script>
 
-// 🎯 QUESTIONS
+// ================= QUESTIONS WITH LOGIC =================
 const questions = [
   {
-    q: "What do you enjoy more?",
+    q: "What do you enjoy the most?",
     options: [
-      { text: "Coding & Technology 💻", type: "tech" },
-      { text: "Biology & Helping people 🏥", type: "medical" },
-      { text: "Creativity & Design 🎨", type: "creative" },
-      { text: "Business & Money 💰", type: "business" }
+      { text: "Coding", type: "tech" },
+      { text: "Helping people", type: "medical" },
+      { text: "Designing", type: "creative" },
+      { text: "Business", type: "business" }
     ]
   },
   {
-    q: "Which subject do you like most?",
+    q: "Which skill do you prefer?",
     options: [
-      { text: "Maths 📐", type: "tech" },
-      { text: "Biology 🧬", type: "medical" },
-      { text: "Arts 🎭", type: "creative" },
-      { text: "Commerce 📊", type: "business" }
+      { text: "Logic", type: "tech" },
+      { text: "Communication", type: "business" },
+      { text: "Creativity", type: "creative" },
+      { text: "Care", type: "medical" }
     ]
   },
   {
-    q: "Your dream work style?",
+    q: "What kind of work excites you?",
     options: [
-      { text: "Building apps 💻", type: "tech" },
-      { text: "Treating patients 🏥", type: "medical" },
-      { text: "Creating designs 🎨", type: "creative" },
-      { text: "Running business 💰", type: "business" }
+      { text: "Building apps", type: "tech" },
+      { text: "Treating patients", type: "medical" },
+      { text: "Creating content", type: "creative" },
+      { text: "Running companies", type: "business" }
     ]
   }
 ];
 
-// 🧠 SCORE
+// ================= SCORE SYSTEM =================
 let score = {
   tech: 0,
   medical: 0,
@@ -67,61 +73,123 @@ let score = {
 
 let current = 0;
 
-// 🚀 LOAD QUESTION
+// ================= LOAD QUESTION =================
 function loadQuestion() {
   const q = questions[current];
+  document.getElementById("questionText").innerText = q.q;
 
-  document.getElementById("questionBox").innerText = q.q;
-
-  const optionsBox = document.getElementById("optionsBox");
-  optionsBox.innerHTML = "";
+  const container = document.getElementById("optionsContainer");
+  container.innerHTML = "";
 
   q.options.forEach(opt => {
-    let btn = document.createElement("button");
-    btn.className = "option-btn";
+    const btn = document.createElement("div");
+    btn.className = "option";
     btn.innerText = opt.text;
 
     btn.onclick = () => {
       score[opt.type]++;
-      nextQuestion();
+      btn.classList.add("selected");
+      setTimeout(nextQuestion, 200);
     };
 
-    optionsBox.appendChild(btn);
+    container.appendChild(btn);
   });
 
-  document.getElementById("progress").innerText =
-    `Question ${current + 1} of ${questions.length}`;
+  updateProgress();
 }
 
-// ➡️ NEXT
+// ================= NEXT =================
 function nextQuestion() {
-  current++;
+  const box = document.getElementById("questionBox");
 
-  if (current < questions.length) {
-    loadQuestion();
-  } else {
-    showResult();
-  }
-}
+  box.style.opacity = 0.5;
+  box.style.transform = "scale(0.97)";
 
-// 🎯 RESULT
-function showResult() {
-  let finalResult = "tech";
-  let max = 0;
+  setTimeout(() => {
+    current++;
 
-  for (let key in score) {
-    if (score[key] > max) {
-      max = score[key];
-      finalResult = key;
+    if (current < questions.length) {
+      loadQuestion();
+      box.style.opacity = 1;
+      box.style.transform = "scale(1)";
+    } else {
+      showAnalyzing();
     }
-  }
-
-  localStorage.setItem("quizResult", finalResult);
-  window.location.href = "/result.html";
+  }, 150);
 }
 
-// START
+// ================= PROGRESS =================
+function updateProgress() {
+  const percent = Math.round((current / questions.length) * 100);
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").innerText = percent + "%";
+}
+
+// ================= AI ANALYZING =================
+function showAnalyzing() {
+  document.querySelector(".quiz-container").innerHTML = `
+    <div class="ai-box">
+      <h2>🤖 Analyzing your answers...</h2>
+      <div class="loader"></div>
+      <p>Finding your best career match</p>
+    </div>
+  `;
+
+  setTimeout(showResult, 2000);
+}
+
+// ================= RESULT LOGIC =================
+function showResult() {
+  let best = Object.keys(score).reduce((a, b) =>
+    score[a] > score[b] ? a : b
+  );
+
+  // ✅ SAVE RESULT
+  localStorage.setItem("careerResult", best);
+
+  // ✅ REDIRECT TO RESULT PAGE
+  window.location.href = "result.html";
+}
+
+// ================= START =================
 loadQuestion();
+
+// ================= PARTICLES =================
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    ctx.fillStyle = "rgba(99,102,241,0.7)";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
 
 </script>
 

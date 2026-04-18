@@ -1,137 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="css/style.css">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Career Result</title>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="result-page">
 
-  <div class="wrap">
-    <div class="card">
-      <h2>Your Career Match 🎯</h2>
+<!-- BACKGROUND PARTICLES -->
+<canvas id="particles"></canvas>
 
-      <div id="resultText">Loading...</div>
-      <div id="roadmap"></div>
+<div class="result-container">
 
-      <div class="top-actions">
-        <button type="button" onclick="compare()">⚔️ Compare Careers</button>
-        <button type="button" class="secondary" onclick="wantMore()">🔓 Want to know more</button>
-      </div>
+  <div class="result-card">
 
-      <button type="button" class="green" onclick="alreadyUser()">👤 Already a user? Login</button>
+    <p class="result-tag">✨ AI Career Match</p>
+
+    <h1>Your Best Career Path</h1>
+
+    <h2 id="careerTitle" class="gradient-text">Loading...</h2>
+
+    <p id="careerDesc">
+      Analyzing your strengths and interests...
+    </p>
+
+    <div class="result-actions">
+      <button class="main-btn" onclick="goDashboard()">
+        Go to Dashboard →
+      </button>
+
+      <button class="secondary-btn" onclick="retakeQuiz()">
+        Retake Quiz
+      </button>
+
+      <button class="main-btn" onclick="goSignup()">
+       Know more about this career →
+      </button>
+
+
     </div>
+
   </div>
 
-  <script type="module">
-    import { careers } from "./js/careers.js";
+</div>
 
-    const result = localStorage.getItem("quizResult");
+<script>
 
-    const typeMap = {
-      tech: "science",
-      medical: "science",
-      creative: "arts",
-      business: "commerce"
-    };
+// ================= GET RESULT =================
+const result = localStorage.getItem("careerResult");
 
-    const type = typeMap[result];
-    const filtered = careers.filter(c => c.type === type);
+// ================= CAREER DATA =================
+const careerData = {
+  tech: {
+    title: "🚀 Software Engineer",
+    desc: "You enjoy logic, problem solving, and building digital systems. This path fits your analytical mindset and curiosity."
+  },
+  medical: {
+    title: "🩺 Healthcare Professional",
+    desc: "You care deeply about people and want to make a real-world impact through helping others."
+  },
+  creative: {
+    title: "🎨 Creative Designer",
+    desc: "You thrive in creativity, visual storytelling, and expressing ideas through design."
+  },
+  business: {
+    title: "📈 Entrepreneur / Manager",
+    desc: "You are driven by leadership, strategy, and making decisions that create impact."
+  }
+};
 
-    const top3 = filtered
-      .sort((a, b) => {
-        const scoreA = (a.growth || 0) * 10 + (a.successRate || 0) + (a.salary || 0) - (a.difficulty || 0) * 10;
-        const scoreB = (b.growth || 0) * 10 + (b.successRate || 0) + (b.salary || 0) - (b.difficulty || 0) * 10;
-        return scoreB - scoreA;
-      })
-      .slice(0, 3);
+// ================= LOAD RESULT =================
+if (result && careerData[result]) {
+  document.getElementById("careerTitle").innerText = careerData[result].title;
+  document.getElementById("careerDesc").innerText = careerData[result].desc;
+} else {
+  document.getElementById("careerTitle").innerText = "No Result Found";
+  document.getElementById("careerDesc").innerText = "Please take the quiz first.";
+}
 
-    window.top3 = top3;
+// ================= ACTIONS =================
+function goDashboard() {
+  window.location.href = "dashboard.html";
+}
 
-    if (!result || !type) {
-      document.getElementById("resultText").innerHTML = `
-        <h3>No quiz result found ❌</h3>
-        <p>Please take the quiz first.</p>
-        <button type="button" onclick="goHome()">Go Home</button>
-      `;
-    } else if (!top3.length) {
-      document.getElementById("resultText").innerHTML = `
-        <h3>No matching careers found 😢</h3>
-        <p>Please check your data file.</p>
-      `;
-    } else {
-      let html = "<h3>🔥 Top Career Matches:</h3>";
+function retakeQuiz() {
+  window.location.href = "quiz.html";
+}
 
-      top3.forEach((career, index) => {
-        html += `
-          <div class="career-box">
-            <h4>${index + 1}. ${career.name}</h4>
-            <p>${career.desc}</p>
-            <p><b>💰 Salary:</b> ${career.salaryLabel}</p>
-            <p><b>📈 Growth:</b> ${career.growth}</p>
-            <button type="button" onclick="viewCareer(${index})">View Details</button>
-          </div>
-        `;
-      });
+// ================= PARTICLES =================
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
-      document.getElementById("resultText").innerHTML = html;
-    }
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    window.viewCareer = function (index) {
-      const career = window.top3[index];
+let particles = [];
 
-      let html = `
-        <h3>${career.name}</h3>
-        <p>${career.desc}</p>
-        <p><b>💰 Salary:</b> ${career.salaryLabel}</p>
-        <p><b>📈 Growth:</b> ${career.growth}</p>
-        <p><b>⚡ Difficulty:</b> ${career.difficulty}</p>
-        <h4>📍 Roadmap:</h4>
-        <ul>
-      `;
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5
+  });
+}
 
-      career.roadmap.forEach(step => {
-        html += `<li>${step}</li>`;
-      });
+function goSignup() {
+  localStorage.setItem("authView", "signup");
+  window.location.href = "index.html";
+}
 
-      html += `</ul>`;
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      document.getElementById("roadmap").innerHTML = html;
-    };
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
 
-    window.compare = function () {
-      let html = "<h3>⚔️ Comparison</h3>";
+    ctx.fillStyle = "rgba(99,102,241,0.7)";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
 
-      window.top3.forEach(career => {
-        html += `
-          <div class="career-box">
-            <b>${career.name}</b><br>
-            💰 ${career.salaryLabel}<br>
-            📈 Growth: ${career.growth}<br>
-            ⚡ Difficulty: ${career.difficulty}
-          </div>
-        `;
-      });
+  requestAnimationFrame(animateParticles);
+}
 
-      document.getElementById("roadmap").innerHTML = html;
-    };
+animateParticles();
 
-    window.wantMore = function () {
-      localStorage.setItem("authView", "signup");
-      window.location.href = "index.html";
-    };
-
-    window.alreadyUser = function () {
-      localStorage.setItem("authView", "login");
-      window.location.href = "index.html";
-    };
-
-    window.goHome = function () {
-      window.location.href = "index.html";
-    };
-  </script>
+</script>
 
 </body>
 </html>
