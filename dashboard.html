@@ -285,5 +285,29 @@
 
 
   </script>
+
+  <script>
+function resetPage() {
+  // fade हटाओ
+  document.body.classList.remove("fade-out");
+
+  // scroll fix
+  document.body.style.opacity = "1";
+  document.body.style.visibility = "visible";
+  document.body.style.overflow = "auto";
+
+  // modal close
+  document.getElementById("authSection")?.classList.add("hidden");
+
+  // sidebar close
+  document.getElementById("sidebar")?.classList.remove("open");
+}
+
+// IMPORTANT
+window.addEventListener("pageshow", resetPage);
+window.addEventListener("DOMContentLoaded", resetPage);
+</script>
+
+
 </body>
 </html>
