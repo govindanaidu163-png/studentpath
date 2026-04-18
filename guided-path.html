@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guided Path</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/guided-path.css" />
+</head>
+
+<body class="guided-path-page">
+  <!-- Background canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="noise"></div>
+
+  <!-- Roadmap drawer backdrop -->
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
+
+  <!-- Roadmap drawer -->
+  <div id="roadmap-drawer">
+    <div class="drawer-inner">
+      <div class="drawer-header">
+        <div class="drawer-title">Career Roadmap</div>
+        <button class="drawer-close" id="drawer-close">✕</button>
+      </div>
+      <div id="drawer-content"></div>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app">
+    <header id="topbar">
+      <div class="brand">
+        <div class="brand-mark">◈</div>
+        <div class="brand-name">Student<span>Path</span></div>
+      </div>
+
+      <div class="top-controls">
+        <div class="depth-indicator" id="depth-label">Choose Stage</div>
+      </div>
+    </header>
+
+    <main id="stage">
+      <div class="step-glow"></div>
+
+      <div id="question-wrap">
+        <div class="question-label" id="question-label">Step 1</div>
+        <h1 class="question-text" id="question-text">Where are you right now?</h1>
+        <p class="question-sub" id="question-sub">Your journey begins with a single step</p>
+      </div>
+
+      <div id="options-grid"></div>
+    </main>
+
+    <footer id="bottombar">
+      <div class="progress-bar" id="progress-bar" style="width: 0;"></div>
+
+      <div class="bottom-left">
+        <button class="btn" id="btn-back" disabled><span class="btn-icon">←</span>Back</button>
+        <button class="btn" id="btn-reset"><span class="btn-icon">↺</span>Reset</button>
+      </div>
+
+      <div class="bottom-right">
+        <button class="btn primary" id="btn-roadmap"><span class="btn-icon">◈</span>View Roadmap</button>
+        <button class="btn" id="btn-dashboard"><span class="btn-icon">⊞</span>Dashboard</button>
+        <button class="btn" id="btn-export"><span class="btn-icon">↗</span>Export</button>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="js/guidedPath.js"></script>
+</body>
+</html>

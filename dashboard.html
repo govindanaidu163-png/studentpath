@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+</head>
+
+<body class="dashboard-page fade-in">
+
+  <!-- =========================
+       OVERLAY (MOBILE SIDEBAR)
+  ========================== -->
+  <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- =========================
+       FULL LAYOUT
+  ========================== -->
+  <div class="layout">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+    <aside id="sidebar" class="sidebar">
+      <div>
+        <div class="sidebar-top">
+          <h2 class="logo">StudentPath</h2>
+        </div>
+
+        <div class="sidebar-section">
+          <p class="sidebar-title">MENU</p>
+
+          <button class="sidebar-btn active" onclick="goToDashboardHome()">Dashboard</button>
+          <button class="sidebar-btn" onclick="goToGuidedPath()">Guided Path</button>
+          <button class="sidebar-btn" onclick="goToExplore()">Explore Careers</button>
+          <button class="sidebar-btn" onclick="goToSaved()">Saved Careers</button>
+        </div>
+
+        <div class="sidebar-section">
+          <p class="sidebar-title">ACCOUNT</p>
+
+          <button class="sidebar-btn" onclick="goToAbout()">ℹ️ About</button>
+          <button class="sidebar-btn">👤 Profile</button>
+          <button class="sidebar-btn">⚙️ Settings</button>
+          <button class="sidebar-btn danger" onclick="logout()">🚪 Logout</button>
+        </div>
+      </div>
+
+      <div class="sidebar-user">
+        <h4 id="sidebarUserName">User</h4>
+        <p id="sidebarUserEmail">email@example.com</p>
+      </div>
+    </aside>
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="main-content">
+
+      <!-- TOPBAR -->
+      <div class="navbar dashboard-topbar">
+        <div class="topbar-left">
+          <button class="icon-btn" onclick="openSidebar()">☰</button>
+          <div class="brand-block">
+            <h2 class="dashboard-brand">StudentPath</h2>
+            <p class="dashboard-subbrand">AI Career Guidance</p>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div class="greeting-block">
+            <h2 id="greetingText"></h2>
+            <p id="dateText"></p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <span class="plan-badge">Free Plan</span>
+        </div>
+      </div>
+
+      <!-- PAGE CONTENT -->
+      <div class="container">
+
+        <!-- HERO -->
+        <section class="hero-card">
+          <div class="hero-tag">✨ AI Career Match Found</div>
+
+          <h2 id="careerText">
+            Your future is in <span class="gradient-text">Loading...</span>
+          </h2>
+
+          <p id="reasonText">
+            Based on your interests and personality — this is your best path.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="goToGuidedPath()">View roadmap</button>
+            <button class="btn-secondary" onclick="goToExplore()">Explore more</button>
+          </div>
+        </section>
+
+        <!-- CARDS -->
+        <section class="cards" aria-label="Quick actions">
+          <div class="card" onclick="goToGuidedPath()">
+            <h3>Guided Path</h3>
+            <p>Build your career roadmap step by step</p>
+          </div>
+
+          <div class="card" onclick="goToExplore()">
+            <h3>Explore</h3>
+            <p>All careers</p>
+          </div>
+
+          <div class="card" onclick="goToSaved()">
+            <h3>Saved</h3>
+            <p>Your saved careers</p>
+          </div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="progress-wrap" aria-label="Career progress">
+          <div class="progress-top">
+            <span>Career Progress</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBar"></div>
+          </div>
+        </section>
+
+        <!-- QUOTE -->
+        <div class="quote">“Consistency builds success.”</div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+          Built by Govinda 🚀 | StudentPath © 2026
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { auth, db } from "./js/firebase.js";
+    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    /* =========================
+       AUTH + DATA
+    ========================== */
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      let finalName = user.email.split("@")[0];
+      let finalEmail = user.email;
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        finalName = data.name || finalName;
+
+        document.getElementById("careerText").innerHTML =
+          'Your future is in <span class="gradient-text">' +
+          (data.recommendedCareer || "Not selected") +
+          '</span>';
+
+        if (data.reasons && Array.isArray(data.reasons)) {
+          document.getElementById("reasonText").innerText = data.reasons.join(", ");
+        }
+
+        const progress = Math.min((data.reasons?.length || 1) * 20, 100);
+        updateProgress(progress);
+      }
+
+      document.getElementById("sidebarUserName").innerText = finalName;
+      document.getElementById("sidebarUserEmail").innerText = finalEmail;
+
+      const now = new Date();
+      let greeting = "Good morning";
+      if (now.getHours() >= 12) greeting = "Good afternoon";
+      if (now.getHours() >= 18) greeting = "Good evening";
+
+      document.getElementById("greetingText").innerText =
+        `${greeting}, ${finalName.split(" ")[0]}!`;
+
+      document.getElementById("dateText").innerText = now.toDateString();
+
+      showToast(`Welcome back ${finalName.split(" ")[0]} 🚀`);
+    });
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+    const GUIDED_PATH_PAGE = "guided-path.html";
+
+    window.goToGuidedPath = () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = GUIDED_PATH_PAGE;
+      }, 300);
+    };
+
+    window.goToExplore = () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "explore.html";
+      }, 300);
+    };
+
+    window.goToSaved = () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "saved.html";
+      }, 300);
+    };
+
+    window.goToAbout = () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "about.html";
+      }, 300);
+    };
+
+    window.goToDashboardHome = () => {
+      closeSidebar();
+    };
+
+    /* =========================
+       SIDEBAR
+    ========================== */
+    window.openSidebar = () => {
+      document.getElementById("sidebar").classList.add("open");
+      document.getElementById("sidebarOverlay").classList.add("active");
+    };
+
+    window.closeSidebar = () => {
+      document.getElementById("sidebar").classList.remove("open");
+      document.getElementById("sidebarOverlay").classList.remove("active");
+    };
+
+    /* =========================
+       LOGOUT
+    ========================== */
+    window.logout = () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    };
+
+    /* =========================
+       PROGRESS
+    ========================== */
+    function updateProgress(value) {
+      document.getElementById("progressBar").style.width = `${value}%`;
+      document.getElementById("progressPercent").innerText = `${value}%`;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+   function showToast(msg) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.innerText = msg;
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+}
+
+
+  </script>
+</body>
+</html>

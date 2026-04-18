@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Quiz</title>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+  <div class="quiz-card">
+    <h2>Career Quiz 🧠</h2>
+
+    <div id="progress" class="progress"></div>
+
+    <div id="questionBox" class="question"></div>
+
+    <div id="optionsBox" class="options"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+// 🎯 QUESTIONS
+const questions = [
+  {
+    q: "What do you enjoy more?",
+    options: [
+      { text: "Coding & Technology 💻", type: "tech" },
+      { text: "Biology & Helping people 🏥", type: "medical" },
+      { text: "Creativity & Design 🎨", type: "creative" },
+      { text: "Business & Money 💰", type: "business" }
+    ]
+  },
+  {
+    q: "Which subject do you like most?",
+    options: [
+      { text: "Maths 📐", type: "tech" },
+      { text: "Biology 🧬", type: "medical" },
+      { text: "Arts 🎭", type: "creative" },
+      { text: "Commerce 📊", type: "business" }
+    ]
+  },
+  {
+    q: "Your dream work style?",
+    options: [
+      { text: "Building apps 💻", type: "tech" },
+      { text: "Treating patients 🏥", type: "medical" },
+      { text: "Creating designs 🎨", type: "creative" },
+      { text: "Running business 💰", type: "business" }
+    ]
+  }
+];
+
+// 🧠 SCORE
+let score = {
+  tech: 0,
+  medical: 0,
+  creative: 0,
+  business: 0
+};
+
+let current = 0;
+
+// 🚀 LOAD QUESTION
+function loadQuestion() {
+  const q = questions[current];
+
+  document.getElementById("questionBox").innerText = q.q;
+
+  const optionsBox = document.getElementById("optionsBox");
+  optionsBox.innerHTML = "";
+
+  q.options.forEach(opt => {
+    let btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.innerText = opt.text;
+
+    btn.onclick = () => {
+      score[opt.type]++;
+      nextQuestion();
+    };
+
+    optionsBox.appendChild(btn);
+  });
+
+  document.getElementById("progress").innerText =
+    `Question ${current + 1} of ${questions.length}`;
+}
+
+// ➡️ NEXT
+function nextQuestion() {
+  current++;
+
+  if (current < questions.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+// 🎯 RESULT
+function showResult() {
+  let finalResult = "tech";
+  let max = 0;
+
+  for (let key in score) {
+    if (score[key] > max) {
+      max = score[key];
+      finalResult = key;
+    }
+  }
+
+  localStorage.setItem("quizResult", finalResult);
+  window.location.href = "/result.html";
+}
+
+// START
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Careers</title>
+
+</head>
+
+<body>
+
+  <div class="top-bar">
+  <button class="btn" onclick="goBack()">⬅ Back</button>
+  <h2>Saved Careers 💾</h2>
+  <div></div>
+</div>
+
+
+<div class="container">
+
+  <h1>❤️ Saved Careers</h1>
+
+  <div id="savedList" class="cards"></div>
+
+  <button class="btn compare-btn" onclick="compareCareers()">
+    Compare Careers
+  </button>
+
+</div>
+
+<script type="module">
+
+import { careers } from "./js/careers.js";
+
+// 📥 GET SAVED
+const savedKeys = JSON.parse(localStorage.getItem("savedCareers")) || [];
+
+const container = document.getElementById("savedList");
+
+if (savedKeys.length === 0) {
+  container.innerHTML = "<p>No saved careers yet</p>";
+}
+
+// 🎯 SHOW CARDS
+savedKeys.forEach(key => {
+
+  const data = careers.find(c => c.key === key);
+
+  if (!data) return;
+
+  let div = document.createElement("div");
+  div.className = "card";
+
+  div.innerHTML = `
+  <h3>${data.name}</h3>
+  <p>${data.salaryLabel}</p>
+  <button onclick="removeCareer('${data.key}')">❌ Remove</button>
+`;
+
+  container.appendChild(div);
+
+});
+
+// 🔥 COMPARE BUTTON
+window.compareCareers = function() {
+
+  const savedKeys = JSON.parse(localStorage.getItem("savedCareers")) || [];
+
+  if (savedKeys.length < 2) {
+    alert("Select at least 2 careers to compare");
+    return;
+  }
+
+  localStorage.setItem("compareCareers", JSON.stringify(savedKeys));
+
+  window.location.href = "compare.html";
+};
+
+window.removeCareer = function(key) {
+
+  let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
+
+  // remove selected
+  saved = saved.filter(c => c !== key);
+
+  localStorage.setItem("savedCareers", JSON.stringify(saved));
+
+  // reload page
+  location.reload();
+};
+
+
+
+
+</script>
+
+
+<script>
+function goBack() {
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Career Result</title>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>Your Career Match 🎯</h2>
+
+      <div id="resultText">Loading...</div>
+      <div id="roadmap"></div>
+
+      <div class="top-actions">
+        <button type="button" onclick="compare()">⚔️ Compare Careers</button>
+        <button type="button" class="secondary" onclick="wantMore()">🔓 Want to know more</button>
+      </div>
+
+      <button type="button" class="green" onclick="alreadyUser()">👤 Already a user? Login</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { careers } from "./js/careers.js";
+
+    const result = localStorage.getItem("quizResult");
+
+    const typeMap = {
+      tech: "science",
+      medical: "science",
+      creative: "arts",
+      business: "commerce"
+    };
+
+    const type = typeMap[result];
+    const filtered = careers.filter(c => c.type === type);
+
+    const top3 = filtered
+      .sort((a, b) => {
+        const scoreA = (a.growth || 0) * 10 + (a.successRate || 0) + (a.salary || 0) - (a.difficulty || 0) * 10;
+        const scoreB = (b.growth || 0) * 10 + (b.successRate || 0) + (b.salary || 0) - (b.difficulty || 0) * 10;
+        return scoreB - scoreA;
+      })
+      .slice(0, 3);
+
+    window.top3 = top3;
+
+    if (!result || !type) {
+      document.getElementById("resultText").innerHTML = `
+        <h3>No quiz result found ❌</h3>
+        <p>Please take the quiz first.</p>
+        <button type="button" onclick="goHome()">Go Home</button>
+      `;
+    } else if (!top3.length) {
+      document.getElementById("resultText").innerHTML = `
+        <h3>No matching careers found 😢</h3>
+        <p>Please check your data file.</p>
+      `;
+    } else {
+      let html = "<h3>🔥 Top Career Matches:</h3>";
+
+      top3.forEach((career, index) => {
+        html += `
+          <div class="career-box">
+            <h4>${index + 1}. ${career.name}</h4>
+            <p>${career.desc}</p>
+            <p><b>💰 Salary:</b> ${career.salaryLabel}</p>
+            <p><b>📈 Growth:</b> ${career.growth}</p>
+            <button type="button" onclick="viewCareer(${index})">View Details</button>
+          </div>
+        `;
+      });
+
+      document.getElementById("resultText").innerHTML = html;
+    }
+
+    window.viewCareer = function (index) {
+      const career = window.top3[index];
+
+      let html = `
+        <h3>${career.name}</h3>
+        <p>${career.desc}</p>
+        <p><b>💰 Salary:</b> ${career.salaryLabel}</p>
+        <p><b>📈 Growth:</b> ${career.growth}</p>
+        <p><b>⚡ Difficulty:</b> ${career.difficulty}</p>
+        <h4>📍 Roadmap:</h4>
+        <ul>
+      `;
+
+      career.roadmap.forEach(step => {
+        html += `<li>${step}</li>`;
+      });
+
+      html += `</ul>`;
+
+      document.getElementById("roadmap").innerHTML = html;
+    };
+
+    window.compare = function () {
+      let html = "<h3>⚔️ Comparison</h3>";
+
+      window.top3.forEach(career => {
+        html += `
+          <div class="career-box">
+            <b>${career.name}</b><br>
+            💰 ${career.salaryLabel}<br>
+            📈 Growth: ${career.growth}<br>
+            ⚡ Difficulty: ${career.difficulty}
+          </div>
+        `;
+      });
+
+      document.getElementById("roadmap").innerHTML = html;
+    };
+
+    window.wantMore = function () {
+      localStorage.setItem("authView", "signup");
+      window.location.href = "index.html";
+    };
+
+    window.alreadyUser = function () {
+      localStorage.setItem("authView", "login");
+      window.location.href = "index.html";
+    };
+
+    window.goHome = function () {
+      window.location.href = "index.html";
+    };
+  </script>
+
+</body>
+</html>

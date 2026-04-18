@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Details</title>
+</head>
+
+<body class="fade-in career-page">
+
+<div class="container">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <button class="btn" onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- HERO -->
+  <div class="career-hero">
+    <h1 id="careerName">Loading...</h1>
+    <p id="careerDesc">Career description...</p>
+    <div class="salary-box" id="salaryBox">💰 Salary: --</div>
+    <p id="careerReason" class="career-reason"></p>
+  </div>
+
+  <!-- SKILLS -->
+  <h2>🧠 Skills You Need</h2>
+  <div id="skillsList" class="chips"></div>
+
+  <!-- ROADMAP -->
+  <h2>🛣️ Roadmap</h2>
+  <div id="roadmap"></div>
+
+  <!-- ACTION -->
+  <div class="career-actions">
+    <button onclick="saveCareer()">❤️ Save Career</button>
+    <button onclick="startLearning()">🚀 Start Learning</button>
+  </div>
+
+</div>
+
+<footer>
+  Built by Govinda | StudentPath © 2026
+</footer>
+
+<script type="module">
+
+import { careers } from "./js/careers.js";
+
+/* ===== LOAD SELECTED CAREER ===== */
+
+const key = localStorage.getItem("selectedCareer");
+
+const career = careers.find(c => c.key === key);
+
+/* ===== DISPLAY DATA ===== */
+
+if (career) {
+
+  document.getElementById("careerName").innerText = career.name;
+
+  document.getElementById("careerDesc").innerText = career.description || "No description available";
+
+  document.getElementById("salaryBox").innerText = "💰 " + (career.salaryLabel || "Not available");
+  
+  document.getElementById("careerReason").innerText =
+  "✨ This career suits you because of your interests and growth potential.";
+  
+  /* SKILLS */
+  const skillsDiv = document.getElementById("skillsList");
+  (career.skills || []).forEach(skill => {
+    let span = document.createElement("span");
+    span.className = "chip";
+    span.innerText = skill;
+    skillsDiv.appendChild(span);
+  });
+
+  /* ROADMAP */
+  const roadmapDiv = document.getElementById("roadmap");
+
+  (career.roadmap || []).forEach((step, i) => {
+
+  let div = document.createElement("div");
+  div.className = "roadmap-step";
+
+  div.innerHTML = `
+    <input type="checkbox" class="step-check">
+    ${i + 1}. ${step}
+  `;
+
+  roadmapDiv.appendChild(div);
+});
+
+}
+
+/* ===== SAVE CAREER ===== */
+
+window.saveCareer = function() {
+
+  let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
+
+  if (!saved.includes(key)) {
+    saved.push(key);
+    localStorage.setItem("savedCareers", JSON.stringify(saved));
+    alert("Saved successfully!");
+  } else {
+    alert("Already saved!");
+  }
+};
+
+/* ===== BACK ===== */
+
+window.goBack = function() {
+
+  const from = localStorage.getItem("fromPage") || "explore";
+
+  window.location.href = from + ".html";
+};
+
+window.startLearning = function() {
+  alert("Start with free resources like YouTube, Coursera, or roadmap.sh 🚀");
+};
+
+</script>
+
+</body>
+</html>
