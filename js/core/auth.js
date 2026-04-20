@@ -41,7 +41,7 @@ window.toggleTheme = function () {
    QUIZ
 ========================= */
 window.startQuiz = function () {
-  window.location.href = "/pages/quiz.html";
+  window.location.href = "/quiz.html";
 };
 
 /* =========================
@@ -134,7 +134,7 @@ window.signup = async function () {
     closeAuthSection();
 
     setTimeout(() => {
-      window.location.href = "/pages/dashboard.html";
+      window.location.href = "/dashboard.html";
     }, 1200);
   } catch (err) {
     showToast(err.message, "error");
@@ -160,7 +160,7 @@ window.login = async function () {
     closeAuthSection();
 
     setTimeout(() => {
-      window.location.href = "/pages/dashboard.html";
+      window.location.href = "/dashboard.html";
     }, 800);
   } catch (err) {
     showToast(err.message, "error");
@@ -188,7 +188,7 @@ onAuthStateChanged(auth, (user) => {
   }
 
   if (user) {
-    window.location.href = "/pages/dashboard.html";
+    window.location.href = "/dashboard.html";
   }
 });
 

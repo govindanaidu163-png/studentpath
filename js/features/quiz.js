@@ -136,7 +136,7 @@ function showResult() {
   localStorage.setItem("careerResult", best);
 
   // REDIRECT
-  window.location.href = "/pages/result.html";
+  window.location.href = "/result.html";
 }
 
 // ================= START =================

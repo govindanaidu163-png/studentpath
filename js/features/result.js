@@ -79,14 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // GLOBAL BUTTON FUNCTIONS
 window.goDashboard = function () {
-  window.location.href = "/pages/index.html";
+  window.location.href = "/index.html";
 };
 
 window.retakeQuiz = function () {
-  window.location.href = "/pages/quiz.html";
+  window.location.href = "/quiz.html";
 };
 
 window.goSignup = function () {
   localStorage.setItem("authView", "signup");
-  window.location.href = "/pages/index.html";
+  window.location.href = "/index.html";
 };

@@ -612,7 +612,7 @@ roadmapBtn?.addEventListener("click", () => {
   drawer.classList.contains("open") ? closeRoadmap() : openRoadmap();
 });
 dashboardBtn?.addEventListener("click", () => {
-  window.location.href = "/pages/dashboard.html";
+  window.location.href = "/dashboard.html";
 });
 exportBtn?.addEventListener("click", exportRoadmap);
 

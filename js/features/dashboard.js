@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-      window.location.href = "/pages/index.html";
+      window.location.href = "/index.html";
       return;
     }
 
@@ -98,10 +98,10 @@ function navigate(path) {
   }, 300);
 }
 
-window.goToGuidedPath = () => navigate("/pages/guided-path.html");
-window.goToExplore = () => navigate("/pages/explore.html");
-window.goToSaved = () => navigate("/pages/saved.html");
-window.goToAbout = () => navigate("/pages/about.html");
+window.goToGuidedPath = () => navigate("/guided-path.html");
+window.goToExplore = () => navigate("/explore.html");
+window.goToSaved = () => navigate("/saved.html");
+window.goToAbout = () => navigate("/about.html");
 
 window.goToDashboardHome = () => {
   closeSidebar();
@@ -126,7 +126,7 @@ window.closeSidebar = () => {
 window.logout = () => {
   signOut(auth)
     .then(() => {
-      window.location.href = "/pages/index.html";
+      window.location.href = "/index.html";
     })
     .catch(err => console.error(err));
 };
