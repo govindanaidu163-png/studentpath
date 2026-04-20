@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta name="google-site-verification" content="4YqOx5FXa4twZWcUAPXaUI77_U4n_vxS59wT6zYxsHE" />
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/landing.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +41,7 @@
   ========================== -->
   <div class="hero">
     <video autoplay muted loop class="hero-video">
-      <source src="videos/hero.mp4" type="video/mp4">
+      <source src="../assets/videos/hero.mp4" type="video/mp4">
     </video>
 
     <div class="hero-overlay"></div>
@@ -102,19 +105,19 @@
 
     <div class="cards why-cards">
       <div class="card why-card">
-        <img src="images/interest.png" alt="Interest">
+        <img src="../assets/images/interest.png" alt="Interest">
         <h3>Find Your True Interest</h3>
         <p>Discover what actually suits your personality, not what others tell you.</p>
       </div>
 
       <div class="card why-card">
-        <img src="images/ai.png" alt="AI">
+        <img src="../assets/images/ai.png" alt="AI">
         <h3>AI-Based Career Matching</h3>
         <p>Smart system analyzes your answers and suggests best career paths.</p>
       </div>
 
       <div class="card why-card">
-        <img src="images/roadmap.png" alt="Roadmap">
+        <img src="../assets/images/roadmap.png" alt="Roadmap">
         <h3>Clear Step-by-Step Roadmap</h3>
         <p>No confusion. Get exact steps to reach your dream career.</p>
       </div>
@@ -170,25 +173,25 @@
 
     <div class="cards">
       <div class="card career-card">
-        <img src="images/tech.jpg" alt="Tech">
+        <img src="../assets/images/tech.jpg" alt="Tech">
         <h3>Tech</h3>
         <p>Software, AI, Data</p>
       </div>
 
       <div class="card career-card">
-        <img src="images/medical.jpg" alt="Medical">
+        <img src="../assets/images/medical.jpg" alt="Medical">
         <h3>Medical</h3>
         <p>Doctor, Healthcare</p>
       </div>
 
       <div class="card career-card">
-        <img src="images/creative.jpg" alt="Creative">
+        <img src="../assets/images/creative.jpg" alt="Creative">
         <h3>Creative</h3>
         <p>Design, Media</p>
       </div>
 
       <div class="card career-card">
-        <img src="images/business.jpg" alt="Business">
+        <img src="../assets/images/business.jpg" alt="Business">
         <h3>Business</h3>
         <p>Finance, Management</p>
       </div>
@@ -298,285 +301,8 @@
   <!-- TOAST -->
   <div id="toast" class="toast"></div>
 
-  <!-- =========================
-       JS
-  ========================== -->
-  <script type="module">
-    import { auth, db } from "./js/firebase.js";
-    import {
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      updateProfile,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    /* =========================
-       ELEMENT REFERENCES
-    ========================== */
-    const authSection = document.getElementById("authSection");
-    const signupForm = document.getElementById("signupForm");
-    const loginForm = document.getElementById("loginForm");
-    const signupTab = document.getElementById("signupTab");
-    const loginTab = document.getElementById("loginTab");
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const loginEmailInput = document.getElementById("loginEmail");
-    const loginPasswordInput = document.getElementById("loginPassword");
-    const toastEl = document.getElementById("toast");
-
-    /* =========================
-       THEME
-    ========================== */
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light");
-    }
-
-    window.toggleTheme = function () {
-      document.body.classList.toggle("light");
-      localStorage.setItem(
-        "theme",
-        document.body.classList.contains("light") ? "light" : "dark"
-      );
-    };
-
-    /* =========================
-       QUIZ
-    ========================== */
-    window.startQuiz = function () {
-      window.location.href = "quiz.html";
-    };
-
-    /* =========================
-       AUTH MODAL HELPERS
-    ========================== */
-    function openAuthSection() {
-      authSection.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeAuthSection() {
-      authSection.classList.add("hidden");
-      document.body.style.overflow = "auto";
-    }
-
-    function showLoginForm() {
-      loginForm.classList.remove("hidden");
-      signupForm.classList.add("hidden");
-      loginTab.classList.add("active");
-      signupTab.classList.remove("active");
-    }
-
-    function showSignupForm() {
-      signupForm.classList.remove("hidden");
-      loginForm.classList.add("hidden");
-      signupTab.classList.add("active");
-      loginTab.classList.remove("active");
-    }
-
-    function showToast(message, type = "success") {
-      toastEl.innerText = message;
-      toastEl.className = "toast show " + type;
-
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        toastEl.classList.remove("show");
-      }, 3000);
-    }
-
-    /* Expose modal actions to buttons */
-    window.showLanding = function () {
-      closeAuthSection();
-    };
-
-    window.showLogin = function () {
-      openAuthSection();
-      showLoginForm();
-    };
-
-    window.showSignup = function () {
-      openAuthSection();
-      showSignupForm();
-    };
-
-    window.showLoginForm = showLoginForm;
-    window.showSignupForm = showSignupForm;
-    window.showToast = showToast;
-
-    /* =========================
-       SIGNUP
-    ========================== */
-    window.signup = async function () {
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-
-      if (!name || !email || !password) {
-        showToast("Enter all fields", "error");
-        return;
-      }
-
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        await setDoc(doc(db, "users", user.uid), {
-          name,
-          email
-        });
-
-        await updateProfile(user, { displayName: name });
-
-        showToast("Account created!", "success");
-        closeAuthSection();
-
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 1200);
-      } catch (err) {
-        showToast(err.message, "error");
-      }
-    };
-
-    /* =========================
-       LOGIN
-    ========================== */
-    window.login = async function () {
-      const email = loginEmailInput.value.trim();
-      const password = loginPasswordInput.value.trim();
-
-      if (!email || !password) {
-        showToast("Enter all fields", "error");
-        return;
-      }
-
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-
-        showToast("Welcome back 🚀", "success");
-        closeAuthSection();
-
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 800);
-      } catch (err) {
-        showToast(err.message, "error");
-      }
-    };
-
-    /* =========================
-       AUTH STATE CONTROL
-       - If authView is signup/login, show that modal first.
-       - Otherwise, if user is logged in, go to dashboard.
-    ========================== */
-    onAuthStateChanged(auth, (user) => {
-      const authView = localStorage.getItem("authView");
-
-      if (authView === "signup") {
-        openAuthSection();
-        showSignupForm();
-        localStorage.removeItem("authView");
-        return;
-      }
-
-      if (authView === "login") {
-        openAuthSection();
-        showLoginForm();
-        localStorage.removeItem("authView");
-        return;
-      }
-
-      if (user) {
-        window.location.href = "dashboard.html";
-      }
-    });
-
-    /* =========================
-       CLOSE MODAL ON OUTSIDE CLICK
-    ========================== */
-    authSection.addEventListener("click", function (e) {
-      if (e.target === authSection) {
-        closeAuthSection();
-      }
-    });
-
-    /* =========================
-       MOBILE / BACK BUTTON RESET
-    ========================== */
-    function resetPage() {
-      document.body.classList.remove("fade-out");
-      document.body.style.opacity = "1";
-      document.body.style.visibility = "visible";
-      document.body.style.overflow = "auto";
-      authSection?.classList.add("hidden");
-    }
-
-    window.addEventListener("pageshow", resetPage);
-    window.addEventListener("DOMContentLoaded", resetPage);
-
-    /* =========================
-       INTRO TEXT ANIMATION
-    ========================== */
-    document.addEventListener("DOMContentLoaded", () => {
-      const introText = document.getElementById("introText");
-      if (!introText) return;
-
-      const words = introText.textContent.trim().split(/\s+/);
-      introText.innerHTML = words
-        .map((word) => `<span class="intro-word">${word}&nbsp;</span>`)
-        .join("");
-
-      const wordSpans = introText.querySelectorAll(".intro-word");
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              wordSpans.forEach((span, index) => {
-                span.style.transitionDelay = `${index * 45}ms`;
-                span.classList.add("show");
-              });
-            } else {
-              wordSpans.forEach((span) => span.classList.remove("show"));
-            }
-          });
-        },
-        { threshold: 0.35 }
-      );
-
-      observer.observe(introText);
-    });
-
-    /* =========================
-       REVIEW ROTATOR
-    ========================== */
-    document.addEventListener("DOMContentLoaded", () => {
-      const reviews = [
-        { text: "This platform changed my career direction.", user: "Aman" },
-        { text: "I finally found clarity in my future.", user: "Rahul" },
-        { text: "Best AI career tool I’ve used.", user: "Sneha" }
-      ];
-
-      let index = 0;
-
-      function showReview() {
-        const box = document.getElementById("reviewBox");
-        if (!box) return;
-
-        box.classList.remove("show");
-
-        setTimeout(() => {
-          document.getElementById("reviewText").innerText = `"${reviews[index].text}"`;
-          document.getElementById("reviewUser").innerText = `— ${reviews[index].user}`;
-          box.classList.add("show");
-          index = (index + 1) % reviews.length;
-        }, 400);
-      }
-
-      showReview();
-      setInterval(showReview, 3000);
-    });
-  </script>
+  <script type='module' src="../js/core/auth.js"></script>
+  <script type='module' src="../js/core/quiz.js"></script>
+  <script type='module' src="../js/core/reviews.js"></script>  
 </body>
 </html>

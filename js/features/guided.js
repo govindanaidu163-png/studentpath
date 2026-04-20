@@ -1,4 +1,4 @@
-import { CAREER_TREE } from "./guidedPathData.js";
+import { CAREER_TREE } from "../data/guidedPathData.js";
 
 /* ================= STATE ================= */
 
@@ -16,7 +16,7 @@ let selectTimer = null;
 /* ================= ELEMENTS ================= */
 
 const canvas = document.getElementById("bg-canvas");
-const ctx = canvas.getContext("2d");
+const ctx = canvas ? canvas.getContext("2d") : null;
 
 const qLabel = document.getElementById("question-label");
 const qText = document.getElementById("question-text");
@@ -45,6 +45,7 @@ let particles = [];
 let time = 0;
 
 function resizeCanvas() {
+  if (!canvas) return;
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
@@ -170,6 +171,7 @@ function buildTreeData() {
 }
 
 function drawTree() {
+  if (!ctx) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   time += 0.012;
 
@@ -297,6 +299,7 @@ function renderQuestion(node, isInitial = false) {
     qText.textContent = node.question;
     qSub.textContent = node.subtitle || "";
 
+    if (!grid) return;
     grid.innerHTML = "";
     (node.options || []).forEach((opt) => {
       grid.appendChild(createOptionCard(opt));
@@ -603,22 +606,18 @@ function showToast(msg) {
 /* ================= HELPERS ================= */
 
 function wireButtons() {
-  backBtn.addEventListener("click", goBack);
-  resetBtn.addEventListener("click", resetAll);
-  roadmapBtn.addEventListener("click", () => {
-    if (drawer.classList.contains("open")) {
-      closeRoadmap();
-    } else {
-      openRoadmap();
-    }
-  });
-  dashboardBtn.addEventListener("click", () => {
-    window.location.href = "dashboard.html";
-  });
-  exportBtn.addEventListener("click", exportRoadmap);
+backBtn?.addEventListener("click", goBack);
+resetBtn?.addEventListener("click", resetAll);
+roadmapBtn?.addEventListener("click", () => {
+  drawer.classList.contains("open") ? closeRoadmap() : openRoadmap();
+});
+dashboardBtn?.addEventListener("click", () => {
+  window.location.href = "/pages/dashboard.html";
+});
+exportBtn?.addEventListener("click", exportRoadmap);
 
-  drawerClose.addEventListener("click", closeRoadmap);
-  backdrop.addEventListener("click", closeRoadmap);
+drawerClose?.addEventListener("click", closeRoadmap);
+backdrop?.addEventListener("click", closeRoadmap);
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeRoadmap();
@@ -645,3 +644,24 @@ document.addEventListener("DOMContentLoaded", () => {
     buildTreeData();
   });
 });
+
+
+function resetPage() {
+  // fade हटाओ
+  document.body.classList.remove("fade-out");
+
+  // scroll fix
+  document.body.style.opacity = "1";
+  document.body.style.visibility = "visible";
+  document.body.style.overflow = "auto";
+
+  // modal close
+  document.getElementById("authSection")?.classList.add("hidden");
+
+  // sidebar close
+  document.getElementById("sidebar")?.classList.remove("open");
+}
+
+// IMPORTANT
+window.addEventListener("pageshow", resetPage);
+window.addEventListener("DOMContentLoaded", resetPage);

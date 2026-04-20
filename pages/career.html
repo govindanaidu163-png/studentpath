@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Details — StudentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/career.css">
+</head>
+
+<body class="career-page">
+
+  <!-- CURSOR -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span>StudentPath</span>
+    </div>
+    <div class="nav-right">
+      <button class="back-btn" onclick="goBack()">
+        <span class="back-arrow">←</span> Back
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <canvas id="heroCanvas"></canvas>
+      <div class="hero-glow glow-1"></div>
+      <div class="hero-glow glow-2"></div>
+      <div class="hero-glow glow-3"></div>
+      <div class="noise-overlay"></div>
+    </div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge" id="heroBadge">
+        <span class="badge-dot"></span>
+        <span id="careerStream">Career Path</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="title-line" id="careerTitle">Loading...</span>
+      </h1>
+
+      <p class="hero-desc" id="careerDesc">Career description loading...</p>
+
+      <div class="hero-meta">
+        <div class="meta-chip">
+          <span class="chip-icon">✦</span>
+          <span id="careerFuture">Future outlook</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn-save" onclick="saveCareer()">
+          <span class="btn-icon">♡</span>
+          <span>Save Career</span>
+          <div class="btn-ripple"></div>
+        </button>
+        <button class="btn-primary" onclick="startLearning()">
+          <span>Start Learning</span>
+          <span class="btn-arrow">→</span>
+          <div class="btn-shimmer"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="section stats-section" id="statsSection">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat-card reveal-up" data-delay="0">
+          <div class="stat-icon-wrap">💰</div>
+          <div class="stat-value" id="careerSalary" data-target="0">--</div>
+          <div class="stat-label">Annual Salary</div>
+          <div class="stat-bar"><div class="stat-bar-fill" id="salaryBar"></div></div>
+        </div>
+        <div class="stat-card reveal-up" data-delay="100">
+          <div class="stat-icon-wrap">📈</div>
+          <div class="stat-value counter" id="statDemand" data-target="92">0</div>
+          <div class="stat-label">Market Demand %</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="stat-card reveal-up" data-delay="200">
+          <div class="stat-icon-wrap">🎯</div>
+          <div class="stat-value counter" id="statSuccess" data-target="0">0</div>
+          <div class="stat-label">Success Rate %</div>
+          <div class="stat-bar"><div class="stat-bar-fill" id="successBar"></div></div>
+        </div>
+        <div class="stat-card reveal-up" data-delay="300">
+          <div class="stat-icon-wrap">⚡</div>
+          <div class="stat-value counter" id="statGrowth" data-target="0">0</div>
+          <div class="stat-label">Growth Score / 5</div>
+          <div class="stat-bar"><div class="stat-bar-fill" id="growthBar"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D VISUAL / STORY SECTION -->
+  <section class="section story-section" id="storySection">
+    <div class="section-inner">
+      <div class="story-layout">
+        <div class="story-text reveal-left">
+          <div class="section-eyebrow">THE JOURNEY</div>
+          <h2 class="section-title">What does this <br><em>career</em> look like?</h2>
+          <p class="story-body" id="storyBody">Every career is a story. This path shapes how you think, what you build, and who you become. The best professionals in this field aren't just skilled — they're driven by curiosity and purpose.</p>
+          <div class="story-callout" id="storyCallout">
+            <span class="callout-mark">"</span>
+            <p id="careerFutureQuote">High demand. Bright future.</p>
+          </div>
+        </div>
+
+        <div class="story-visual reveal-right">
+          <div class="card-3d-wrap" id="card3d">
+            <div class="card-3d-inner">
+              <div class="card-3d-front">
+                <div class="c3d-glow"></div>
+                <div class="c3d-icon">🚀</div>
+                <div class="c3d-title" id="c3dTitle">Career</div>
+                <div class="c3d-stream" id="c3dStream">Stream</div>
+                <div class="c3d-stats">
+                  <div class="c3d-stat">
+                    <span id="c3dDiff">--</span>
+                    <small>Difficulty</small>
+                  </div>
+                  <div class="c3d-stat">
+                    <span id="c3dGrowth">--</span>
+                    <small>Growth</small>
+                  </div>
+                </div>
+                <div class="c3d-salary" id="c3dSalary">--</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section class="section skills-section" id="skillsSection">
+    <div class="section-inner">
+      <div class="section-header reveal-up">
+        <div class="section-eyebrow">WHAT YOU'LL MASTER</div>
+        <h2 class="section-title">Core Skills</h2>
+        <p class="section-sub">The building blocks of your expertise in this field.</p>
+      </div>
+      <div id="skillsList" class="skills-grid"></div>
+    </div>
+  </section>
+
+  <!-- ROADMAP SECTION -->
+  <section class="section roadmap-section" id="roadmapSection">
+    <div class="section-inner">
+      <div class="section-header reveal-up">
+        <div class="section-eyebrow">YOUR PATH FORWARD</div>
+        <h2 class="section-title">The Roadmap</h2>
+        <p class="section-sub">A clear, step-by-step journey from where you are to where you want to be.</p>
+      </div>
+      <div id="roadmapList" class="roadmap-timeline"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / REVIEWS -->
+  <section class="section reviews-section" id="reviewsSection">
+    <div class="section-inner">
+      <div class="section-header reveal-up">
+        <div class="section-eyebrow">FROM THE FIELD</div>
+        <h2 class="section-title">Real Experiences</h2>
+      </div>
+      <div class="reviews-track-wrap">
+        <div class="reviews-track" id="reviewsTrack">
+          <!-- injected by JS -->
+        </div>
+      </div>
+      <div class="reviews-nav">
+        <button class="rnav-btn" id="rnavPrev">←</button>
+        <div class="rnav-dots" id="rnavDots"></div>
+        <button class="rnav-btn" id="rnavNext">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="section cta-section" id="ctaSection">
+    <div class="cta-bg">
+      <div class="cta-glow"></div>
+    </div>
+    <div class="section-inner">
+      <div class="cta-content reveal-up">
+        <div class="section-eyebrow">READY?</div>
+        <h2 class="cta-title">Your future starts <em>now.</em></h2>
+        <p class="cta-sub">Stop waiting for the right moment. This is it. Take the first step toward your dream career.</p>
+        <div class="cta-actions">
+          <button class="btn-primary large" onclick="startLearning()">
+            <span>Begin Your Journey</span>
+            <span class="btn-arrow">→</span>
+            <div class="btn-shimmer"></div>
+          </button>
+          <button class="btn-outline" onclick="saveCareer()">
+            Save for Later
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER NAV -->
+  <div class="page-footer">
+    <div class="logo">
+      <span class="logo-icon">⬡</span> StudentPath
+    </div>
+    <p>© 2025 StudentPath. All rights reserved.</p>
+  </div>
+
+  <script src="../js/features/career.js"></script>
+</body>
+</html>

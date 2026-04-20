@@ -1,73 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Explore Careers</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
 
-<body class="fade-in explore-page">
-  <div class="container">
-
-    <!-- HERO BANNER -->
-    <div class="hero-banner">
-      <img src="images/banner.jpg" class="hero-img" />
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p>Explore paths, salaries, and future opportunities</p>
-      </div>
-    </div>
-
-    <!-- TITLE -->
-    <h1>Explore All Career Paths 🌍</h1>
-
-    <!-- SEARCH + FILTER -->
-    <div class="search-wrapper">
-      <input
-        type="text"
-        id="searchInput"
-        class="search-box"
-        placeholder="Search careers..."
-        onkeyup="searchCareer()"
-      />
-      <button class="filter-btn" onclick="toggleFilters()">⚙️</button>
-    </div>
-
-    <!-- TRENDING CAREERS -->
-    <div class="category-section">
-      <h2>Trending Careers</h2>
-      <div class="cards" id="trendingCareers"></div>
-    </div>
-
-    <!-- FILTER PANEL -->
-    <div id="filterPanel" class="filter-panel hidden">
-      <p>Filter by Type:</p>
-      <button onclick="filterType('all', this)">All</button>
-      <button onclick="filterType('science', this)">Science</button>
-      <button onclick="filterType('commerce', this)">Commerce</button>
-      <button onclick="filterType('arts', this)">Arts</button>
-
-      <p>Sort:</p>
-      <button onclick="sortCareers('high')">High Salary</button>
-      <button onclick="sortCareers('low')">Low Salary</button>
-      <button onclick="sortCareers('az')">A–Z</button>
-    </div>
-
-    <!-- CAREER SECTIONS -->
-    <div id="careerSections"></div>
-
-    <p id="noResults" style="text-align:center; display:none; margin-top:20px; color:#94a3b8;">
-      ❌ No careers found
-    </p>
-  </div>
-
-  <footer>
-    Built by Govinda | StudentPath © 2026
-  </footer>
-
-  <script type="module">
-    import { careers } from "./js/careers.js";
+    import { careers } from "../data/careersData.js";
 
     /* ================= STATE ================= */
     let currentType = "all";
@@ -201,16 +133,15 @@
         .slice(0, 8);
     }
 
-    function openCareer(career) {
-      localStorage.setItem("selectedCareer", career.key);
-      localStorage.setItem("fromPage", "explore");
+   function openCareer(career) {
+  localStorage.setItem("selectedCareer", JSON.stringify(career));
 
-      document.body.classList.add("fade-out");
+  document.body.classList.add("fade-out");
 
-      setTimeout(() => {
-        window.location.href = "career.html";
-      }, 300);
-    }
+  setTimeout(() => {
+    window.location.href = "career.html";
+  }, 300);
+}
 
     function focusTrendingCard(cards, index, row) {
       cards.forEach((card) => card.classList.remove("is-focused"));
@@ -422,9 +353,7 @@
 
     /* ================= INIT ================= */
     updateUI();
-  </script>
-
-  <script>
+    
 function resetPage() {
   // fade हटाओ
   document.body.classList.remove("fade-out");
@@ -444,6 +373,3 @@ function resetPage() {
 // IMPORTANT
 window.addEventListener("pageshow", resetPage);
 window.addEventListener("DOMContentLoaded", resetPage);
-</script>
-</body>
-</html>

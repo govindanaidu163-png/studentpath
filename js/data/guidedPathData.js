@@ -86,6 +86,8 @@ export const CAREER_TREE = {
                           salary: "₹12–40 LPA",
                           backup: ["Network Engineer", "SOC Analyst"]
                         })
+
+                        
                       ])
                     },
                     leaf("mechanical", "Mechanical", "Machines & systems", "#81d4fa", {

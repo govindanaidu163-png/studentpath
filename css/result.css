@@ -1,0 +1,108 @@
+/* =========================
+   RESULT.CSS
+   result.html only
+========================= */
+
+.result-page {
+  background: #0f172a;
+  font-family: "Inter", sans-serif;
+  color: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.result-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.result-card {
+  width: min(560px, 100%);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.result-tag {
+  color: #93c5fd;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.result-card h1 {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.result-card h2 {
+  margin: 0 0 12px 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.result-card p {
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+}
+
+.result-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.result-actions button {
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.result-actions .main-btn {
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  color: white;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #e5e7eb;
+}
+
+.secondary-btn:hover {
+  border-color: white;
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .result-card {
+    padding: 24px;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions button {
+    width: 100%;
+  }
+}

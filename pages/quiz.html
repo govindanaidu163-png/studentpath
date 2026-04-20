@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath Quiz</title>
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+  
+</head>
+
+<body class="quiz-page">
+
+<canvas id="particles"></canvas>
+
+<div class="quiz-container">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrapper">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span id="progressText">0%</span>
+  </div>
+
+  <!-- QUESTION BOX -->
+  <div class="question-box" id="questionBox">
+    <h2 id="questionText"></h2>
+    <div class="options" id="optionsContainer"></div>
+  </div>
+
+</div>
+
+<script src="../js/features/quiz.js"></script>
+
+</body>
+</html>

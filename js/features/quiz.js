@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudentPath Quiz</title>
-
-  <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body class="quiz-page">
-
-<canvas id="particles"></canvas>
-
-<div class="quiz-container">
-
-  <!-- PROGRESS -->
-  <div class="progress-wrapper">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    <span id="progressText">0%</span>
-  </div>
-
-  <!-- QUESTION BOX -->
-  <div class="question-box" id="questionBox">
-    <h2 id="questionText"></h2>
-    <div class="options" id="optionsContainer"></div>
-  </div>
-
-</div>
-
-<script>
-
 // ================= QUESTIONS WITH LOGIC =================
+
+// (Firebase removed because not used here)
+// import { auth , db } from "../firebase.js";
+
 const questions = [
   {
     q: "What do you enjoy the most?",
@@ -64,6 +34,7 @@ const questions = [
 ];
 
 // ================= SCORE SYSTEM =================
+
 let score = {
   tech: 0,
   medical: 0,
@@ -74,11 +45,16 @@ let score = {
 let current = 0;
 
 // ================= LOAD QUESTION =================
+
 function loadQuestion() {
   const q = questions[current];
-  document.getElementById("questionText").innerText = q.q;
 
+  const questionText = document.getElementById("questionText");
   const container = document.getElementById("optionsContainer");
+
+  if (!questionText || !container) return;
+
+  questionText.innerText = q.q;
   container.innerHTML = "";
 
   q.options.forEach(opt => {
@@ -99,8 +75,10 @@ function loadQuestion() {
 }
 
 // ================= NEXT =================
+
 function nextQuestion() {
   const box = document.getElementById("questionBox");
+  if (!box) return;
 
   box.style.opacity = 0.5;
   box.style.transform = "scale(0.97)";
@@ -119,15 +97,24 @@ function nextQuestion() {
 }
 
 // ================= PROGRESS =================
+
 function updateProgress() {
   const percent = Math.round((current / questions.length) * 100);
-  document.getElementById("progressFill").style.width = percent + "%";
-  document.getElementById("progressText").innerText = percent + "%";
+
+  const fill = document.getElementById("progressFill");
+  const text = document.getElementById("progressText");
+
+  if (fill) fill.style.width = percent + "%";
+  if (text) text.innerText = percent + "%";
 }
 
 // ================= AI ANALYZING =================
+
 function showAnalyzing() {
-  document.querySelector(".quiz-container").innerHTML = `
+  const container = document.querySelector(".quiz-container");
+  if (!container) return;
+
+  container.innerHTML = `
     <div class="ai-box">
       <h2>🤖 Analyzing your answers...</h2>
       <div class="loader"></div>
@@ -139,59 +126,60 @@ function showAnalyzing() {
 }
 
 // ================= RESULT LOGIC =================
+
 function showResult() {
   let best = Object.keys(score).reduce((a, b) =>
     score[a] > score[b] ? a : b
   );
 
-  // ✅ SAVE RESULT
+  // SAVE RESULT
   localStorage.setItem("careerResult", best);
 
-  // ✅ REDIRECT TO RESULT PAGE
-  window.location.href = "result.html";
+  // REDIRECT
+  window.location.href = "/pages/result.html";
 }
 
 // ================= START =================
-loadQuestion();
 
-// ================= PARTICLES =================
+document.addEventListener("DOMContentLoaded", loadQuestion);
+
+// ================= PARTICLES (SAFE) =================
+
 const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (canvas) {
+  const ctx = canvas.getContext("2d");
 
-let particles = [];
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-for (let i = 0; i < 60; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 2,
-    speedX: (Math.random() - 0.5) * 0.5,
-    speedY: (Math.random() - 0.5) * 0.5
-  });
+  let particles = [];
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      ctx.fillStyle = "rgba(99,102,241,0.7)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
 }
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach(p => {
-    p.x += p.speedX;
-    p.y += p.speedY;
-
-    ctx.fillStyle = "rgba(99,102,241,0.7)";
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  requestAnimationFrame(animateParticles);
-}
-
-animateParticles();
-
-</script>
-
-</body>
-</html>
