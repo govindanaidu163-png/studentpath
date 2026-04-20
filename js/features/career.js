@@ -491,5 +491,5 @@ window.saveCareer = function () {
 };
 
 window.startLearning = function () {
-  alert("🚀 Start Learning...");
+  alert(" Start Learning...");
 };
