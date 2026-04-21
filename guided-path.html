@@ -9,9 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/guided-path.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
 </head>
 
 <body class="guided-path-page">
+  <div id="navbarContainer"></div>
   <!-- Background canvas -->
   <canvas id="bg-canvas"></canvas>
   <div class="noise"></div>
@@ -71,6 +73,9 @@
     </footer>
   </div>
 
+  
   <script type="module" src="../js/features/guided.js"></script>
+  <script src="../js/core/loadNavbar.js"></script>
+  <script src="js/core/transition.js"></script>
 </body>
 </html>

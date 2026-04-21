@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore Exams</title>
+
+  <link rel="stylesheet" href="../css/explore.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbarContainer"></div>
+
+  <section class="category-bar">
+  <div class="category-scroll">
+
+    <button class="cat active" onclick="filterExam('all')">All</button>
+    <button class="cat" onclick="filterExam('engineering')">Engineering</button>
+    <button class="cat" onclick="filterExam('medical')">Medical</button>
+    <button class="cat" onclick="filterExam('government')">Government</button>
+    <button class="cat" onclick="filterExam('business')">Business</button>
+    <button class="cat" onclick="filterExam('law')">Law</button>
+    <button class="cat" onclick="filterExam('defense')">Defense</button>
+
+  </div>
+</section>
+
+  <main>
+
+    <!-- ===== TRENDING ===== -->
+    <section class="trending-section">
+      <div class="section-header">
+        <h2>Trending Exams</h2>
+        <button class="dots-btn">•••</button>
+      </div>
+
+      <div class="trending-viewport">
+        <div id="trendingExams" class="trending-track"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== TOP EXAMS ===== -->
+    <section class="top-careers-section">
+
+      <div class="section-header">
+        <h2>Top Exams</h2>
+        <a href="#" class="view-all">View all ›</a>
+      </div>
+
+      <!-- GRID -->
+      <div id="examGrid" class="career-grid"></div>
+
+    </section>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="../js/data/examData.js"></script>
+  <script src="../js/core/loadNavbar.js"></script>
+  <script src="../js/features/explore-exams.js"></script>
+
+</body>
+</html>

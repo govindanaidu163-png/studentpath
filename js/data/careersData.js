@@ -1,4 +1,4 @@
-export const careers = [
+window.careers = [
 
   // 🔬 PCM (Engineering / Tech)
 
@@ -366,6 +366,764 @@ export const careers = [
     skills: ["Camera"],
     roadmap: ["Learn photography"],
     future: "Freelance"
-  }
+  },
+
+  // 🚀 TECH / EMERGING
+
+{
+  key: "blockchain_dev",
+  name: "Blockchain Developer",
+  stream: "pcm",
+  type: "science",
+  salary: 45,
+  salaryLabel: "₹6L - ₹45L",
+  image: "../assets/images/blockchain.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 5,
+  desc: "Build decentralized apps",
+  skills: ["Solidity", "Web3"],
+  roadmap: ["PCM", "CSE", "Blockchain"],
+  future: "Growing fast"
+},
+{
+  key: "cloud_engineer",
+  name: "Cloud Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 35,
+  salaryLabel: "₹5L - ₹35L",
+  image: "../assets/images/cloud.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 5,
+  desc: "Manage cloud systems",
+  skills: ["AWS", "Azure"],
+  roadmap: ["PCM", "CSE"],
+  future: "High demand"
+},
+{
+  key: "game_dev",
+  name: "Game Developer",
+  stream: "pcm",
+  type: "science",
+  salary: 30,
+  salaryLabel: "₹4L - ₹30L",
+  image: "../assets/images/game.jpg",
+  difficulty: 4,
+  successRate: 55,
+  growth: 4,
+  desc: "Build games",
+  skills: ["Unity", "C#"],
+  roadmap: ["PCM", "Game Dev"],
+  future: "Growing"
+},
+
+// 🧬 MEDICAL / HEALTH
+
+{
+  key: "physiotherapist",
+  name: "Physiotherapist",
+  stream: "pcb",
+  type: "science",
+  salary: 20,
+  salaryLabel: "₹3L - ₹20L",
+  image: "../assets/images/physio.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 4,
+  desc: "Help recovery from injuries",
+  skills: ["Therapy"],
+  roadmap: ["PCB", "BPT"],
+  future: "Stable"
+},
+{
+  key: "nutritionist",
+  name: "Nutritionist",
+  stream: "pcb",
+  type: "science",
+  salary: 18,
+  salaryLabel: "₹3L - ₹18L",
+  image: "../assets/images/nutrition.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 4,
+  desc: "Guide healthy diet",
+  skills: ["Health"],
+  roadmap: ["PCB", "Nutrition"],
+  future: "Growing"
+},
+
+// 💼 BUSINESS / FINANCE
+
+{
+  key: "product_manager",
+  name: "Product Manager",
+  stream: "commerce",
+  type: "commerce",
+  salary: 60,
+  salaryLabel: "₹8L - ₹60L",
+  image: "../assets/images/product.jpg",
+  difficulty: 5,
+  successRate: 45,
+  growth: 5,
+  desc: "Manage products",
+  skills: ["Strategy"],
+  roadmap: ["MBA"],
+  future: "High demand"
+},
+{
+  key: "business_analyst",
+  name: "Business Analyst",
+  stream: "commerce",
+  type: "commerce",
+  salary: 25,
+  salaryLabel: "₹4L - ₹25L",
+  image: "../assets/images/analyst.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 4,
+  desc: "Analyze business data",
+  skills: ["Excel"],
+  roadmap: ["Commerce"],
+  future: "Growing"
+},
+{
+  key: "hr_manager",
+  name: "HR Manager",
+  stream: "commerce",
+  type: "commerce",
+  salary: 30,
+  salaryLabel: "₹5L - ₹30L",
+  image: "../assets/images/hr.jpg",
+  difficulty: 3,
+  successRate: 75,
+  growth: 4,
+  desc: "Manage employees",
+  skills: ["Communication"],
+  roadmap: ["MBA HR"],
+  future: "Stable"
+},
+
+// 🎨 CREATIVE
+
+{
+  key: "graphic_designer",
+  name: "Graphic Designer",
+  stream: "arts",
+  type: "arts",
+  salary: 20,
+  salaryLabel: "₹3L - ₹20L",
+  image: "../assets/images/graphic.jpg",
+  difficulty: 3,
+  successRate: 65,
+  growth: 4,
+  desc: "Design visuals",
+  skills: ["Photoshop"],
+  roadmap: ["Design"],
+  future: "Growing"
+},
+{
+  key: "video_editor",
+  name: "Video Editor",
+  stream: "arts",
+  type: "arts",
+  salary: 22,
+  salaryLabel: "₹3L - ₹22L",
+  image: "../assets/images/video.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 5,
+  desc: "Edit videos",
+  skills: ["Premiere Pro"],
+  roadmap: ["Practice"],
+  future: "High demand"
+},
+
+// ⚙️ ENGINEERING
+
+{
+  key: "civil_engineer",
+  name: "Civil Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 25,
+  salaryLabel: "₹3L - ₹25L",
+  image: "../assets/images/civil.jpg",
+  difficulty: 4,
+  successRate: 70,
+  growth: 4,
+  desc: "Build infrastructure",
+  skills: ["AutoCAD"],
+  roadmap: ["B.Tech"],
+  future: "Stable"
+},
+{
+  key: "mechanical_engineer",
+  name: "Mechanical Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 28,
+  salaryLabel: "₹3L - ₹28L",
+  image: "../assets/images/mech.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 4,
+  desc: "Work with machines",
+  skills: ["Design"],
+  roadmap: ["B.Tech"],
+  future: "Stable"
+},
+
+// 🧠 OTHER UNIQUE
+
+{
+  key: "teacher",
+  name: "Teacher",
+  stream: "arts",
+  type: "arts",
+  salary: 12,
+  salaryLabel: "₹2L - ₹12L",
+  image: "../assets/images/teacher.jpg",
+  difficulty: 3,
+  successRate: 80,
+  growth: 3,
+  desc: "Educate students",
+  skills: ["Teaching"],
+  roadmap: ["B.Ed"],
+  future: "Stable"
+},
+{
+  key: "journalist",
+  name: "Journalist",
+  stream: "arts",
+  type: "arts",
+  salary: 18,
+  salaryLabel: "₹3L - ₹18L",
+  image: "../assets/images/journalist.jpg",
+  difficulty: 3,
+  successRate: 60,
+  growth: 4,
+  desc: "Report news",
+  skills: ["Writing"],
+  roadmap: ["Mass Comm"],
+  future: "Dynamic"
+},
+{
+  key: "chef",
+  name: "Chef",
+  stream: "arts",
+  type: "arts",
+  salary: 20,
+  salaryLabel: "₹3L - ₹20L",
+  image: "../assets/images/chef.jpg",
+  difficulty: 3,
+  successRate: 65,
+  growth: 4,
+  desc: "Cook professionally",
+  skills: ["Cooking"],
+  roadmap: ["Hotel Mgmt"],
+  future: "Growing"
+},
+{
+  key: "event_manager",
+  name: "Event Manager",
+  stream: "arts",
+  type: "arts",
+  salary: 25,
+  salaryLabel: "₹3L - ₹25L",
+  image: "../assets/images/event.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 4,
+  desc: "Organize events",
+  skills: ["Management"],
+  roadmap: ["Event Mgmt"],
+  future: "Growing"
+},
+
+// 🔥 ADVANCED TECH
+
+{
+  key: "devops_engineer",
+  name: "DevOps Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 40,
+  salaryLabel: "₹6L - ₹40L",
+  image: "../assets/images/devops.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 5,
+  desc: "Automate deployment systems",
+  skills: ["Docker", "CI/CD"],
+  roadmap: ["PCM", "CSE"],
+  future: "High demand"
+},
+{
+  key: "full_stack_dev",
+  name: "Full Stack Developer",
+  stream: "pcm",
+  type: "science",
+  salary: 35,
+  salaryLabel: "₹5L - ₹35L",
+  image: "../assets/images/fullstack.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 5,
+  desc: "Build frontend & backend",
+  skills: ["React", "Node"],
+  roadmap: ["PCM", "CSE"],
+  future: "Very high demand"
+},
+{
+  key: "ar_vr_dev",
+  name: "AR/VR Developer",
+  stream: "pcm",
+  type: "science",
+  salary: 30,
+  salaryLabel: "₹5L - ₹30L",
+  image: "../assets/images/arvr.jpg",
+  difficulty: 4,
+  successRate: 55,
+  growth: 5,
+  desc: "Build virtual experiences",
+  skills: ["Unity", "3D"],
+  roadmap: ["PCM", "Game Dev"],
+  future: "Future tech"
+},
+
+// 🧬 HEALTH + SPECIALIZED
+
+{
+  key: "dentist",
+  name: "Dentist",
+  stream: "pcb",
+  type: "science",
+  salary: 30,
+  salaryLabel: "₹5L - ₹30L",
+  image: "../assets/images/dentist.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 4,
+  desc: "Treat dental problems",
+  skills: ["Dental Science"],
+  roadmap: ["PCB", "BDS"],
+  future: "Stable"
+},
+{
+  key: "psychologist",
+  name: "Psychologist",
+  stream: "pcb",
+  type: "science",
+  salary: 22,
+  salaryLabel: "₹3L - ₹22L",
+  image: "../assets/images/psychologist.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 5,
+  desc: "Study human behavior",
+  skills: ["Psychology"],
+  roadmap: ["PCB", "Psychology"],
+  future: "Growing fast"
+},
+
+// 💼 HIGH-END BUSINESS
+
+{
+  key: "management_consultant",
+  name: "Management Consultant",
+  stream: "commerce",
+  type: "commerce",
+  salary: 80,
+  salaryLabel: "₹10L - ₹80L",
+  image: "../assets/images/consultant.jpg",
+  difficulty: 5,
+  successRate: 35,
+  growth: 5,
+  desc: "Advise companies",
+  skills: ["Strategy"],
+  roadmap: ["MBA"],
+  future: "Elite"
+},
+{
+  key: "supply_chain_manager",
+  name: "Supply Chain Manager",
+  stream: "commerce",
+  type: "commerce",
+  salary: 35,
+  salaryLabel: "₹6L - ₹35L",
+  image: "../assets/images/supply.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 4,
+  desc: "Manage logistics",
+  skills: ["Operations"],
+  roadmap: ["MBA"],
+  future: "Stable"
+},
+
+// 🎨 CREATIVE + MODERN
+
+{
+  key: "content_creator",
+  name: "Content Creator",
+  stream: "arts",
+  type: "arts",
+  salary: 50,
+  salaryLabel: "₹0 - ₹50L+",
+  image: "../assets/images/content.jpg",
+  difficulty: 4,
+  successRate: 30,
+  growth: 5,
+  desc: "Create online content",
+  skills: ["Creativity"],
+  roadmap: ["Social Media"],
+  future: "High growth"
+},
+{
+  key: "fashion_designer",
+  name: "Fashion Designer",
+  stream: "arts",
+  type: "arts",
+  salary: 25,
+  salaryLabel: "₹4L - ₹25L",
+  image: "../assets/images/fashion.jpg",
+  difficulty: 3,
+  successRate: 60,
+  growth: 4,
+  desc: "Design clothing",
+  skills: ["Design"],
+  roadmap: ["Fashion Design"],
+  future: "Creative field"
+},
+
+// ⚙️ CORE ENGINEERING
+
+{
+  key: "electrical_engineer",
+  name: "Electrical Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 28,
+  salaryLabel: "₹3L - ₹28L",
+  image: "../assets/images/electrical.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 4,
+  desc: "Work with electrical systems",
+  skills: ["Circuits"],
+  roadmap: ["B.Tech"],
+  future: "Stable"
+},
+{
+  key: "chemical_engineer",
+  name: "Chemical Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 30,
+  salaryLabel: "₹4L - ₹30L",
+  image: "../assets/images/chemical.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 4,
+  desc: "Work in chemical industries",
+  skills: ["Chemistry"],
+  roadmap: ["B.Tech"],
+  future: "Industrial demand"
+},
+
+// 🌍 UNIQUE CAREERS
+
+{
+  key: "foreign_service_officer",
+  name: "Foreign Service Officer",
+  stream: "arts",
+  type: "arts",
+  salary: 50,
+  salaryLabel: "₹8L - ₹50L",
+  image: "../assets/images/foreign.jpg",
+  difficulty: 5,
+  successRate: 20,
+  growth: 5,
+  desc: "Represent country abroad",
+  skills: ["Diplomacy"],
+  roadmap: ["UPSC"],
+  future: "Elite"
+},
+{
+  key: "sports_manager",
+  name: "Sports Manager",
+  stream: "arts",
+  type: "arts",
+  salary: 20,
+  salaryLabel: "₹3L - ₹20L",
+  image: "../assets/images/sports.jpg",
+  difficulty: 3,
+  successRate: 65,
+  growth: 4,
+  desc: "Manage sports teams",
+  skills: ["Management"],
+  roadmap: ["Sports Mgmt"],
+  future: "Growing"
+},
+{
+  key: "interior_designer",
+  name: "Interior Designer",
+  stream: "arts",
+  type: "arts",
+  salary: 22,
+  salaryLabel: "₹3L - ₹22L",
+  image: "../assets/images/interior.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 4,
+  desc: "Design spaces",
+  skills: ["Creativity"],
+  roadmap: ["Design"],
+  future: "Growing"
+},
+{
+  key: "pilot_drone",
+  name: "Drone Pilot",
+  stream: "pcm",
+  type: "science",
+  salary: 18,
+  salaryLabel: "₹3L - ₹18L",
+  image: "../assets/images/drone.jpg",
+  difficulty: 3,
+  successRate: 70,
+  growth: 5,
+  desc: "Operate drones",
+  skills: ["Navigation"],
+  roadmap: ["Training"],
+  future: "Future tech"
+},
+
+// 🔥 DEEP TECH / ELITE
+
+{
+  key: "ml_ops_engineer",
+  name: "MLOps Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 60,
+  salaryLabel: "₹10L - ₹60L",
+  image: "../assets/images/mlops.jpg",
+  difficulty: 5,
+  successRate: 40,
+  growth: 5,
+  desc: "Deploy and manage ML systems",
+  skills: ["ML", "DevOps"],
+  roadmap: ["CSE", "AI"],
+  future: "Exploding demand"
+},
+{
+  key: "quantitative_analyst",
+  name: "Quantitative Analyst (Quant)",
+  stream: "pcm",
+  type: "science",
+  salary: 100,
+  salaryLabel: "₹20L - ₹100L+",
+  image: "../assets/images/quant.jpg",
+  difficulty: 5,
+  successRate: 20,
+  growth: 5,
+  desc: "Use math for trading strategies",
+  skills: ["Math", "Python"],
+  roadmap: ["IIT", "Finance"],
+  future: "Elite"
+},
+{
+  key: "edge_ai_engineer",
+  name: "Edge AI Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 55,
+  salaryLabel: "₹10L - ₹55L",
+  image: "../assets/images/edgeai.jpg",
+  difficulty: 5,
+  successRate: 35,
+  growth: 5,
+  desc: "Run AI on devices",
+  skills: ["Embedded", "AI"],
+  roadmap: ["ECE", "AI"],
+  future: "Future tech"
+},
+
+// 💰 FINANCE ELITE
+
+{
+  key: "risk_analyst",
+  name: "Risk Analyst",
+  stream: "commerce",
+  type: "commerce",
+  salary: 45,
+  salaryLabel: "₹8L - ₹45L",
+  image: "../assets/images/risk.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 5,
+  desc: "Analyze financial risks",
+  skills: ["Finance"],
+  roadmap: ["MBA", "CFA"],
+  future: "High demand"
+},
+{
+  key: "actuary",
+  name: "Actuary",
+  stream: "commerce",
+  type: "commerce",
+  salary: 80,
+  salaryLabel: "₹10L - ₹80L",
+  image: "../assets/images/actuary.jpg",
+  difficulty: 5,
+  successRate: 25,
+  growth: 5,
+  desc: "Predict financial risks",
+  skills: ["Statistics"],
+  roadmap: ["Actuarial Exams"],
+  future: "Elite niche"
+},
+
+// 🧠 SCIENCE + RESEARCH
+
+{
+  key: "bioinformatician",
+  name: "Bioinformatician",
+  stream: "pcb",
+  type: "science",
+  salary: 35,
+  salaryLabel: "₹6L - ₹35L",
+  image: "../assets/images/bioinfo.jpg",
+  difficulty: 4,
+  successRate: 55,
+  growth: 5,
+  desc: "Combine biology + data",
+  skills: ["Bio", "Python"],
+  roadmap: ["Biotech"],
+  future: "Future science"
+},
+{
+  key: "neuroscientist",
+  name: "Neuroscientist",
+  stream: "pcb",
+  type: "science",
+  salary: 40,
+  salaryLabel: "₹6L - ₹40L",
+  image: "../assets/images/neuro.jpg",
+  difficulty: 5,
+  successRate: 30,
+  growth: 5,
+  desc: "Study brain systems",
+  skills: ["Biology"],
+  roadmap: ["Research"],
+  future: "High impact"
+},
+
+// 🌍 FUTURE GLOBAL ROLES
+
+{
+  key: "climate_analyst",
+  name: "Climate Analyst",
+  stream: "science",
+  type: "science",
+  salary: 30,
+  salaryLabel: "₹5L - ₹30L",
+  image: "../assets/images/climate.jpg",
+  difficulty: 4,
+  successRate: 60,
+  growth: 5,
+  desc: "Work on climate solutions",
+  skills: ["Data"],
+  roadmap: ["Environmental"],
+  future: "Critical future"
+},
+{
+  key: "sustainability_manager",
+  name: "Sustainability Manager",
+  stream: "commerce",
+  type: "commerce",
+  salary: 35,
+  salaryLabel: "₹6L - ₹35L",
+  image: "../assets/images/sustain.jpg",
+  difficulty: 4,
+  successRate: 65,
+  growth: 5,
+  desc: "Manage green strategies",
+  skills: ["Strategy"],
+  roadmap: ["MBA"],
+  future: "Rising fast"
+},
+
+// 🎮 DIGITAL ECONOMY
+
+{
+  key: "esports_manager",
+  name: "Esports Manager",
+  stream: "arts",
+  type: "arts",
+  salary: 25,
+  salaryLabel: "₹4L - ₹25L",
+  image: "../assets/images/esports.jpg",
+  difficulty: 3,
+  successRate: 60,
+  growth: 5,
+  desc: "Manage gaming teams",
+  skills: ["Gaming"],
+  roadmap: ["Sports Mgmt"],
+  future: "Exploding"
+},
+{
+  key: "streaming_specialist",
+  name: "Streaming Platform Specialist",
+  stream: "arts",
+  type: "arts",
+  salary: 30,
+  salaryLabel: "₹5L - ₹30L",
+  image: "../assets/images/stream.jpg",
+  difficulty: 3,
+  successRate: 65,
+  growth: 5,
+  desc: "Work in OTT industry",
+  skills: ["Media"],
+  roadmap: ["Media"],
+  future: "Growing"
+},
+
+// 🛰️ SPACE / DEFENSE
+
+{
+  key: "space_engineer",
+  name: "Space Systems Engineer",
+  stream: "pcm",
+  type: "science",
+  salary: 60,
+  salaryLabel: "₹10L - ₹60L",
+  image: "../assets/images/space.jpg",
+  difficulty: 5,
+  successRate: 20,
+  growth: 5,
+  desc: "Build space tech",
+  skills: ["Physics"],
+  roadmap: ["Aerospace"],
+  future: "Elite"
+},
+{
+  key: "defense_analyst",
+  name: "Defense Analyst",
+  stream: "arts",
+  type: "arts",
+  salary: 28,
+  salaryLabel: "₹5L - ₹28L",
+  image: "../assets/images/defense.jpg",
+  difficulty: 4,
+  successRate: 55,
+  growth: 4,
+  desc: "Analyze defense strategy",
+  skills: ["Analysis"],
+  roadmap: ["UPSC"],
+  future: "Strategic"
+}
 
 ];

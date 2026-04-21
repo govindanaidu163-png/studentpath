@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/navbar.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saved Careers</title>
 
@@ -10,11 +11,8 @@
 
 <body>
 
-  <div class="top-bar">
-  <button class="btn" onclick="goBack()">⬅ Back</button>
-  <h2>Saved Careers 💾</h2>
-  <div></div>
-</div>
+
+<div id="navbarContainer"></div>
 
 
 <div class="container">
@@ -123,6 +121,8 @@ function resetPage() {
 window.addEventListener("pageshow", resetPage);
 window.addEventListener("DOMContentLoaded", resetPage);
 </script>
+<script src="../js/core/loadNavbar.js"></script>
+<script src="js/core/transition.js"></script>
 
 </body>
 </html>

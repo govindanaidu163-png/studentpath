@@ -175,3 +175,4 @@ function resetPage() {
 
 window.addEventListener("pageshow", resetPage);
 window.addEventListener("DOMContentLoaded", resetPage);
+

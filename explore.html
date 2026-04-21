@@ -1,78 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Explore Careers</title>
-
-
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/explore.css">
-
-  
+  <link rel="stylesheet" href="../css/navbar.css">
 </head>
 
-<body class="fade-in explore-page">
-  <div class="container">
+<body class="explore-page">
 
-    <!-- HERO BANNER -->
-    <div class="hero-banner">
-      <img src="../assets/images/banner.jpg" class="hero-img" />
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p>Explore paths, salaries, and future opportunities</p>
-      </div>
-    </div>
+  <div id="navbarContainer"></div>
 
-    <!-- TITLE -->
-    <h1>Explore All Career Paths 🌍</h1>
+  <section class="category-bar">
+  <div class="category-scroll">
 
-    <!-- SEARCH + FILTER -->
-    <div class="search-wrapper">
-      <input
-        type="text"
-        id="searchInput"
-        class="search-box"
-        placeholder="Search careers..."
-        onkeyup="searchCareer()"
-      />
-      <button class="filter-btn" onclick="toggleFilters()">⚙️</button>
-    </div>
+    <button class="cat active" onclick="filterType('all')">All</button>
+    <button class="cat" onclick="filterType('tech')">Technology</button>
+    <button class="cat" onclick="filterType('health')">Healthcare</button>
+    <button class="cat" onclick="filterType('business')">Business</button>
+    <button class="cat" onclick="filterType('design')">Design</button>
+    <button class="cat" onclick="filterType('finance')">Finance</button>
+    <button class="cat" onclick="filterType('engineering')">Engineering</button>
+    <button class="cat" onclick="filterType('creative')">Creative</button>
 
-    <!-- TRENDING CAREERS -->
-    <div class="category-section">
-      <h2>Trending Careers</h2>
-      <div class="cards" id="trendingCareers"></div>
-    </div>
-
-    <!-- FILTER PANEL -->
-    <div id="filterPanel" class="filter-panel hidden">
-      <p>Filter by Type:</p>
-      <button onclick="filterType('all', this)">All</button>
-      <button onclick="filterType('science', this)">Science</button>
-      <button onclick="filterType('commerce', this)">Commerce</button>
-      <button onclick="filterType('arts', this)">Arts</button>
-
-      <p>Sort:</p>
-      <button onclick="sortCareers('high')">High Salary</button>
-      <button onclick="sortCareers('low')">Low Salary</button>
-      <button onclick="sortCareers('az')">A–Z</button>
-    </div>
-
-    <!-- CAREER SECTIONS -->
-    <div id="careerSections"></div>
-
-    <p id="noResults" style="text-align:center; display:none; margin-top:20px; color:#94a3b8;">
-      ❌ No careers found
-    </p>
   </div>
+</section>
 
-  <footer>
-    Built by Govinda | StudentPath © 2026
-  </footer>
+  <main class="explore-page">
 
-  <script type="module" src="../js/features/explore.js"></script>
-</script>
+  <section class="trending-section">
+    <div class="section-header">
+      <h2>Trending Careers</h2>
+      <button class="dots-btn" type="button">•••</button>
+    </div>
+
+    <div class="trending-viewport">
+      <div id="trendingCareers" class="trending-track"></div>
+    </div>
+  </section>
+
+  <section class="top-careers-section">
+    <div class="section-header top-careers-header">
+      <h2>Top Careers</h2>
+      <a href="#" class="view-all">View all ›</a>
+    </div>
+
+    <div id="careerGrid" class="career-grid"></div>
+  </section>
+
+</main>
+
+  <script src="../js/data/careersData.js"></script>
+  <script src="../js/core/loadNavbar.js"></script>
+  <script src="../js/features/explore.js"></script>
+  
+
 </body>
 </html>

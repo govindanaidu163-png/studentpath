@@ -131,11 +131,18 @@ window.signup = async function () {
     await updateProfile(user, { displayName: name });
 
     showToast("Account created!", "success");
-    closeAuthSection();
 
-    setTimeout(() => {
-      window.location.href = "/dashboard.html";
-    }, 1200);
+// ✅ SAVE USER (VERY IMPORTANT)
+localStorage.setItem("user", JSON.stringify({
+  email: email,
+  name: name
+}));
+
+closeAuthSection();
+
+setTimeout(() => {
+  window.location.href = "/explore.html";
+}, 1200);
   } catch (err) {
     showToast(err.message, "error");
   }
@@ -157,11 +164,17 @@ window.login = async function () {
     await signInWithEmailAndPassword(auth, email, password);
 
     showToast("Welcome back 🚀", "success");
-    closeAuthSection();
 
-    setTimeout(() => {
-      window.location.href = "/dashboard.html";
-    }, 800);
+  // ✅ SAVE USER (STEP 3)
+   localStorage.setItem("user", JSON.stringify({
+  email: email
+   }));
+
+   closeAuthSection();
+
+  setTimeout(() => {
+  window.location.href = "/explore.html";
+}, 800);
   } catch (err) {
     showToast(err.message, "error");
   }
@@ -188,7 +201,7 @@ onAuthStateChanged(auth, (user) => {
   }
 
   if (user) {
-    window.location.href = "/dashboard.html";
+    window.location.href = "/explore.html";
   }
 });
 

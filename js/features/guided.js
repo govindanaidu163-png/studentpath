@@ -665,3 +665,22 @@ function resetPage() {
 // IMPORTANT
 window.addEventListener("pageshow", resetPage);
 window.addEventListener("DOMContentLoaded", resetPage);
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("loaded");
+});
+
+// smooth navigation
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+
+  if (link && link.href.includes(window.location.origin)) {
+    e.preventDefault();
+
+    document.body.classList.remove("loaded");
+
+    setTimeout(() => {
+      window.location.href = link.href;
+    }, 300);
+  }
+});

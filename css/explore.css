@@ -1,443 +1,243 @@
-/* =========================
-   EXPLORE.CSS
-   explore.html only
-========================= */
-
-body.explore-page {
-  background:
-    radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 28%),
-    radial-gradient(circle at right top, rgba(99, 102, 241, 0.14), transparent 24%),
-    radial-gradient(circle at left bottom, rgba(168, 85, 247, 0.10), transparent 24%),
-    linear-gradient(180deg, #050816 0%, #0b1020 45%, #020617 100%);
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.explore-page .container {
-  width: 100%;
-  max-width: none;
+/* ===== GLOBAL ===== */
+body {
   margin: 0;
-  padding: 18px 28px 28px;
-  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f7f9;
 }
 
-.explore-page h1 {
-  text-align: center;
-  margin: 14px 0 14px;
-  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
-  line-height: 1.1;
-  letter-spacing: -0.05em;
-  font-weight: 800;
-  background: linear-gradient(90deg, #ffffff 0%, #dbeafe 35%, #c4b5fd 70%, #93c5fd 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.20);
+/* ===== SECTIONS ===== */
+.trending-section,
+.top-careers-section {
+  padding: 40px 80px;
+  margin-top: 10px;
 }
 
-.explore-page h1::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 4px;
-  margin: 12px auto 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #38bdf8, #6366f1, #a855f7);
-  opacity: 0.85;
+/* ===== HEADERS ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
-.explore-page .hero-banner {
-  position: relative;
-  height: 220px;
-  border-radius: 20px;
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.view-all {
+  text-decoration: none;
+  color: #374151;
+  font-size: 16px;
+}
+
+/* ===== TRENDING (MAIN PART) ===== */
+.trending-viewport {
   overflow: hidden;
-  margin-bottom: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-  animation: exploreFadeIn 0.6s ease both;
 }
 
-.explore-page .hero-img {
+.trending-track {
+  display: flex;
+  gap: 18px;
+  transition: transform 0.6s ease;
+}
+
+.trend-card {
+  flex: 0 0 calc(50% - 9px);
+  height: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(90deg, #0b1020, #1e3a8a);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.trend-card-image {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  filter: brightness(0.72) contrast(1.05) saturate(1.08);
-  transform: scale(1.03);
 }
 
-.explore-page .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(2, 6, 23, 0.86) 0%, rgba(2, 6, 23, 0.40) 48%, rgba(2, 6, 23, 0.08) 100%),
-    radial-gradient(circle at left center, rgba(99, 102, 241, 0.20), transparent 45%);
-}
-
-.explore-page .hero-content {
-  position: absolute;
-  left: 28px;
-  bottom: 24px;
-  z-index: 2;
-  max-width: 520px;
-}
-
-.explore-page .hero-content p {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-
-.explore-page .search-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 900px;
-  width: 100%;
-  margin: 18px auto 18px;
-  animation: exploreFadeUp 0.6s ease both;
-}
-
-.explore-page .search-box {
-  flex: 1;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(15, 23, 42, 0.72);
-  color: #fff;
-  outline: none;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
-  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease, background 0.22s ease;
-}
-
-.explore-page .search-box::placeholder {
-  color: rgba(255, 255, 255, 0.42);
-}
-
-.explore-page .search-box:focus {
-  border-color: rgba(56, 189, 248, 0.65);
-  background: rgba(15, 23, 42, 0.88);
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12), 0 16px 34px rgba(0, 0, 0, 0.22);
-  transform: translateY(-1px);
-}
-
-.explore-page .filter-btn {
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  color: white;
-  cursor: pointer;
-  font-weight: 700;
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-}
-
-.explore-page .filter-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.32);
-}
-
-.explore-page .filter-panel {
-  max-width: 900px;
-  margin: 0 auto 18px;
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(15, 23, 42, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
-  animation: exploreFadeIn 0.28s ease both;
-}
-
-.explore-page .filter-panel p {
-  margin: 10px 0 8px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.explore-page .filter-panel button {
-  margin: 5px 6px 5px 0;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(59, 130, 246, 0.18);
-  color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  transition: transform 0.18s ease, background 0.18s ease;
-  box-shadow: none;
-}
-
-.explore-page .filter-panel button:hover {
-  transform: translateY(-1px);
-  background: rgba(59, 130, 246, 0.28);
-}
-
-.explore-page .filter-panel button.active {
-  background: linear-gradient(90deg, #2563eb, #3b82f6);
-  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.22);
-}
-
-.explore-page .hidden {
-  display: none !important;
-}
-
-.explore-page .category-section {
-  margin-bottom: 18px;
-  animation: exploreFadeUp 0.55s ease both;
-}
-
-.explore-page .row-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 14px 0 10px;
-  gap: 10px;
-}
-
-.explore-page .row-header h2,
-.explore-page h2 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-  color: #f8fafc;
-  letter-spacing: -0.02em;
-  position: relative;
-  padding-left: 12px;
-  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
-}
-
-.explore-page .row-header h2::before,
-.explore-page h2::before {
+/* OVERLAY */
+.trend-card::after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 18px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #38bdf8, #6366f1);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.7), transparent);
 }
 
-.explore-page .row-header > div {
-  display: flex;
-  gap: 8px;
+/* CONTENT */
+.trend-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  width: 60%;
 }
 
-.explore-page .row-header button {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(15, 23, 42, 0.78);
-  color: #fff;
+.trend-kicker {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+
+.trend-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.trend-desc {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.trend-salary {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.trend-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: white;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
-.explore-page .row-header button:hover {
-  transform: translateY(-1px);
-  background: rgba(30, 41, 59, 0.95);
-  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.28);
-}
-
-.explore-page .cards {
+/* ===== FILTER BUTTONS ===== */
+.pill-row,
+.category-row {
   display: flex;
-  flex-wrap: nowrap;
   gap: 10px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 0 8px;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap;
+  margin: 15px 0;
 }
 
-.explore-page .cards::-webkit-scrollbar {
+.pill,
+.category {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pill.active,
+.category.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* ===== GRID ===== */
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* ===== CARD ===== */
+.career-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.career-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.career-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.career-info {
+  padding: 12px;
+}
+
+.career-info h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.salary {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+/* ===== CATEGORY BAR (GOOGLE PLAY STYLE) ===== */
+
+.category-bar {
+  padding: 14px 80px 6px;
+  margin-top: 20px;
+}
+
+.category-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.explore-page .card {
-  flex: 0 0 290px;
-  height: 190px;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+/* BUTTON STYLE */
+.cat {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  color: #374151;
   cursor: pointer;
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-  scroll-snap-align: start;
-  transform-origin: center center;
-}
-
-.explore-page .card:hover {
-  transform: scale(1.08) translateY(-3px);
-  z-index: 5;
-  border-color: rgba(96, 165, 250, 0.35);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.62);
-}
-
-.explore-page .card-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-  transition: transform 0.38s ease, filter 0.38s ease;
-}
-
-.explore-page .card:hover .card-img {
-  transform: scale(1.12);
-  filter: saturate(1.06) contrast(1.05);
-}
-
-.explore-page .card-overlay {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.42), transparent);
-  z-index: 1;
-}
-
-.explore-page .card-content {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  text-align: left;
-}
-
-.explore-page .card-content h3 {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #fff;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-}
-
-.explore-page .card-content p {
-  margin: 4px 0 0;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.2;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
-}
-
-.explore-page .badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  backdrop-filter: blur(8px);
-}
-
-.explore-page #trendingCareers {
-  padding-top: 10px;
-  scroll-snap-type: none !important;
-  scroll-behavior: auto !important;
-}
-
-.explore-page #trendingCareers .card {
-  flex: 0 0 210px;
-  height: 270px;
-  overflow: visible;
-  margin-top: 14px;
-  scroll-snap-align: none !important;
-}
-
-.explore-page #trendingCareers .card-content h3 {
-  font-size: 13px;
-}
-
-.explore-page #trendingCareers .card-content p {
-  font-size: 11px;
-}
-
-.explore-page #trendingCareers .career-note {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px) scale(0.96);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
   white-space: nowrap;
-  color: #fff;
-  opacity: 0;
-  z-index: 4;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.95), rgba(168, 85, 247, 0.95));
-  box-shadow: 0 14px 30px rgba(59, 130, 246, 0.22);
-  backdrop-filter: blur(10px);
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  transition: all 0.25s ease;
 }
 
-.explore-page #trendingCareers .card.is-focused {
-  transform: scale(1.1) translateY(-4px);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.66);
-  z-index: 10;
+/* HOVER */
+.cat:hover {
+  background: #eef2ff;
 }
 
-.explore-page #trendingCareers .card.is-focused .career-note {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.explore-page #careerSections > div {
-  margin-bottom: 14px;
-}
-
-.explore-page #noResults {
-  color: rgba(255, 255, 255, 0.65) !important;
-}
-
-.explore-page footer {
-  margin-top: 26px;
-  padding: 18px 0 6px;
-  color: rgba(255, 255, 255, 0.45);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-@keyframes exploreFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes exploreFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ACTIVE */
+.cat.active {
+  background: #d1fae5;
+  color: #065f46;
+  border: none;
+  font-weight: 500;
 }

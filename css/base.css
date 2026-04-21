@@ -190,3 +190,24 @@ a:focus-visible {
     transform: rotate(360deg);
   }
 }
+
+/* PAGE TRANSITION */
+body {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* when loaded */
+body.page-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* when leaving */
+body.page-exit {
+  opacity: 0;
+  transform: translateY(10px);
+}
