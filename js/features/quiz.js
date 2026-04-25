@@ -1,8 +1,6 @@
-// ================= QUESTIONS WITH LOGIC =================
-
-// (Firebase removed because not used here)
-// import { auth , db } from "../firebase.js";
-
+/* ================= QUESTIONS ================= */
+console.log("START RUNNING");
+alert("RUNNING");
 const questions = [
   {
     q: "What do you enjoy the most?",
@@ -33,7 +31,7 @@ const questions = [
   }
 ];
 
-// ================= SCORE SYSTEM =================
+/* ================= STATE ================= */
 
 let score = {
   tech: 0,
@@ -44,74 +42,99 @@ let score = {
 
 let current = 0;
 
-// ================= LOAD QUESTION =================
+/* ================= ELEMENTS ================= */
+
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+const questionBox = document.getElementById("questionBox");
+
+/* ================= START ================= */
+
+function startQuizUI() {
+  console.log("Quiz script loaded");
+  loadQuestion();
+  initParticles();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startQuizUI);
+} else {
+  startQuizUI();
+}
+
+/* ================= LOAD QUESTION ================= */
 
 function loadQuestion() {
   const q = questions[current];
 
-  const questionText = document.getElementById("questionText");
-  const container = document.getElementById("optionsContainer");
-
-  if (!questionText || !container) return;
+  if (!questionText || !optionsContainer) {
+    console.error("Quiz elements missing");
+    return;
+  }
 
   questionText.innerText = q.q;
-  container.innerHTML = "";
+  optionsContainer.innerHTML = "";
 
   q.options.forEach(opt => {
     const btn = document.createElement("div");
     btn.className = "option";
-    btn.innerText = opt.text;
+    btn.textContent = opt.text;
 
-    btn.onclick = () => {
-      score[opt.type]++;
+    btn.addEventListener("click", () => {
+      score[opt.type] += 1;
       btn.classList.add("selected");
-      setTimeout(nextQuestion, 200);
-    };
 
-    container.appendChild(btn);
+      const allOptions = optionsContainer.querySelectorAll(".option");
+      allOptions.forEach(el => {
+        el.style.pointerEvents = "none";
+      });
+
+      setTimeout(nextQuestion, 220);
+    });
+
+    optionsContainer.appendChild(btn);
   });
 
   updateProgress();
 }
 
-// ================= NEXT =================
+/* ================= NEXT QUESTION ================= */
 
 function nextQuestion() {
-  const box = document.getElementById("questionBox");
-  if (!box) return;
+  if (!questionBox) return;
 
-  box.style.opacity = 0.5;
-  box.style.transform = "scale(0.97)";
+  questionBox.style.opacity = "0.5";
+  questionBox.style.transform = "scale(0.98)";
 
   setTimeout(() => {
-    current++;
+    current += 1;
 
     if (current < questions.length) {
+      questionBox.style.opacity = "1";
+      questionBox.style.transform = "scale(1)";
       loadQuestion();
-      box.style.opacity = 1;
-      box.style.transform = "scale(1)";
     } else {
       showAnalyzing();
     }
-  }, 150);
+  }, 120);
 }
 
-// ================= PROGRESS =================
+/* ================= PROGRESS ================= */
 
 function updateProgress() {
   const percent = Math.round((current / questions.length) * 100);
 
-  const fill = document.getElementById("progressFill");
-  const text = document.getElementById("progressText");
-
-  if (fill) fill.style.width = percent + "%";
-  if (text) text.innerText = percent + "%";
+  if (progressFill) progressFill.style.width = `${percent}%`;
+  if (progressText) progressText.textContent = `${percent}%`;
 }
 
-// ================= AI ANALYZING =================
+/* ================= ANALYZING ================= */
 
 function showAnalyzing() {
   const container = document.querySelector(".quiz-container");
+
   if (!container) return;
 
   container.innerHTML = `
@@ -122,64 +145,64 @@ function showAnalyzing() {
     </div>
   `;
 
-  setTimeout(showResult, 2000);
+  setTimeout(showResult, 1800);
 }
 
-// ================= RESULT LOGIC =================
+/* ================= RESULT ================= */
 
 function showResult() {
-  let best = Object.keys(score).reduce((a, b) =>
+  const best = Object.keys(score).reduce((a, b) =>
     score[a] > score[b] ? a : b
   );
 
-  // SAVE RESULT
   localStorage.setItem("careerResult", best);
-
-  // REDIRECT
-  window.location.href = "/result.html";
+  window.location.href = "result.html";
 }
 
-// ================= START =================
+/* ================= PARTICLES ================= */
 
-document.addEventListener("DOMContentLoaded", loadQuestion);
+function initParticles() {
+  const canvas = document.getElementById("particles");
+  if (!canvas) return;
 
-// ================= PARTICLES (SAFE) =================
-
-const canvas = document.getElementById("particles");
-
-if (canvas) {
   const ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particles = [];
-
-  for (let i = 0; i < 60; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5
-    });
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
 
-  function animateParticles() {
+  resize();
+  window.addEventListener("resize", resize);
+
+  const particles = Array.from({ length: 70 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.8 + 0.3,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35
+  }));
+
+  function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p => {
-      p.x += p.speedX;
-      p.y += p.speedY;
+      p.x += p.vx;
+      p.y += p.vy;
 
-      ctx.fillStyle = "rgba(99,102,241,0.7)";
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(99,102,241,0.55)";
       ctx.fill();
     });
 
-    requestAnimationFrame(animateParticles);
+    requestAnimationFrame(draw);
   }
 
-  animateParticles();
+  draw();
 }

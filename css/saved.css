@@ -1,0 +1,86 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+.saved-page {
+  padding: 30px 40px;
+}
+
+/* HEADER */
+.saved-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.saved-header p {
+  color: #666;
+  margin-top: 6px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab.active {
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 500;
+}
+
+/* GRID */
+.tab-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* CARD */
+.saved-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.saved-card:hover {
+  transform: translateY(-5px);
+}
+
+.saved-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.saved-info {
+  padding: 10px;
+}
+
+.saved-info h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.saved-info p {
+  font-size: 13px;
+  color: #555;
+}
+
+/* EMPTY STATE */
+.empty {
+  font-size: 16px;
+  color: #777;
+}

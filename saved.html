@@ -1,128 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/navbar.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saved Careers</title>
+  <meta charset="UTF-8">
+  <title>Saved</title>
 
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="../css/navbar.css">
+
+  <!-- PAGE STYLE -->
+  <link rel="stylesheet" href="../css/saved.css">
 </head>
 
 <body>
 
+  <!-- NAVBAR -->
+  <div id="navbarContainer"></div>
 
-<div id="navbarContainer"></div>
+  <!-- MAIN -->
+  <main class="saved-page">
 
+    <!-- HEADER -->
+    <div class="saved-header">
+      <h1>Saved</h1>
+      <p>Your personalized collection</p>
+    </div>
 
-<div class="container">
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('careers', event)">
+        Careers
+      </button>
 
-  <h1>❤️ Saved Careers</h1>
+      <button class="tab" onclick="showTab('exams', event)">
+        Exams
+      </button>
+    </div>
 
-  <div id="savedList" class="cards"></div>
+    <!-- CONTENT -->
+    <div id="savedCareers" class="tab-content"></div>
 
-  <button class="btn compare-btn" onclick="compareCareers()">
-    Compare Careers
-  </button>
+    <div id="savedExams" class="tab-content" style="display: none;"></div>
 
-</div>
+  </main>
 
-<script type="module">
-
-import { careers } from "./js/careers.js";
-
-// 📥 GET SAVED
-const savedKeys = JSON.parse(localStorage.getItem("savedCareers")) || [];
-
-const container = document.getElementById("savedList");
-
-if (savedKeys.length === 0) {
-  container.innerHTML = "<p>No saved careers yet</p>";
-}
-
-// 🎯 SHOW CARDS
-savedKeys.forEach(key => {
-
-  const data = careers.find(c => c.key === key);
-
-  if (!data) return;
-
-  let div = document.createElement("div");
-  div.className = "card";
-
-  div.innerHTML = `
-  <h3>${data.name}</h3>
-  <p>${data.salaryLabel}</p>
-  <button onclick="removeCareer('${data.key}')">❌ Remove</button>
-`;
-
-  container.appendChild(div);
-
-});
-
-// 🔥 COMPARE BUTTON
-window.compareCareers = function() {
-
-  const savedKeys = JSON.parse(localStorage.getItem("savedCareers")) || [];
-
-  if (savedKeys.length < 2) {
-    alert("Select at least 2 careers to compare");
-    return;
-  }
-
-  localStorage.setItem("compareCareers", JSON.stringify(savedKeys));
-
-  window.location.href = "compare.html";
-};
-
-window.removeCareer = function(key) {
-
-  let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
-
-  // remove selected
-  saved = saved.filter(c => c !== key);
-
-  localStorage.setItem("savedCareers", JSON.stringify(saved));
-
-  // reload page
-  location.reload();
-};
-
-
-
-
-</script>
-
-
-<script>
-function goBack() {
-  window.location.href = "dashboard.html";
-}
-</script>
-
-<script>
-function resetPage() {
-  // fade हटाओ
-  document.body.classList.remove("fade-out");
-
-  // scroll fix
-  document.body.style.opacity = "1";
-  document.body.style.visibility = "visible";
-  document.body.style.overflow = "auto";
-
-  // modal close
-  document.getElementById("authSection")?.classList.add("hidden");
-
-  // sidebar close
-  document.getElementById("sidebar")?.classList.remove("open");
-}
-
-// IMPORTANT
-window.addEventListener("pageshow", resetPage);
-window.addEventListener("DOMContentLoaded", resetPage);
-</script>
-<script src="../js/core/loadNavbar.js"></script>
-<script src="js/core/transition.js"></script>
+  <!-- SCRIPTS -->
+ <script type="module" src="../js/core/loadNavbar.js"></script>
+  <script src="../js/features/saved.js"></script>
 
 </body>
 </html>

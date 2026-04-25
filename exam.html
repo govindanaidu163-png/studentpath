@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Details</title>
+
+  <!-- NAVBAR -->
+  <link rel="stylesheet" href="../css/navbar.css">
+
+  <!-- PAGE STYLE -->
+  <link rel="stylesheet" href="../css/exam.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbarContainer"></div>
+
+  <!-- MAIN -->
+  <main class="exam-page">
+
+    <!-- HEADER -->
+    <section class="exam-hero">
+      <h1 id="examTitle">Exam Name</h1>
+      <p id="examDesc">Description</p>
+
+      <div class="exam-meta">
+        <span id="examType"></span>
+        <span id="examDifficulty"></span>
+      </div>
+
+      <!-- SAVE BUTTON -->
+      <button class="btn-save">
+        <span class="btn-icon">♡</span>
+        Save
+      </button>
+    </section>
+
+    <!-- CAREERS SECTION -->
+    <section class="related-careers">
+      <h2>Careers after this exam</h2>
+
+      <div id="careerList" class="career-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="../js/data/careerData.js"></script>
+  <script src="../js/core/loadNavbar.js"></script>
+  <script src="../js/features/exam.js"></script>
+
+</body>
+</html>

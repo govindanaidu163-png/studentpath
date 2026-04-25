@@ -1,87 +1,133 @@
 const exams = window.exams || [];
 
-let currentSearch = "";
+if (!Array.isArray(exams)) {
+  console.error("Exam data not loaded properly");
+}
+
 let currentType = "all";
 
-/* TRENDING */
+/* ================= HELPERS ================= */
+
+function openExam(exam) {
+  localStorage.setItem("selectedExam", JSON.stringify(exam));
+  window.location.href = "exam.html";
+}
+
+function isExamSaved(exam) {
+  const saved = JSON.parse(localStorage.getItem("savedExams")) || [];
+  return saved.some(e => e.key === exam.key);
+}
+
+/* ================= TRENDING ================= */
+
 function renderTrending(list) {
   const container = document.getElementById("trendingExams");
+  if (!container) return;
+
   container.innerHTML = "";
 
-  const top = [...list].slice(0, 6);
+  const trending = [...list]
+    .map(e => ({
+      ...e,
+      score: (e.difficulty || 0) * 10
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6);
 
-  top.forEach(e => {
-    const div = document.createElement("div");
-    div.className = "trend-card";
+  trending.forEach(e => {
+    const card = document.createElement("div");
+    card.className = "trend-card";
 
-    div.innerHTML = `
+    card.innerHTML = `
       <img src="${e.image}" class="trend-card-image">
       <div class="trend-card-content">
-        <div class="trend-kicker">Trending</div>
-        <h3 class="trend-title">${e.name}</h3>
-        <p class="trend-desc">${e.salaryLabel}</p>
-        <button class="trend-btn">View details</button>
+        <h3>${e.name}</h3>
+        <p>${e.salaryLabel}</p>
       </div>
     `;
 
-    div.onclick = () => {
-      localStorage.setItem("selectedExam", JSON.stringify(e));
-      window.location.href = "exam.html";
-    };
+    card.onclick = () => openExam(e);
 
-    container.appendChild(div);
+    container.appendChild(card);
   });
 }
 
-/* GRID */
-function renderGrid(list) {
+/* ================= GRID ================= */
+
+function renderGrid(list = exams) {
   const grid = document.getElementById("examGrid");
+  if (!grid) return;
+
   grid.innerHTML = "";
 
   list.forEach(e => {
     const card = document.createElement("div");
-    card.className = "career-card";
+    card.className = "career-card"; // reuse same style
+
+    const saved = isExamSaved(e);
 
     card.innerHTML = `
+      <div class="save-btn">${saved ? "♥" : "♡"}</div>
+
       <img src="${e.image}" class="career-image">
+
       <div class="career-info">
         <h3>${e.name}</h3>
         <p class="salary">${e.salaryLabel}</p>
-        <span class="tag">${e.tag}</span>
+
+        <div class="meta">
+          <span>Difficulty: ${"⭐".repeat(e.difficulty || 3)}</span>
+          <span class="tag">${e.tag || "Exam"}</span>
+        </div>
       </div>
     `;
 
-    card.onclick = () => {
-      localStorage.setItem("selectedExam", JSON.stringify(e));
-      window.location.href = "exam.html";
+    // ❤️ SAVE BUTTON
+    const saveBtn = card.querySelector(".save-btn");
+
+    saveBtn.onclick = (ev) => {
+      ev.stopPropagation();
+
+      let saved = JSON.parse(localStorage.getItem("savedExams")) || [];
+
+      const exists = saved.find(item => item.key === e.key);
+
+      if (exists) {
+        saved = saved.filter(item => item.key !== e.key);
+        saveBtn.textContent = "♡";
+      } else {
+        saved.push(e);
+        saveBtn.textContent = "♥";
+      }
+
+      localStorage.setItem("savedExams", JSON.stringify(saved));
     };
+
+    // 👉 OPEN EXAM PAGE
+    card.onclick = () => openExam(e);
 
     grid.appendChild(card);
   });
 }
 
-/* SEARCH */
-window.searchExam = function () {
-  const input = document.getElementById("searchInput");
-  currentSearch = input.value.toLowerCase();
-  updateUI();
-};
+/* ================= FILTER ================= */
 
-/* FILTER */
-window.filterType = function (type) {
+window.filterType = function(type, e) {
   currentType = type;
+
+  document.querySelectorAll(".category").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  if (e) e.target.classList.add("active");
+
   updateUI();
 };
 
-/* UPDATE */
+/* ================= MAIN ================= */
+
 function updateUI() {
   let filtered = [...exams];
-
-  if (currentSearch) {
-    filtered = filtered.filter(e =>
-      e.name.toLowerCase().includes(currentSearch)
-    );
-  }
 
   if (currentType !== "all") {
     filtered = filtered.filter(e => e.type === currentType);
@@ -91,23 +137,8 @@ function updateUI() {
   renderGrid(filtered);
 }
 
+/* ================= INIT ================= */
 
-function filterExam(type) {
-  const cards = document.querySelectorAll(".exam-card");
-
-  cards.forEach(card => {
-    if (type === "all" || card.dataset.type === type) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-
-  // active button UI
-  document.querySelectorAll(".cat").forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
-}
-
-
-/* INIT */
-document.addEventListener("DOMContentLoaded", updateUI);
+document.addEventListener("DOMContentLoaded", () => {
+  updateUI();
+});

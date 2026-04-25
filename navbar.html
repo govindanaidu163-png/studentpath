@@ -3,16 +3,48 @@
   <div class="logo">StudentPath</div>
 
   <nav class="nav-center">
-  <a href="explore.html" class="nav-link">Explore Careers</a>
-  <a href="exams.html" class="nav-link">Explore Exams</a>
-  <a href="guided-path.html" class="nav-link">Guide My Path</a>
-  <a href="saved.html" class="nav-link">Saved</a>
-</nav>
+    <a href="explore.html" class="nav-link">Explore Careers</a>
+    <a href="exams.html" class="nav-link">Explore Exams</a>
+    <a href="guided-path.html" class="nav-link">Guide My Path</a>
+    <a href="saved.html" class="nav-link">Saved</a>
+
+    <!-- optional indicator -->
+    <div class="nav-indicator"></div>
+  </nav>
 
   <div class="nav-right">
     <input type="text" placeholder="Search..." />
     <div class="icon">🔍</div>
-    <div class="icon">👤</div>
+
+    <!-- PROFILE -->
+    <div class="icon profile-icon" id="profileBtn">👤</div>
   </div>
 
 </header>
+
+
+<!-- ================= PROFILE SLIDER ================= -->
+
+<div class="profile-panel" id="profilePanel">
+
+  <div class="profile-content">
+
+    <div class="profile-header">
+      <h3>My Profile</h3>
+      <span id="closeProfile">&times;</span>
+    </div>
+
+    <div class="profile-body">
+      <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+      <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+
+      <div class="profile-about">
+        <p>About: Building my career journey 🚀</p>
+      </div>
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+
+  </div>
+
+</div>

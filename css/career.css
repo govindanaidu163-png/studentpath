@@ -12,27 +12,27 @@
 }
 
 :root {
-  --bg-void: #050810;
-  --bg-deep: #080d1a;
-  --bg-surface: #0d1526;
-  --bg-elevated: #111e35;
-  --bg-card: rgba(255,255,255,0.04);
+  --bg-void: #f7f9fc;
+  --bg-deep: #eef3fb;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5ff;
+  --bg-card: rgba(255,255,255,0.8);
 
   --accent: #4f8eff;
-  --accent-bright: #6fa3ff;
-  --accent-dim: rgba(79,142,255,0.15);
-  --accent-glow: rgba(79,142,255,0.35);
+  --accent-bright: #3b82f6;
+  --accent-dim: rgba(79,142,255,0.08);
+  --accent-glow: rgba(79,142,255,0.2);
 
   --gold: #f0b429;
   --gold-dim: rgba(240,180,41,0.12);
-  --emerald: #10d9a0;
+  --emerald: #10b981;
   --coral: #ff6b6b;
 
-  --text-primary: #f0f4ff;
-  --text-secondary: #8b9cc0;
-  --text-muted: #4a5578;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(0,0,0,0.08);
   --border-hover: rgba(79,142,255,0.4);
 
   --radius-sm: 8px;
@@ -52,7 +52,7 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg-void);
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef3fb 100%);
   color: var(--text-primary);
   overflow-x: hidden;
   cursor: none;
@@ -62,31 +62,46 @@ body {
 .custom-cursor {
   width: 32px;
   height: 32px;
-  border: 1.5px solid rgba(79,142,255,0.6);
+
+  /* 🔥 DARK BORDER */
+  border: 2px solid rgba(20, 30, 60, 0.9);
+
   border-radius: 50%;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s var(--ease-out), opacity 0.2s;
+
   transform: translate(-50%, -50%);
-  mix-blend-mode: screen;
+  transition: transform 0.15s ease, opacity 0.2s;
+
+  /* ❌ REMOVE THIS (important) */
+  mix-blend-mode: normal;
+
+  /* ✨ ADD LIGHT BACKGROUND */
+  background: rgba(20, 30, 60, 0.1);
 }
 .custom-cursor-dot {
-  width: 5px;
-  height: 5px;
-  background: var(--accent-bright);
+  width: 6px;
+  height: 6px;
+
+  /* 🔥 DARK DOT */
+  background: #0f1f3d;
+
   border-radius: 50%;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
+
   pointer-events: none;
   z-index: 9999;
+
   transform: translate(-50%, -50%);
-  transition: transform 0.05s;
 }
 body:has(button:hover) .custom-cursor {
-  transform: translate(-50%, -50%) scale(1.8);
-  background: var(--accent-dim);
+  transform: translate(-50%, -50%) scale(1.6);
+  background: rgba(20, 30, 60, 0.2);
 }
 
 /* ---- NAV ---- */
@@ -102,9 +117,9 @@ body:has(button:hover) .custom-cursor {
   transition: background 0.4s var(--ease-out), backdrop-filter 0.4s;
 }
 .nav.scrolled {
-  background: rgba(5,8,16,0.85);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.85); /* 🔥 light */
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
 .logo {
@@ -159,7 +174,7 @@ body:has(button:hover) .custom-cursor {
   justify-content: center;
   position: relative;
   padding: 120px 48px 60px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-bg {
@@ -224,7 +239,7 @@ body:has(button:hover) .custom-cursor {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  max-width: 1000px;
 }
 
 .hero-badge {
@@ -263,18 +278,20 @@ body:has(button:hover) .custom-cursor {
   line-height: 1.0;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #ffffff 0%, #c8d8ff 50%, #6fa3ff 100%);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+
+  /* 🔥 DARK GRADIENT */
+  background: linear-gradient(135deg, #0b1220 0%, #1a2a4a 50%, #2f4f90 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0;
-  animation: fadeSlideUp 0.8s 0.35s var(--ease-out) forwards;
 }
 
 .hero-desc {
   font-size: 18px;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: #1f2a44;
   max-width: 520px;
   margin-bottom: 28px;
   font-weight: 300;
@@ -482,7 +499,7 @@ body:has(button:hover) .custom-cursor {
 
 /* ---- STATS SECTION ---- */
 .stats-section {
-  background: var(--bg-deep);
+  background: #f7f9ff;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -608,26 +625,46 @@ body:has(button:hover) .custom-cursor {
 .card-3d-front {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0f1f3d 0%, #0a1628 60%, #060e1e 100%);
-  border: 1px solid rgba(79,142,255,0.2);
+
+  /* 🔥 LIGHT GLASS BACKGROUND */
+  background: linear-gradient(135deg, #1a2a4a 0%, #0f1f3d 60%, #0a1628 100%);
+
+  /* ✨ ADD BORDER GLOW */
+  border: 1px solid rgba(79,142,255,0.35);
+
   border-radius: var(--radius-xl);
   padding: 40px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   position: relative;
   overflow: hidden;
-  box-shadow: 
-    0 0 0 1px rgba(255,255,255,0.04) inset,
-    0 40px 80px rgba(0,0,0,0.6),
-    0 0 60px rgba(79,142,255,0.1);
+
+  /* 🔥 STRONGER SHADOW (VISIBLE FLOATING) */
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.4),
+    0 0 40px rgba(79,142,255,0.2);
+
+  /* ✨ GLASS EFFECT */
+  backdrop-filter: blur(10px);
 }
 .c3d-glow {
   position: absolute;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(79,142,255,0.15) 0%, transparent 70%);
-  top: -60px; right: -60px;
+  width: 250px;
+  height: 250px;
+
+  background: radial-gradient(circle,
+    rgba(79,142,255,0.25) 0%,
+    transparent 70%
+  );
+
+  top: -80px;
+  right: -80px;
   border-radius: 50%;
+
+  filter: blur(50px);
 }
 .c3d-icon {
   font-size: 42px;
@@ -638,13 +675,13 @@ body:has(button:hover) .custom-cursor {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 .c3d-stream {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--accent);
+  color: #ffffff;
   font-weight: 500;
   margin-top: 4px;
 }
@@ -662,11 +699,11 @@ body:has(button:hover) .custom-cursor {
   font-family: 'Syne', sans-serif;
   font-size: 1.4rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 .c3d-stat small {
   font-size: 11px;
-  color: var(--text-muted);
+  color: #ffffff;
   letter-spacing: 0.05em;
 }
 .c3d-salary {

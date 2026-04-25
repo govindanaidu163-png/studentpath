@@ -1,6 +1,7 @@
 window.exams = [
 
 {
+  key: "jee_main",
   name: "JEE Main",
   type: "engineering",
   salaryLabel: "Gateway to IIT/NIT",
@@ -11,6 +12,7 @@ window.exams = [
 },
 
 {
+  key: "neet",
   name: "NEET",
   type: "medical",
   salaryLabel: "MBBS Entry",
@@ -21,6 +23,7 @@ window.exams = [
 },
 
 {
+  key: "upsc",
   name: "UPSC",
   type: "government",
   salaryLabel: "IAS/IPS",
@@ -31,6 +34,7 @@ window.exams = [
 },
 
 {
+  key: "cat",
   name: "CAT",
   type: "business",
   salaryLabel: "MBA Entry",
@@ -41,6 +45,7 @@ window.exams = [
 },
 
 {
+  key: "jee_advanced",
   name: "JEE Advanced",
   type: "engineering",
   salaryLabel: "IIT Admission",
@@ -51,6 +56,7 @@ window.exams = [
 },
 
 {
+  key: "gate",
   name: "GATE",
   type: "engineering",
   salaryLabel: "PSU / M.Tech",
@@ -61,6 +67,7 @@ window.exams = [
 },
 
 {
+  key: "ssc_cgl",
   name: "SSC CGL",
   type: "government",
   salaryLabel: "Gov Jobs",
@@ -71,6 +78,7 @@ window.exams = [
 },
 
 {
+  key: "clat",
   name: "CLAT",
   type: "law",
   salaryLabel: "Law Schools",
@@ -81,6 +89,7 @@ window.exams = [
 },
 
 {
+  key: "nda",
   name: "NDA",
   type: "defense",
   salaryLabel: "Army/Navy/Airforce",
@@ -91,6 +100,7 @@ window.exams = [
 },
 
 {
+  key: "cuet",
   name: "CUET",
   type: "general",
   salaryLabel: "Central Universities",
@@ -101,6 +111,7 @@ window.exams = [
 },
 
 {
+  key: "aiims",
   name: "AIIMS",
   type: "medical",
   salaryLabel: "Top Medical College",
@@ -111,6 +122,7 @@ window.exams = [
 },
 
 {
+  key: "bitsat",
   name: "BITSAT",
   type: "engineering",
   salaryLabel: "BITS Admission",
@@ -121,6 +133,7 @@ window.exams = [
 },
 
 {
+  key: "xat",
   name: "XAT",
   type: "business",
   salaryLabel: "MBA Top Colleges",
@@ -131,6 +144,7 @@ window.exams = [
 },
 
 {
+  key: "gmat",
   name: "GMAT",
   type: "business",
   salaryLabel: "Abroad MBA",
@@ -141,6 +155,7 @@ window.exams = [
 },
 
 {
+  key: "isi_test",
   name: "ISI Admission Test",
   type: "science",
   salaryLabel: "Statistics Career",
@@ -149,7 +164,9 @@ window.exams = [
   tag: "Elite",
   careers: ["Data Scientist", "Statistician", "Research Analyst"]
 },
+
 {
+  key: "iiser_test",
   name: "IISER Aptitude Test",
   type: "science",
   salaryLabel: "Research Career",
@@ -158,7 +175,9 @@ window.exams = [
   tag: "Research",
   careers: ["Scientist", "Researcher", "Professor"]
 },
+
 {
+  key: "lsat_india",
   name: "LSAT India",
   type: "law",
   salaryLabel: "Law Career",
@@ -167,7 +186,9 @@ window.exams = [
   tag: "International",
   careers: ["Lawyer", "Corporate Lawyer", "Legal Advisor"]
 },
+
 {
+  key: "ailet",
   name: "AILET",
   type: "law",
   salaryLabel: "NLU Admission",
@@ -176,7 +197,9 @@ window.exams = [
   tag: "Top Law",
   careers: ["Lawyer", "Judge", "Legal Consultant"]
 },
+
 {
+  key: "ipmat",
   name: "IPMAT",
   type: "business",
   salaryLabel: "Integrated MBA",
@@ -185,7 +208,9 @@ window.exams = [
   tag: "IIM",
   careers: ["Business Analyst", "Manager", "Entrepreneur"]
 },
+
 {
+  key: "cmat",
   name: "CMAT",
   type: "business",
   salaryLabel: "MBA Entrance",
@@ -194,7 +219,9 @@ window.exams = [
   tag: "MBA",
   careers: ["Marketing Manager", "HR Manager", "Consultant"]
 },
+
 {
+  key: "mat",
   name: "MAT",
   type: "business",
   salaryLabel: "MBA Colleges",
@@ -203,7 +230,9 @@ window.exams = [
   tag: "Popular",
   careers: ["Business Analyst", "Sales Manager", "Entrepreneur"]
 },
+
 {
+  key: "snap",
   name: "SNAP",
   type: "business",
   salaryLabel: "Symbiosis MBA",
@@ -212,7 +241,9 @@ window.exams = [
   tag: "Top MBA",
   careers: ["Consultant", "Manager", "Startup Founder"]
 },
+
 {
+  key: "tissnet",
   name: "TISSNET",
   type: "social",
   salaryLabel: "Social Work",
@@ -221,7 +252,9 @@ window.exams = [
   tag: "Unique",
   careers: ["Social Worker", "Policy Analyst", "NGO Manager"]
 },
+
 {
+  key: "nchmct",
   name: "NCHMCT JEE",
   type: "hospitality",
   salaryLabel: "Hotel Mgmt",
@@ -230,7 +263,9 @@ window.exams = [
   tag: "Hospitality",
   careers: ["Hotel Manager", "Chef", "Hospitality Executive"]
 },
+
 {
+  key: "ca_foundation",
   name: "CA Foundation",
   type: "commerce",
   salaryLabel: "CA Career",
@@ -239,7 +274,9 @@ window.exams = [
   tag: "Finance",
   careers: ["Chartered Accountant", "Auditor", "Finance Analyst"]
 },
+
 {
+  key: "cs_executive",
   name: "CS Executive",
   type: "commerce",
   salaryLabel: "Company Secretary",
@@ -248,7 +285,9 @@ window.exams = [
   tag: "Corporate",
   careers: ["Company Secretary", "Legal Advisor", "Corporate Manager"]
 },
+
 {
+  key: "cma_foundation",
   name: "CMA Foundation",
   type: "commerce",
   salaryLabel: "Cost Accountant",
@@ -257,7 +296,9 @@ window.exams = [
   tag: "Finance",
   careers: ["Cost Accountant", "Finance Manager", "Analyst"]
 },
+
 {
+  key: "nios",
   name: "NIOS Exam",
   type: "general",
   salaryLabel: "Open School",
@@ -266,7 +307,9 @@ window.exams = [
   tag: "Flexible",
   careers: ["Various Careers", "Higher Studies"]
 },
+
 {
+  key: "jam_iit",
   name: "JAM (IIT)",
   type: "science",
   salaryLabel: "M.Sc IIT",
@@ -275,7 +318,9 @@ window.exams = [
   tag: "IIT",
   careers: ["Scientist", "Researcher", "Professor"]
 },
+
 {
+  key: "duet",
   name: "DUET",
   type: "general",
   salaryLabel: "Delhi University",
@@ -284,7 +329,9 @@ window.exams = [
   tag: "University",
   careers: ["Graduate Careers", "Research Fields"]
 },
+
 {
+  key: "amu",
   name: "AMU Entrance",
   type: "general",
   salaryLabel: "AMU Admission",
@@ -293,7 +340,9 @@ window.exams = [
   tag: "University",
   careers: ["Various Careers", "Higher Studies"]
 },
+
 {
+  key: "jipmer",
   name: "JIPMER",
   type: "medical",
   salaryLabel: "Medical College",
@@ -302,7 +351,9 @@ window.exams = [
   tag: "Top Medical",
   careers: ["Doctor", "Surgeon", "Medical Researcher"]
 },
+
 {
+  key: "agniveer",
   name: "Army Agniveer",
   type: "defense",
   salaryLabel: "Army Entry",
@@ -311,7 +362,9 @@ window.exams = [
   tag: "Defense",
   careers: ["Army Soldier", "Defense Services"]
 },
+
 {
+  key: "merchant_navy",
   name: "Merchant Navy Exam",
   type: "marine",
   salaryLabel: "Sea Career",

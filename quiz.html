@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudentPath Quiz</title>
 
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/quiz.css">
-  
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/quiz.css">
 </head>
 
 <body class="quiz-page">
+  <canvas id="particles"></canvas>
 
-<canvas id="particles"></canvas>
-
-<div class="quiz-container">
-
-  <!-- PROGRESS -->
-  <div class="progress-wrapper">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <main class="quiz-container">
+    <div class="quiz-topbar">
+      <a class="quiz-back" href="index.html">← Back</a>
+      <div class="quiz-brand">StudentPath</div>
     </div>
-    <span id="progressText">0%</span>
-  </div>
 
-  <!-- QUESTION BOX -->
-  <div class="question-box" id="questionBox">
-    <h2 id="questionText"></h2>
-    <div class="options" id="optionsContainer"></div>
-  </div>
+    <div class="progress-wrapper">
+      <div class="progress-label">
+        <span>Quiz progress</span>
+        <span id="progressText">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
 
-</div>
+    <section class="question-box" id="questionBox">
+      <p class="quiz-kicker">Find your best path</p>
+      <h2 id="questionText"></h2>
+      <div class="options" id="optionsContainer"></div>
+    </section>
+  </main>
 
-<script src="../js/features/quiz.js"></script>
-
+  <script src="js/features/quiz.js"></script>
 </body>
 </html>
