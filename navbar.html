@@ -1,6 +1,7 @@
 <header class="top-nav">
 
-  <div class="logo">StudentPath</div>
+  <!-- LOGO — links to explore via SPA -->
+  <a href="explore.html" class="logo" style="text-decoration:none;color:inherit;">StudentPath</a>
 
   <nav class="nav-center">
     <a href="explore.html" class="nav-link">Explore Careers</a>
@@ -8,16 +9,25 @@
     <a href="guided-path.html" class="nav-link">Guide My Path</a>
     <a href="saved.html" class="nav-link">Saved</a>
 
-    <!-- optional indicator -->
+    <!-- sliding underline indicator -->
     <div class="nav-indicator"></div>
   </nav>
 
   <div class="nav-right">
-    <input type="text" placeholder="Search..." />
-    <div class="icon">🔍</div>
+    <!-- Search bar -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search..."
+             oninput="if(window.searchCareer) window.searchCareer()" />
+    </div>
 
-    <!-- PROFILE -->
-    <div class="icon profile-icon" id="profileBtn">👤</div>
+    <!-- Bell icon -->
+    <div class="icon bell-icon" title="Notifications">🔔</div>
+
+    <!-- PROFILE avatar -->
+    <div class="icon profile-icon" id="profileBtn">
+      <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=32&rounded=true" alt="Profile" class="avatar-img">
+    </div>
   </div>
 
 </header>

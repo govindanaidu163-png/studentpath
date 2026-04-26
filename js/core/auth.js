@@ -15,34 +15,18 @@ const signupForm = document.getElementById("signupForm");
 const loginForm = document.getElementById("loginForm");
 const signupTab = document.getElementById("signupTab");
 const loginTab = document.getElementById("loginTab");
+
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
+
 const loginEmailInput = document.getElementById("loginEmail");
 const loginPasswordInput = document.getElementById("loginPassword");
+
+const loginBtn = document.getElementById("loginBtn");
+const signupBtn = document.getElementById("signupBtn");
+const closeBtn = document.getElementById("closeBtn");
 const toastEl = document.getElementById("toast");
-
-/* =========================
-   THEME
-========================= */
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light");
-}
-
-window.toggleTheme = function () {
-  document.body.classList.toggle("light");
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("light") ? "light" : "dark"
-  );
-};
-
-/* =========================
-   QUIZ
-========================= */
-window.startQuiz = function () {
-  window.location.href = "/quiz.html";
-};
 
 /* =========================
    AUTH MODAL HELPERS
@@ -77,166 +61,187 @@ function showSignupForm() {
 
 function showToast(message, type = "success") {
   if (!toastEl) return;
-
   toastEl.innerText = message;
-  toastEl.className = "toast show " + type;
-
+  toastEl.className = `toast show ${type}`;
   clearTimeout(window.toastTimer);
   window.toastTimer = setTimeout(() => {
     toastEl.classList.remove("show");
   }, 3000);
 }
 
-/* Expose modal actions to HTML buttons */
-window.showLanding = function () {
-  closeAuthSection();
-};
+/* =========================
+   EVENT LISTENERS
+========================= */
+if (loginTab) loginTab.addEventListener("click", showLoginForm);
+if (signupTab) signupTab.addEventListener("click", showSignupForm);
+if (closeBtn) closeBtn.addEventListener("click", closeAuthSection);
 
-window.showLogin = function () {
+if (authSection) {
+  authSection.addEventListener("click", (e) => {
+    if (e.target === authSection) closeAuthSection();
+  });
+}
+
+// Global functions for HTML buttons
+window.showLogin = () => {
   openAuthSection();
   showLoginForm();
 };
 
-window.showSignup = function () {
+window.showSignup = () => {
   openAuthSection();
   showSignupForm();
 };
 
-window.showLoginForm = showLoginForm;
-window.showSignupForm = showSignupForm;
-window.showToast = showToast;
+window.startQuiz = () => {
+  window.location.href = "quiz.html";
+};
 
 /* =========================
-   SIGNUP
+   SIGNUP LOGIC
 ========================= */
-window.signup = async function () {
-  const name = nameInput?.value.trim() || "";
-  const email = emailInput?.value.trim() || "";
-  const password = passwordInput?.value.trim() || "";
+async function handleSignup() {
+  const name = nameInput?.value.trim();
+  const email = emailInput?.value.trim();
+  const password = passwordInput?.value.trim();
 
   if (!name || !email || !password) {
-    showToast("Enter all fields", "error");
+    showToast("Please fill in all fields", "error");
+    return;
+  }
+
+  if (password.length < 6) {
+    showToast("Password should be at least 6 characters", "error");
     return;
   }
 
   try {
+    signupBtn.disabled = true;
+    signupBtn.innerText = "Creating Account...";
+
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, "users", user.uid), {
-      name,
-      email
-    });
-
+    await setDoc(doc(db, "users", user.uid), { name, email });
     await updateProfile(user, { displayName: name });
 
-    showToast("Account created!", "success");
+    localStorage.setItem("user", JSON.stringify({ email, name }));
+    showToast("Account created successfully!", "success");
 
-// ✅ SAVE USER (VERY IMPORTANT)
-localStorage.setItem("user", JSON.stringify({
-  email: email,
-  name: name
-}));
-
-closeAuthSection();
-
-setTimeout(() => {
-  window.location.href = "/explore.html";
-}, 1200);
+    setTimeout(() => {
+      window.location.href = "explore.html";
+    }, 1000);
   } catch (err) {
-    showToast(err.message, "error");
+    console.error(err);
+    let msg = "Signup failed. Please try again.";
+    if (err.code === "auth/email-already-in-use") msg = "This email is already in use.";
+    if (err.code === "auth/invalid-email") msg = "Please enter a valid email.";
+    if (err.code === "auth/weak-password") msg = "Password should be at least 6 characters.";
+    
+    showToast(msg, "error");
+    signupBtn.disabled = false;
+    signupBtn.innerText = "Create Account";
   }
-};
+}
 
 /* =========================
-   LOGIN
+   LOGIN LOGIC
 ========================= */
-window.login = async function () {
-  const email = loginEmailInput?.value.trim() || "";
-  const password = loginPasswordInput?.value.trim() || "";
+async function handleLogin() {
+  const email = loginEmailInput?.value.trim();
+  const password = loginPasswordInput?.value.trim();
 
   if (!email || !password) {
-    showToast("Enter all fields", "error");
+    showToast("Please fill in all fields", "error");
     return;
   }
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    loginBtn.disabled = true;
+    loginBtn.innerText = "Logging in...";
 
-    showToast("Welcome back 🚀", "success");
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-  // ✅ SAVE USER (STEP 3)
-   localStorage.setItem("user", JSON.stringify({
-  email: email
-   }));
+    localStorage.setItem("user", JSON.stringify({ email: user.email, name: user.displayName }));
+    showToast("Welcome back!", "success");
 
-   closeAuthSection();
-
-  setTimeout(() => {
-  window.location.href = "/explore.html";
-}, 800);
+    setTimeout(() => {
+      window.location.href = "explore.html";
+    }, 1000);
   } catch (err) {
-    showToast(err.message, "error");
+    console.error(err);
+    let msg = "Login failed. Please check your credentials.";
+    if (err.code === "auth/invalid-credential") msg = "Invalid email or password.";
+    if (err.code === "auth/user-not-found") msg = "No account found with this email.";
+    if (err.code === "auth/wrong-password") msg = "Incorrect password.";
+    
+    showToast(msg, "error");
+    loginBtn.disabled = false;
+    loginBtn.innerText = "Login";
   }
-};
+}
+
+if (signupBtn) signupBtn.addEventListener("click", handleSignup);
+if (loginBtn) loginBtn.addEventListener("click", handleLogin);
 
 /* =========================
-   AUTH STATE CONTROL
+   AUTH STATE
 ========================= */
+let isRedirecting = false;
+
 onAuthStateChanged(auth, (user) => {
+  // If there's an authView flag, the user came from the result page wanting to sign up/login
+  // Don't auto-redirect — let the modal open instead
   const authView = localStorage.getItem("authView");
+  if (authView) return;
 
-  if (authView === "signup") {
-    openAuthSection();
-    showSignupForm();
-    localStorage.removeItem("authView");
-    return;
-  }
-
-  if (authView === "login") {
-    openAuthSection();
-    showLoginForm();
-    localStorage.removeItem("authView");
-    return;
-  }
-
-  if (user) {
-    window.location.href = "/explore.html";
+  if (user && !isRedirecting) {
+    const path = window.location.pathname;
+    const isLanding = path.endsWith("index.html") || path === "/" || path.endsWith("/");
+    
+    if (isLanding) {
+      isRedirecting = true;
+      window.location.href = "explore.html";
+    }
   }
 });
 
 /* =========================
-   CLOSE MODAL ON OUTSIDE CLICK
+   AUTO-OPEN MODAL FROM FLAG
 ========================= */
-if (authSection) {
-  authSection.addEventListener("click", function (e) {
-    if (e.target === authSection) {
-      closeAuthSection();
-    }
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const authView = localStorage.getItem("authView");
+  if (authView === "signup") {
+    localStorage.removeItem("authView");
+    openAuthSection();
+    showSignupForm();
+  } else if (authView === "login") {
+    localStorage.removeItem("authView");
+    openAuthSection();
+    showLoginForm();
+  }
+});
 
 /* =========================
-   MOBILE / BACK BUTTON RESET
+   THEME TOGGLE
 ========================= */
-function resetPage() {
-  document.body.classList.remove("fade-out");
-  document.body.style.opacity = "1";
-  document.body.style.visibility = "visible";
-  document.body.style.overflow = "auto";
+window.toggleTheme = () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+};
 
-  if (authSection) {
-    authSection.classList.add("hidden");
-  }
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
 }
-
-window.addEventListener("pageshow", resetPage);
-window.addEventListener("DOMContentLoaded", resetPage);
 
 /* =========================
    INTRO TEXT ANIMATION
 ========================= */
 document.addEventListener("DOMContentLoaded", () => {
+  // Reveal the page
+  document.body.classList.add("page-loaded");
+
   const introText = document.getElementById("introText");
   if (!introText) return;
 

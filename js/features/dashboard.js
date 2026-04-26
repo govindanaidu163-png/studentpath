@@ -13,13 +13,13 @@ import {
 
 
 // ================= SAFE LOAD =================
-document.addEventListener("DOMContentLoaded", () => {
+function initDashboardPage() {
 
   // ================= AUTH + DATA =================
   onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-      window.location.href = "/index.html";
+      window.location.href = "index.html";
       return;
     }
 
@@ -85,7 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initDashboardPage);
+} else {
+  initDashboardPage();
+}
 
 
 // ================= NAVIGATION =================
@@ -98,10 +104,10 @@ function navigate(path) {
   }, 300);
 }
 
-window.goToGuidedPath = () => navigate("/guided-path.html");
-window.goToExplore = () => navigate("/explore.html");
-window.goToSaved = () => navigate("/saved.html");
-window.goToAbout = () => navigate("/about.html");
+window.goToGuidedPath = () => navigate("guided-path.html");
+window.goToExplore = () => navigate("explore.html");
+window.goToSaved = () => navigate("saved.html");
+window.goToAbout = () => navigate("about.html");
 
 window.goToDashboardHome = () => {
   closeSidebar();
@@ -126,7 +132,7 @@ window.closeSidebar = () => {
 window.logout = () => {
   signOut(auth)
     .then(() => {
-      window.location.href = "/index.html";
+      window.location.href = "index.html";
     })
     .catch(err => console.error(err));
 };
@@ -174,5 +180,9 @@ function resetPage() {
 }
 
 window.addEventListener("pageshow", resetPage);
-window.addEventListener("DOMContentLoaded", resetPage);
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", resetPage);
+} else {
+  resetPage();
+}
 

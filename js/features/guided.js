@@ -612,7 +612,7 @@ roadmapBtn?.addEventListener("click", () => {
   drawer.classList.contains("open") ? closeRoadmap() : openRoadmap();
 });
 dashboardBtn?.addEventListener("click", () => {
-  window.location.href = "/dashboard.html";
+  window.location.href = "dashboard.html";
 });
 exportBtn?.addEventListener("click", exportRoadmap);
 
@@ -629,7 +629,7 @@ backdrop?.addEventListener("click", closeRoadmap);
 
 /* ================= INIT ================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function initGuidedPage() {
   resizeCanvas();
   buildTreeData();
   drawTree();
@@ -643,7 +643,13 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeCanvas();
     buildTreeData();
   });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initGuidedPage);
+} else {
+  initGuidedPage();
+}
 
 
 function resetPage() {
@@ -664,11 +670,21 @@ function resetPage() {
 
 // IMPORTANT
 window.addEventListener("pageshow", resetPage);
-window.addEventListener("DOMContentLoaded", resetPage);
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", resetPage);
+} else {
+  resetPage();
+}
 
-window.addEventListener("DOMContentLoaded", () => {
+function markGuidedLoaded() {
   document.body.classList.add("loaded");
-});
+}
+
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", markGuidedLoaded);
+} else {
+  markGuidedLoaded();
+}
 
 // smooth navigation
 document.addEventListener("click", function (e) {

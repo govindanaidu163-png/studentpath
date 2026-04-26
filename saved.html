@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Saved</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath | Saved</title>
 
-  <!-- NAVBAR -->
-  <link rel="stylesheet" href="../css/navbar.css">
-
-  <!-- PAGE STYLE -->
-  <link rel="stylesheet" href="../css/saved.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/saved.css">
 </head>
 
 <body>
@@ -30,7 +30,6 @@
       <button class="tab active" onclick="showTab('careers', event)">
         Careers
       </button>
-
       <button class="tab" onclick="showTab('exams', event)">
         Exams
       </button>
@@ -38,14 +37,15 @@
 
     <!-- CONTENT -->
     <div id="savedCareers" class="tab-content"></div>
-
     <div id="savedExams" class="tab-content" style="display: none;"></div>
 
   </main>
 
   <!-- SCRIPTS -->
- <script type="module" src="../js/core/loadNavbar.js"></script>
-  <script src="../js/features/saved.js"></script>
+  <script type="module" src="js/core/loadNavbar.js"></script>
+  <script src="js/features/saved.js"></script>
+  <!-- SPA Engine -->
+  <script src="js/core/spa.js"></script>
 
 </body>
 </html>

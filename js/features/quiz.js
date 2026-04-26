@@ -1,6 +1,4 @@
-/* ================= QUESTIONS ================= */
-console.log("START RUNNING");
-alert("RUNNING");
+// ================= QUESTIONS =================
 const questions = [
   {
     q: "What do you enjoy the most?",
@@ -31,7 +29,8 @@ const questions = [
   }
 ];
 
-/* ================= STATE ================= */
+// ================= STATE =================
+let current = 0;
 
 let score = {
   tech: 0,
@@ -40,37 +39,19 @@ let score = {
   business: 0
 };
 
-let current = 0;
-
-/* ================= ELEMENTS ================= */
-
+// ================= DOM =================
 const questionText = document.getElementById("questionText");
 const optionsContainer = document.getElementById("optionsContainer");
 const progressFill = document.getElementById("progressFill");
 const progressText = document.getElementById("progressText");
 const questionBox = document.getElementById("questionBox");
 
-/* ================= START ================= */
-
-function startQuizUI() {
-  console.log("Quiz script loaded");
-  loadQuestion();
-  initParticles();
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", startQuizUI);
-} else {
-  startQuizUI();
-}
-
-/* ================= LOAD QUESTION ================= */
-
+// ================= LOAD QUESTION =================
 function loadQuestion() {
   const q = questions[current];
 
   if (!questionText || !optionsContainer) {
-    console.error("Quiz elements missing");
+    console.error("Elements not found");
     return;
   }
 
@@ -80,19 +61,13 @@ function loadQuestion() {
   q.options.forEach(opt => {
     const btn = document.createElement("div");
     btn.className = "option";
-    btn.textContent = opt.text;
+    btn.innerText = opt.text;
 
-    btn.addEventListener("click", () => {
-      score[opt.type] += 1;
+    btn.onclick = () => {
+      score[opt.type]++;
       btn.classList.add("selected");
-
-      const allOptions = optionsContainer.querySelectorAll(".option");
-      allOptions.forEach(el => {
-        el.style.pointerEvents = "none";
-      });
-
-      setTimeout(nextQuestion, 220);
-    });
+      setTimeout(nextQuestion, 200);
+    };
 
     optionsContainer.appendChild(btn);
   });
@@ -100,38 +75,38 @@ function loadQuestion() {
   updateProgress();
 }
 
-/* ================= NEXT QUESTION ================= */
-
+// ================= NEXT =================
 function nextQuestion() {
-  if (!questionBox) return;
-
-  questionBox.style.opacity = "0.5";
-  questionBox.style.transform = "scale(0.98)";
+  if (questionBox) {
+    questionBox.style.opacity = 0.5;
+    questionBox.style.transform = "scale(0.97)";
+  }
 
   setTimeout(() => {
-    current += 1;
+    current++;
 
     if (current < questions.length) {
-      questionBox.style.opacity = "1";
-      questionBox.style.transform = "scale(1)";
       loadQuestion();
+
+      if (questionBox) {
+        questionBox.style.opacity = 1;
+        questionBox.style.transform = "scale(1)";
+      }
     } else {
       showAnalyzing();
     }
-  }, 120);
+  }, 150);
 }
 
-/* ================= PROGRESS ================= */
-
+// ================= PROGRESS =================
 function updateProgress() {
   const percent = Math.round((current / questions.length) * 100);
 
-  if (progressFill) progressFill.style.width = `${percent}%`;
-  if (progressText) progressText.textContent = `${percent}%`;
+  if (progressFill) progressFill.style.width = percent + "%";
+  if (progressText) progressText.innerText = percent + "%";
 }
 
-/* ================= ANALYZING ================= */
-
+// ================= ANALYZING =================
 function showAnalyzing() {
   const container = document.querySelector(".quiz-container");
 
@@ -145,64 +120,62 @@ function showAnalyzing() {
     </div>
   `;
 
-  setTimeout(showResult, 1800);
+  setTimeout(showResult, 2000);
 }
 
-/* ================= RESULT ================= */
-
+// ================= RESULT =================
 function showResult() {
   const best = Object.keys(score).reduce((a, b) =>
     score[a] > score[b] ? a : b
   );
 
   localStorage.setItem("careerResult", best);
+
   window.location.href = "result.html";
 }
 
-/* ================= PARTICLES ================= */
+// ================= START =================
+window.onload = function () {
+  console.log("Quiz started");
+  loadQuestion();
+};
 
-function initParticles() {
-  const canvas = document.getElementById("particles");
-  if (!canvas) return;
+// PARTICLES
+const canvas = document.getElementById("particles");
 
+if (canvas) {
   const ctx = canvas.getContext("2d");
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: (Math.random() - 0.5) * 0.5
+    });
   }
 
-  resize();
-  window.addEventListener("resize", resize);
-
-  const particles = Array.from({ length: 70 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.8 + 0.3,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35
-  }));
-
-  function draw() {
+  function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
+      p.x += p.speedX;
+      p.y += p.speedY;
 
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-
+      ctx.fillStyle = "rgba(99,102,241,0.7)";
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(99,102,241,0.55)";
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
     });
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animateParticles);
   }
 
-  draw();
+  animateParticles();
 }

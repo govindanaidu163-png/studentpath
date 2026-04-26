@@ -1,6 +1,16 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #f8f9fa;
+  overflow-x: hidden;
+}
+
+.exam-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
 }
 /* ===== HERO ===== */
 .exam-hero {
@@ -66,7 +76,7 @@ body {
 /* GRID */
 .career-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -104,4 +114,36 @@ body {
 .career-info p {
   font-size: 13px;
   color: gray;
+}
+
+@media (max-width: 960px) {
+  .career-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .exam-page {
+    padding: 24px 16px 48px;
+  }
+
+  .exam-hero {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .exam-meta {
+    flex-wrap: wrap;
+  }
+
+  .career-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .career-grid {
+    grid-template-columns: 1fr;
+  }
 }

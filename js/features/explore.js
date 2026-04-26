@@ -1,12 +1,9 @@
 const careers = window.careers || [];
 
-if (!Array.isArray(careers)) {
-  console.error("Careers data not loaded properly");
-}
-
 let currentSearch = "";
-let currentType = "all";
+let currentType = "tech"; // default to Tech like reference image
 let currentSort = "high";
+let currentPill = "all";
 
 let trendingIndex = 0;
 let trendingTimer = null;
@@ -15,7 +12,12 @@ let trendingTimer = null;
 
 function openCareer(career) {
   localStorage.setItem("selectedCareer", JSON.stringify(career));
-  window.location.href = "career.html";
+  // Use SPA router if available, else normal navigation
+  if (window.spaGo) {
+    window.spaGo("career.html");
+  } else {
+    window.location.href = "career.html";
+  }
 }
 
 function isSaved(career) {
@@ -32,24 +34,33 @@ function renderTrending(list) {
   container.innerHTML = "";
 
   const trending = [...list]
-    .map(c => ({
-      ...c,
-      score: (c.salary || 0) + (c.rating || 4) * 10
-    }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => (b.salary || 0) - (a.salary || 0))
     .slice(0, 6);
 
   trending.forEach((c, index) => {
     const card = document.createElement("div");
-    card.className = "trend-card";
+    card.className = "trend-card" + (index % 2 === 1 ? " spotlight" : "");
 
     card.innerHTML = `
-      <img src="${c.image}" class="trend-card-image">
+      <img src="${c.image}" class="trend-card-image" alt="${c.name}" onerror="this.style.display='none'">
       <div class="trend-card-content">
-        <h3>${c.name}</h3>
-        <p>${c.salaryLabel}</p>
+        ${index % 2 === 1 ? '<div class="trend-kicker">Spotlight</div>' : ''}
+        <div class="trend-title">
+          ${index % 2 === 1
+            ? `Learn about <strong>${c.name}</strong>.<br><small style="font-size:13px;opacity:0.8">High demand, lucrative salaries</small>`
+            : `<strong>${c.name}:</strong> Shape the Future`
+          }
+        </div>
+        ${index % 2 === 0 ? `<div class="trend-salary">&#8377; ${c.salaryLabel}</div>` : ''}
+        <button class="trend-btn" type="button">View details</button>
       </div>
     `;
+
+    const detailsBtn = card.querySelector(".trend-btn");
+    detailsBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openCareer(c);
+    });
 
     card.onclick = () => openCareer(c);
     container.appendChild(card);
@@ -70,7 +81,7 @@ function startTrendingSlider() {
 
   function slideNext() {
     const cardWidth = cards[0].offsetWidth;
-    const gap = 18;
+    const gap = 16;
     const maxIndex = cards.length - 2;
 
     trendingIndex = trendingIndex >= maxIndex ? 0 : trendingIndex + 1;
@@ -93,20 +104,19 @@ function renderGrid(list = careers) {
     card.className = "career-card";
 
     const saved = isSaved(c);
+    const rating = Math.round(c.rating || 4);
+    const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
 
     card.innerHTML = `
-      <div class="save-btn">${saved ? "♥" : "♡"}</div>
-
-      <img src="${c.image}" class="career-image">
-
+      <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
+      <img src="${c.image}" class="career-image" alt="${c.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(c.name)}'">
       <div class="career-info">
         <h3>${c.name}</h3>
-        <p class="salary">${c.salaryLabel}</p>
-
-        <div class="meta">
-          <span>${"⭐".repeat(Math.round(c.rating || 4))}</span>
-          <span class="tag">${c.tag || "Trending"}</span>
+        <div class="salary">
+          <span class="salary-arrow">↑</span>
+          ${c.salaryLabel}
         </div>
+        <div class="stars">${stars}</div>
       </div>
     `;
 
@@ -114,11 +124,8 @@ function renderGrid(list = careers) {
 
     saveBtn.onclick = (e) => {
       e.stopPropagation();
-
       let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
-
       const exists = saved.find(item => item.key === c.key);
-
       if (exists) {
         saved = saved.filter(item => item.key !== c.key);
         saveBtn.textContent = "♡";
@@ -126,12 +133,10 @@ function renderGrid(list = careers) {
         saved.push(c);
         saveBtn.textContent = "♥";
       }
-
       localStorage.setItem("savedCareers", JSON.stringify(saved));
     };
 
     card.onclick = () => openCareer(c);
-
     grid.appendChild(card);
   });
 }
@@ -144,20 +149,24 @@ window.searchCareer = function () {
   updateUI();
 };
 
-window.filterType = function(type, e) {
+// Type filter from icon row
+window.filterType = function(type, el) {
   currentType = type;
-
-  document.querySelectorAll(".cat").forEach(btn => {
-    btn.classList.remove("active");
-  });
-
-  if (e) e.target.classList.add("active");
-
+  document.querySelectorAll(".cat-icon").forEach(btn => btn.classList.remove("active"));
+  if (el) el.classList.add("active");
   updateUI();
 };
 
-window.sortCareers = function (type) {
-  currentSort = type;
+// Pill filter (top free, high demand, etc.)
+window.setPill = function(el, type) {
+  currentPill = type;
+  document.querySelectorAll(".pill").forEach(btn => btn.classList.remove("active"));
+  if (el) el.classList.add("active");
+
+  if (type === "high") currentSort = "high";
+  else if (type === "salary") currentSort = "salary";
+  else currentSort = "high";
+
   updateUI();
 };
 
@@ -172,11 +181,28 @@ function updateUI() {
     );
   }
 
-  if (currentType !== "all") {
-    filtered = filtered.filter(c => (c.type || "") === currentType);
+  // Type filter maps: icon categories → data types
+  const typeMap = {
+    "tech": ["science"],
+    "health": ["science"],
+    "business": ["commerce"],
+    "design": ["arts"],
+    "finance": ["commerce"],
+    "engineering": ["science"],
+    "creative": ["arts"],
+  };
+
+  if (currentType && typeMap[currentType]) {
+    filtered = filtered.filter(c => typeMap[currentType].includes(c.type || ""));
   }
 
-  if (currentSort === "high") {
+  if (currentPill === "high") {
+    filtered = filtered.filter(c => (c.growth || 0) >= 4 || (c.successRate || 0) >= 60);
+  } else if (currentPill === "easy") {
+    filtered = filtered.filter(c => (c.difficulty || 0) <= 3 || (c.successRate || 0) >= 65);
+  }
+
+  if (currentSort === "high" || currentSort === "salary") {
     filtered.sort((a, b) => (b.salary || 0) - (a.salary || 0));
   } else if (currentSort === "low") {
     filtered.sort((a, b) => (a.salary || 0) - (b.salary || 0));
@@ -188,6 +214,12 @@ function updateUI() {
   renderGrid(filtered);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initExplorePage() {
   updateUI();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initExplorePage);
+} else {
+  initExplorePage();
+}

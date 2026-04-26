@@ -3,8 +3,15 @@
    index.html only
 ========================= */
 
+.hidden {
+  display: none !important;
+}
+
 .landing-page {
   background: linear-gradient(180deg, #eef2f7 0%, #f8fafc 45%, #e2e8f0 100%);
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Navbar */
@@ -12,7 +19,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
@@ -82,6 +89,7 @@
 .landing-page .hero {
   position: relative;
   width: 100%;
+  max-width: 100%;
   height: 100vh;
   overflow: hidden;
 }
@@ -134,6 +142,7 @@
   align-items: center;
   text-align: center;
   padding: 24px;
+  max-width: 100%;
   color: #0f172a;
 }
 
@@ -168,6 +177,7 @@
 
 /* Intro section */
 .landing-page .intro-section {
+  width: min(100%, 1100px);
   max-width: 1100px;
   margin: 0 auto;
   padding: 70px 20px 40px;
@@ -202,10 +212,12 @@
 
 /* Marquee */
 .landing-page .marquee-section {
-  max-width: 1100px;
-  margin: 30px auto 10px;
+  width: 100%;
+  max-width: 100%;
+  margin: 30px 0 10px;
   padding: 10px 0;
   overflow: hidden;
+  position: relative;
 }
 
 .landing-page .marquee-track {
@@ -235,6 +247,7 @@
 
 /* Sections */
 .landing-page .section {
+  width: min(100%, 1100px);
   max-width: 1100px;
   margin: 0 auto;
   padding: 96px 20px;
@@ -376,6 +389,7 @@
 /* Review box */
 .review-box {
   text-align: center;
+  width: min(100%, 600px);
   margin: 60px auto;
   max-width: 600px;
   padding: 20px 30px;
@@ -447,16 +461,15 @@
   z-index: 9999;
   overflow: hidden;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .auth-box {
   width: 90%;
   max-width: 420px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 1);
+  padding: 32px 28px;
   border-radius: 20px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
   text-align: center;
@@ -464,6 +477,76 @@
 
 .landing-page .auth-box h2 {
   margin-bottom: 8px;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.auth-box input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+.auth-box input::placeholder {
+  color: #94a3b8;
+}
+
+#loginBtn,
+#signupBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#loginBtn:hover,
+#signupBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+}
+
+#loginBtn:disabled,
+#signupBtn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
+#closeBtn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background 0.2s ease;
+}
+
+#closeBtn:hover {
+  background: #f1f5f9;
 }
 
 .mini-note {
@@ -557,50 +640,231 @@
   }
 }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE — TABLET (max 900px)
+============================================ */
 @media (max-width: 900px) {
+  /* Navbar */
   .landing-page .navbar {
-    padding: 14px 20px;
+    padding: 14px 24px;
   }
-
   .landing-page .nav-links {
     display: none;
   }
+  .landing-page .login-btn {
+    display: none;
+  }
 
+  /* Hero */
   .landing-page .hero-content h1 {
-    font-size: clamp(2.2rem, 9vw, 3.6rem);
+    font-size: clamp(2.4rem, 7vw, 3.8rem);
+    letter-spacing: -1px;
   }
 
-  .landing-page .intro-points {
-    grid-template-columns: 1fr;
+  /* Cards — 2 columns on tablet */
+  .landing-page .cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Timeline */
   .landing-page .timeline::before {
     left: 16px;
   }
+  .landing-page .timeline {
+    max-width: 100%;
+    padding: 0 16px;
+  }
 
+  /* Footer */
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* Section padding */
+  .landing-page .section {
+    padding: 72px 24px;
   }
 }
 
+/* ============================================
+   RESPONSIVE — MOBILE (max 640px)
+============================================ */
 @media (max-width: 640px) {
-  .landing-page .hero-content {
-    padding: 18px;
+  /* Navbar */
+  .landing-page .navbar {
+    padding: 12px 16px;
+  }
+  .landing-page .logo {
+    font-size: 17px;
+  }
+  .landing-page .nav-actions {
+    gap: 6px;
+  }
+  .landing-page .demo-btn {
+    padding: 7px 12px;
+    font-size: 13px;
   }
 
-  .landing-page .hero .main-btn,
+  /* Hero */
+  .landing-page .hero {
+    min-height: 100svh; /* Safe area on mobile */
+  }
+  .landing-page .hero-content {
+    padding: 16px;
+    justify-content: center;
+  }
+  .landing-page .hero-content h1 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    letter-spacing: -1px;
+    line-height: 1.05;
+  }
+  .landing-page .hero-content p {
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+  .landing-page .hero .main-btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    margin-top: 20px;
+  }
+
+  /* Intro */
+  .landing-page .intro-section {
+    padding: 56px 16px 28px;
+  }
+  .landing-page .intro-text {
+    font-size: clamp(1.5rem, 6.5vw, 2.2rem);
+    line-height: 1.3;
+  }
+
+  /* Marquee */
+  .landing-page .marquee-section {
+    width: 100%;
+    margin: 20px 0 6px;
+  }
+  .landing-page .marquee-item {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* Sections */
+  .landing-page .section {
+    padding: 56px 16px;
+  }
+  .landing-page .section h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: 28px;
+  }
+
+  /* Cards — single column on mobile */
+  .landing-page .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .landing-page .why-card {
+    padding: 20px;
+  }
+  .landing-page .why-card img {
+    max-width: 100px;
+  }
+  .landing-page .career-card img {
+    height: 130px;
+  }
+
+  /* Timeline */
+  .landing-page .timeline {
+    max-width: 100%;
+    margin: 32px auto;
+    padding: 0;
+  }
+  .landing-page .timeline::before {
+    left: 14px;
+  }
+  .landing-page .timeline-item {
+    margin-bottom: 36px;
+  }
+  .landing-page .circle {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    margin-right: 14px;
+    flex-shrink: 0;
+  }
+  .landing-page .timeline .content h3 {
+    font-size: 1rem;
+  }
+  .landing-page .timeline .content p {
+    font-size: 0.9rem;
+  }
+
+  /* Review */
+  .review-box {
+    margin: 40px 16px;
+    padding: 16px;
+  }
+  .review-box p {
+    font-size: 17px;
+  }
+
+  /* Final CTA */
+  .landing-page .final-cta {
+    padding: 72px 16px;
+  }
+  .landing-page .cta-box h2 {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+  }
+  .landing-page .cta-box p {
+    font-size: 0.95rem;
+  }
   .landing-page .big-btn {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
+    padding: 14px 20px;
+    font-size: 0.95rem;
   }
 
-  .landing-page .section {
-    padding: 70px 16px;
+  /* Auth Modal */
+  .auth-modal {
+    padding: 12px;
+    align-items: flex-end; /* slides up from bottom on mobile */
+  }
+  .auth-box {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0; /* Bottom sheet feel */
+    padding: 24px 20px 32px;
   }
 
-  .review-box p {
-    font-size: 18px;
+  /* Footer */
+  .footer-premium {
+    padding: 56px 20px 32px;
+  }
+  .footer-top h1 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    margin-bottom: 36px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
+
+/* ============================================
+   RESPONSIVE — TINY PHONES (max 380px)
+============================================ */
+@media (max-width: 380px) {
+  .landing-page .hero-content h1 {
+    font-size: 1.85rem;
+  }
+  .landing-page .demo-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .landing-page .section h2 {
+    font-size: 1.4rem;
+  }
+}
+

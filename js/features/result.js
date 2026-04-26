@@ -1,92 +1,60 @@
-// ================= SAFE LOAD =================
-document.addEventListener("DOMContentLoaded", () => {
+// GET RESULT FROM QUIZ
+const result = localStorage.getItem("careerResult");
 
-  const result = localStorage.getItem("careerResult");
-
-  const careerData = {
-    tech: {
-      title: "🚀 Software Engineer",
-      desc: "You enjoy logic, problem solving, and building digital systems."
-    },
-    medical: {
-      title: "🩺 Healthcare Professional",
-      desc: "You care deeply about people and want to help others."
-    },
-    creative: {
-      title: "🎨 Creative Designer",
-      desc: "You love creativity and visual storytelling."
-    },
-    business: {
-      title: "📈 Entrepreneur / Manager",
-      desc: "You are driven by leadership and decision making."
-    }
-  };
-
-  const titleEl = document.getElementById("careerTitle");
-  const descEl = document.getElementById("careerDesc");
-
-  if (titleEl && descEl) {
-    if (result && careerData[result]) {
-      titleEl.innerText = careerData[result].title;
-      descEl.innerText = careerData[result].desc;
-    } else {
-      titleEl.innerText = "No Result Found";
-      descEl.innerText = "Please take the quiz first.";
-    }
+// DATA MAP
+const careers = {
+  tech: {
+    title: "Software Engineer 💻",
+    desc: "You love logic, coding and building apps.",
+    salary: "₹6L - ₹25L / year",
+    roadmap: "Learn Programming → DSA → Projects → Jobs"
+  },
+  medical: {
+    title: "Doctor 🏥",
+    desc: "You enjoy helping people and saving lives.",
+    salary: "₹5L - ₹20L / year",
+    roadmap: "NEET → MBBS → Specialization"
+  },
+  creative: {
+    title: "Designer 🎨",
+    desc: "You are creative and love design.",
+    salary: "₹4L - ₹15L / year",
+    roadmap: "Design Skills → Portfolio → Freelance/Job"
+  },
+  business: {
+    title: "Entrepreneur 💼",
+    desc: "You think about business and growth.",
+    salary: "Unlimited 🚀",
+    roadmap: "Skills → Idea → Build → Scale"
   }
-
-  // PARTICLES
-  const canvas = document.getElementById("particles");
-
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5
-      });
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(p => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        ctx.fillStyle = "rgba(99,102,241,0.7)";
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animateParticles);
-    }
-
-    animateParticles();
-  }
-
-});
-
-// GLOBAL BUTTON FUNCTIONS
-window.goDashboard = function () {
-  window.location.href = "/index.html";
 };
 
-window.retakeQuiz = function () {
-  window.location.href = "/quiz.html";
-};
+// GET ELEMENTS
+const title = document.getElementById("careerTitle");
+const desc = document.getElementById("careerDesc");
+const salary = document.getElementById("salary");
+const roadmap = document.getElementById("roadmap");
 
-window.goSignup = function () {
+// SET DATA
+if (result && careers[result]) {
+  title.innerText = careers[result].title;
+  desc.innerText = careers[result].desc;
+  salary.innerText = careers[result].salary;
+  roadmap.innerText = careers[result].roadmap;
+} else {
+  title.innerText = "No Result Found";
+}
+
+function goSignup() {
+  // Set a flag so the landing page opens the signup modal automatically
   localStorage.setItem("authView", "signup");
-  window.location.href = "/index.html";
-};
+  window.location.href = "index.html";
+}
+
+function goHome() {
+  window.location.href = "index.html";
+}
+// RESTART
+function restartQuiz() {
+  window.location.href = "quiz.html";
+}

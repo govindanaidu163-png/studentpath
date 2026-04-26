@@ -5,17 +5,26 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 
 // ================= LOAD NAVBAR =================
 async function loadNavbar() {
-  const res = await fetch("navbar.html");
-  const html = await res.text();
+  try {
+    const res = await fetch("navbar.html");
+    if (!res.ok) throw new Error("navbar.html not found");
+    const html = await res.text();
 
-  document.getElementById("navbarContainer").innerHTML = html;
+    const container = document.getElementById("navbarContainer");
+    if (!container) return;
 
-  initNavbar();
-  initProfilePanel(); // 🔥 important
+    container.innerHTML = html;
+
+    initNavbar();
+    initProfilePanel();
+
+  } catch (e) {
+    console.error("[loadNavbar] Error:", e);
+  }
 }
 
 
-// ================= NAVBAR ANIMATION =================
+// ================= NAVBAR UNDERLINE ANIMATION =================
 function initNavbar() {
   const links = document.querySelectorAll(".nav-center a");
   const indicator = document.querySelector(".nav-indicator");
@@ -25,24 +34,36 @@ function initNavbar() {
   function moveIndicator(el) {
     const rect = el.getBoundingClientRect();
     const parentRect = el.parentElement.getBoundingClientRect();
-
     indicator.style.width = rect.width + "px";
     indicator.style.left = (rect.left - parentRect.left) + "px";
   }
 
   links.forEach(link => {
-    if (link.href === window.location.href) {
+    // Mark active based on current page
+    const linkPage = link.getAttribute("href");
+    const currentPage = window.location.pathname.split("/").pop() || "explore.html";
+    if (linkPage === currentPage) {
       link.classList.add("active");
-      moveIndicator(link);
+      // Use rAF to ensure layout is complete before measuring
+      requestAnimationFrame(() => moveIndicator(link));
     }
 
-    link.addEventListener("mouseenter", () => {
-      moveIndicator(link);
-    });
-
+    link.addEventListener("mouseenter", () => moveIndicator(link));
     link.addEventListener("mouseleave", () => {
       const active = document.querySelector(".nav-center a.active");
       if (active) moveIndicator(active);
+    });
+  });
+
+  // Re-run active check whenever SPA navigates
+  document.addEventListener("spa-navigated", (e) => {
+    const page = e.detail?.page;
+    links.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === page) {
+        link.classList.add("active");
+        requestAnimationFrame(() => moveIndicator(link));
+      }
     });
   });
 }
@@ -50,64 +71,40 @@ function initNavbar() {
 
 // ================= PROFILE PANEL =================
 function initProfilePanel() {
-  const profileBtn = document.getElementById("profileBtn");
+  const profileBtn   = document.getElementById("profileBtn");
   const profilePanel = document.getElementById("profilePanel");
   const closeProfile = document.getElementById("closeProfile");
-
-  const userNameEl = document.getElementById("userName");
-  const userEmailEl = document.getElementById("userEmail");
-  const logoutBtn = document.getElementById("logoutBtn");
+  const userNameEl   = document.getElementById("userName");
+  const userEmailEl  = document.getElementById("userEmail");
+  const logoutBtn    = document.getElementById("logoutBtn");
 
   if (!profileBtn || !profilePanel) return;
 
-  // 🔥 OPEN PANEL
-  profileBtn.addEventListener("click", () => {
-    profilePanel.classList.add("active");
-  });
+  profileBtn.addEventListener("click", () => profilePanel.classList.add("active"));
+  closeProfile?.addEventListener("click", () => profilePanel.classList.remove("active"));
 
-  // 🔥 CLOSE PANEL
-  closeProfile.addEventListener("click", () => {
-    profilePanel.classList.remove("active");
-  });
-
-  // 🔥 FIREBASE USER DATA
+  // Firebase user state
   onAuthStateChanged(auth, (user) => {
-    console.log("USER:", user); // debug
-
     if (user) {
-      userNameEl.textContent = user.displayName || "User";
-      userEmailEl.textContent = user.email;
+      if (userNameEl) userNameEl.textContent = user.displayName || "User";
+      if (userEmailEl) userEmailEl.textContent = user.email;
     } else {
-      userNameEl.textContent = "Guest";
-      userEmailEl.textContent = "Not logged in";
+      if (userNameEl) userNameEl.textContent = "Guest";
+      if (userEmailEl) userEmailEl.textContent = "Not logged in";
     }
   });
 
-  // 🔥 LOGOUT
-  logoutBtn.addEventListener("click", () => {
+  // Logout
+  logoutBtn?.addEventListener("click", () => {
     signOut(auth)
       .then(() => {
         alert("Logged out successfully");
         window.location.href = "index.html";
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(console.error);
   });
 }
-try {
-  console.log("START");
 
-  const res = await fetch("navbar.html");
-  const html = await res.text();
-
-  document.getElementById("navbarContainer").innerHTML = html;
-
-  console.log("NAVBAR LOADED");
-
-} catch (e) {
-  console.error("ERROR:", e);
-}
 
 // ================= START =================
 loadNavbar();

@@ -1,108 +1,108 @@
-/* =========================
-   RESULT.CSS
-   result.html only
-========================= */
-
+/* PAGE */
 .result-page {
-  background: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   font-family: "Inter", sans-serif;
   color: white;
-  overflow-x: hidden;
   min-height: 100vh;
 }
 
-#particles {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
+/* CONTAINER */
 .result-container {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
+  height: 100vh;
 }
 
-.result-card {
-  width: min(560px, 100%);
-  background: rgba(255, 255, 255, 0.05);
+/* BOX */
+.result-box {
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(20px);
   padding: 40px;
   border-radius: 20px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  animation: fadeIn 0.5s ease;
 }
 
-.result-tag {
-  color: #93c5fd;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 700;
+/* TITLE */
+#careerTitle {
+  font-size: 28px;
+  margin: 10px 0;
+  color: #4f46e5;
 }
 
-.result-card h1 {
-  margin-bottom: 10px;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+/* DESC */
+#careerDesc {
+  margin-bottom: 20px;
+  color: #ccc;
 }
 
-.result-card h2 {
-  margin: 0 0 12px 0;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  line-height: 1.1;
+/* EXTRA */
+.extra-info {
+  margin: 20px 0;
+  text-align: left;
 }
 
-.result-card p {
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.7;
-}
-
-.result-actions {
-  margin-top: 25px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.result-actions button {
-  padding: 12px 18px;
-  border-radius: 12px;
+/* BUTTON */
+.main-btn {
+  padding: 12px 20px;
+  background: #4f46e5;
+  border: none;
+  border-radius: 10px;
+  color: white;
   cursor: pointer;
-  box-shadow: none;
+  transition: 0.2s;
 }
 
-.result-actions .main-btn {
-  background: linear-gradient(135deg, #4f46e5, #2563eb);
-  color: white;
+.main-btn:hover {
+  background: #4338ca;
 }
 
-.secondary-btn {
+/* ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #e5e7eb;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.secondary-btn:hover {
-  border-color: white;
+.back-btn:hover {
   color: white;
 }
 
-@media (max-width: 640px) {
-  .result-card {
-    padding: 24px;
-  }
+/* CTA BOX */
+.cta-box {
+  margin: 25px 0;
+  padding: 15px;
+  background: rgba(79,70,229,0.15);
+  border-radius: 12px;
+}
 
-  .result-actions {
-    flex-direction: column;
-  }
+/* CTA BUTTON */
+.cta-btn {
+  margin-top: 10px;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-  .result-actions button {
-    width: 100%;
-  }
+.cta-btn:hover {
+  transform: scale(1.05);
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath</title>
+  <meta name="description" content="Explore careers, exams and your guided path with StudentPath.">
+
+  <!-- Google Fonts (loaded once) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shell styles (loaded once) -->
+  <link rel="stylesheet" href="css/spa-shell.css">
+  <link rel="stylesheet" href="css/navbar.css">
+
+  <!-- Default page CSS (explore is first page) -->
+  <link rel="stylesheet" href="css/explore.css" id="spa-css-css-explore-css">
+</head>
+
+<body>
+
+  <!-- ── Top progress bar overlay ──────────────────────────── -->
+  <div id="spa-overlay"></div>
+
+  <!-- ── Navbar (loaded once, stays fixed) ─────────────────── -->
+  <div id="navbarContainer"></div>
+
+  <!-- ── Page content (swapped by router) ──────────────────── -->
+  <div id="spa-content"></div>
+
+  <!-- =====================================================
+       SCRIPTS — loaded once in the shell
+  ===================================================== -->
+
+  <!-- Firebase (module — loaded once) -->
+  <script type="module" src="js/core/loadNavbar.js"></script>
+
+  <!-- SPA Router (must come BEFORE page data scripts) -->
+  <script src="js/core/router.js"></script>
+
+</body>
+</html>

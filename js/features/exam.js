@@ -1,6 +1,6 @@
 // ================= LOAD EXAM =================
 
-document.addEventListener("DOMContentLoaded", () => {
+function initExamPage() {
 
   const exam = JSON.parse(localStorage.getItem("selectedExam"));
 
@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const careerList = document.getElementById("careerList");
 
   if (!exam) {
-    titleEl.textContent = "No exam selected";
+    if (titleEl) titleEl.textContent = "No exam selected";
+    if (descEl) descEl.textContent = "Go back and choose an exam.";
     return;
   }
 
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateBtn();
 
-  btn.onclick = () => {
+  if (btn) btn.onclick = () => {
     let saved = JSON.parse(localStorage.getItem("savedExams")) || [];
 
     const exists = saved.find(e => e.key === exam.key);
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     exam.careers?.includes(c.name)
   );
 
+  if (!careerList) return;
   careerList.innerHTML = "";
 
   if (related.length === 0) {
@@ -81,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     card.className = "career-card";
 
     card.innerHTML = `
-      <img src="${c.image}" class="career-image">
+      <img src="${c.image}" class="career-image" alt="${c.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(c.name)}'">
 
       <div class="career-info">
         <h3>${c.name}</h3>
@@ -91,10 +93,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card.onclick = () => {
       localStorage.setItem("selectedCareer", JSON.stringify(c));
-      window.location.href = "career.html";
+      if (window.spaGo) window.spaGo("career.html");
+      else window.location.href = "career.html";
     };
 
     careerList.appendChild(card);
   });
 
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initExamPage);
+} else {
+  initExamPage();
+}

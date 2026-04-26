@@ -1,0 +1,62 @@
+/* =====================================================
+   SPA Shell Layout
+   =====================================================
+   The shell keeps the navbar fixed at the top and
+   renders page content in #spa-content below it.
+   All per-page CSS is still loaded dynamically.
+===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* ── Navbar container stays fixed ── */
+#navbarContainer {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+}
+
+/* ── SPA content area ── */
+#spa-content {
+  min-height: calc(100vh - 64px);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  will-change: opacity, transform;
+}
+
+/* ── Overlay (thin bar at top during load) ── */
+#spa-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #1a8a4a, #4facfe);
+  z-index: 9999;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+#spa-overlay.active {
+  transform: scaleX(1);
+  animation: spa-progress 0.6s ease forwards;
+}
+
+@keyframes spa-progress {
+  0%   { transform: scaleX(0); opacity: 1; }
+  70%  { transform: scaleX(0.8); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}

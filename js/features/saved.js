@@ -1,14 +1,15 @@
 // ================= TABS =================
 window.showTab = function(tab, e) {
+  const careersTab = document.getElementById("savedCareers");
+  const examsTab = document.getElementById("savedExams");
+  if (!careersTab || !examsTab) return;
 
-  document.getElementById("savedCareers").style.display =
-    tab === "careers" ? "grid" : "none";
+  careersTab.style.display = tab === "careers" ? "grid" : "none";
 
-  document.getElementById("savedExams").style.display =
-    tab === "exams" ? "grid" : "none";
+  examsTab.style.display = tab === "exams" ? "grid" : "none";
 
   document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
-  e.target.classList.add("active");
+  e?.target?.classList.add("active");
 };
 
 
@@ -17,6 +18,7 @@ function renderSaved() {
 
   const careersContainer = document.getElementById("savedCareers");
   const examsContainer = document.getElementById("savedExams");
+  if (!careersContainer || !examsContainer) return;
 
   const savedCareers = JSON.parse(localStorage.getItem("savedCareers")) || [];
   const savedExams = JSON.parse(localStorage.getItem("savedExams")) || [];
@@ -35,7 +37,7 @@ function renderSaved() {
       card.innerHTML = `
         <div class="remove-btn">✕</div>
 
-        <img src="${c.image}">
+        <img src="${c.image}" alt="${c.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(c.name)}'">
 
         <div class="saved-info">
           <h3>${c.name}</h3>
@@ -46,7 +48,8 @@ function renderSaved() {
       // 👉 Open detail
       card.onclick = () => {
         localStorage.setItem("selectedCareer", JSON.stringify(c));
-        window.location.href = "career.html";
+        if (window.spaGo) window.spaGo("career.html");
+        else window.location.href = "career.html";
       };
 
       // 👉 Remove from saved
@@ -77,7 +80,7 @@ function renderSaved() {
       card.innerHTML = `
         <div class="remove-btn">✕</div>
 
-        <img src="${e.image}">
+        <img src="${e.image}" alt="${e.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(e.name)}'">
 
         <div class="saved-info">
           <h3>${e.name}</h3>
@@ -105,4 +108,8 @@ function renderSaved() {
 
 
 // ================= INIT =================
-document.addEventListener("DOMContentLoaded", renderSaved);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderSaved);
+} else {
+  renderSaved();
+}

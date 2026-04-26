@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta name="google-site-verification" content="4YqOx5FXa4twZWcUAPXaUI77_U4n_vxS59wT6zYxsHE" />
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/landing.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/landing.css">
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
@@ -41,7 +41,7 @@
   ========================== -->
   <div class="hero">
     <video autoplay muted loop class="hero-video">
-      <source src="../assets/videos/hero.mp4" type="video/mp4">
+      <source src="./assets/videos/hero.mp4" type="video/mp4">
     </video>
 
     <div class="hero-overlay"></div>
@@ -105,19 +105,19 @@
 
     <div class="cards why-cards">
       <div class="card why-card">
-        <img src="../assets/images/interest.png" alt="Interest">
+        <img src="./assets/images/interest.png" alt="Interest">
         <h3>Find Your True Interest</h3>
         <p>Discover what actually suits your personality, not what others tell you.</p>
       </div>
 
       <div class="card why-card">
-        <img src="../assets/images/ai.png" alt="AI">
+        <img src="./assets/images/ai.png" alt="AI">
         <h3>AI-Based Career Matching</h3>
         <p>Smart system analyzes your answers and suggests best career paths.</p>
       </div>
 
       <div class="card why-card">
-        <img src="../assets/images/roadmap.png" alt="Roadmap">
+        <img src="./assets/images/roadmap.png" alt="Roadmap">
         <h3>Clear Step-by-Step Roadmap</h3>
         <p>No confusion. Get exact steps to reach your dream career.</p>
       </div>
@@ -173,25 +173,25 @@
 
     <div class="cards">
       <div class="card career-card">
-        <img src="../assets/images/tech.jpg" alt="Tech">
+        <img src="./assets/images/tech.jpg" alt="Tech">
         <h3>Tech</h3>
         <p>Software, AI, Data</p>
       </div>
 
       <div class="card career-card">
-        <img src="../assets/images/medical.jpg" alt="Medical">
+        <img src="./assets/images/medical.jpg" alt="Medical">
         <h3>Medical</h3>
         <p>Doctor, Healthcare</p>
       </div>
 
       <div class="card career-card">
-        <img src="../assets/images/creative.jpg" alt="Creative">
+        <img src="./assets/images/creative.jpg" alt="Creative">
         <h3>Creative</h3>
         <p>Design, Media</p>
       </div>
 
       <div class="card career-card">
-        <img src="../assets/images/business.jpg" alt="Business">
+        <img src="./assets/images/business.jpg" alt="Business">
         <h3>Business</h3>
         <p>Finance, Management</p>
       </div>
@@ -221,7 +221,7 @@
         Take the quiz and start building your future today.
       </p>
 
-      <button class="main-btn big-btn" onclick="startQuiz()">
+      <button class="main-btn big-btn" onclick="showLogin()">
         Start Your Journey Now
       </button>
     </div>
@@ -230,38 +230,38 @@
   <!-- =========================
        AUTH MODAL
   ========================== -->
-  <div id="authSection" class="auth-modal hidden">
-    <div class="auth-box">
-      <h2>StudentPath</h2>
+<!-- AUTH MODAL (CLEAN) -->
+<div id="authSection" class="auth-modal hidden">
 
-      <p class="mini-note">
-        Create an account or log in to unlock your dashboard and saved careers.
-      </p>
+  <div class="auth-box">
 
-      <div class="tab-row">
-        <button id="signupTab" class="tab active" onclick="showSignupForm()">Create Account</button>
-        <button id="loginTab" class="tab" onclick="showLoginForm()">Login</button>
-      </div>
+    <h2>StudentPath</h2>
 
-      <!-- SIGNUP -->
-      <div id="signupForm">
-        <input class="field" type="text" id="name" placeholder="Enter your name" />
-        <input class="field" type="email" id="email" placeholder="Enter your email" />
-        <input class="field" type="password" id="password" placeholder="Enter your password" />
-        <button class="main-btn" onclick="signup()">Create Account</button>
-      </div>
-
-      <!-- LOGIN -->
-      <div id="loginForm" class="hidden">
-        <input class="field" type="email" id="loginEmail" placeholder="Enter your email" />
-        <input class="field" type="password" id="loginPassword" placeholder="Enter your password" />
-        <button class="main-btn" onclick="login()">Login</button>
-      </div>
-
-      <button class="ghost-btn" onclick="showLanding()">← Back</button>
+    <div class="tab-row">
+      <button id="loginTab" class="tab active">Login</button>
+      <button id="signupTab" class="tab">Signup</button>
     </div>
+
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button id="loginBtn">Login</button>
+    </div>
+
+    <!-- SIGNUP -->
+    <div id="signupForm" class="hidden">
+      <input type="text" id="name" placeholder="Name" />
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="signupBtn">Create Account</button>
+    </div>
+
+    <button id="closeBtn">Close</button>
+
   </div>
 
+</div>
   <!-- =========================
        FOOTER
   ========================== -->
@@ -301,8 +301,6 @@
   <!-- TOAST -->
   <div id="toast" class="toast"></div>
 
-  <script type='module' src="../js/core/auth.js"></script>
-  <script type='module' src="../js/core/quiz.js"></script>
-  <script type='module' src="../js/core/reviews.js"></script>  
+  <script type='module' src="./js/core/auth.js"></script>
 </body>
 </html>

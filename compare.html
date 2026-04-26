@@ -65,12 +65,16 @@
 
 </div>
 
-<script type="module">
+<script src="js/data/careersData.js"></script>
+<script>
 
-import { careers } from "./js/careers.js";
-
+const careers = window.careers || [];
 const keys = JSON.parse(localStorage.getItem("compareCareers")) || [];
 const container = document.getElementById("compareBox");
+
+if (keys.length === 0) {
+  container.innerHTML = "<p>No careers selected for comparison.</p>";
+}
 
 // 🧠 SAFE SCORE FUNCTION
 function calculateScore(c) {

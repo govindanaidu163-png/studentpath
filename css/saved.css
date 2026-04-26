@@ -1,7 +1,12 @@
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
 }
 .saved-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 30px 40px;
 }
 
@@ -41,7 +46,7 @@ body {
 /* GRID */
 .tab-content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -83,4 +88,27 @@ body {
 .empty {
   font-size: 16px;
   color: #777;
+}
+
+@media (max-width: 960px) {
+  .tab-content {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .saved-page {
+    padding: 24px 16px 40px;
+  }
+
+  .tab-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .tab-content {
+    grid-template-columns: 1fr;
+  }
 }

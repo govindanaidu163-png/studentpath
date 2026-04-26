@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Career Result</title>
+  <title>StudentPath Result</title>
 
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/result.css">
+  <link rel="stylesheet" href="css/result.css">
 </head>
 
 <body class="result-page">
 
-  <!-- BACKGROUND PARTICLES -->
-  <canvas id="particles"></canvas>
+<div class="result-container">
 
-  <div class="result-container">
-    <div class="result-card">
+  <div class="result-box">
 
-      <p class="result-tag">✨ AI Career Match</p>
+    <!-- BACK BUTTON -->
+    <button class="back-btn" onclick="goHome()">← Back</button>
 
-      <h1>Your Best Career Path</h1>
+    <h2>Your Career Match 🎯</h2>
 
-      <h2 id="careerTitle" class="gradient-text">Loading...</h2>
+    <h1 id="careerTitle">Loading...</h1>
 
-      <p id="careerDesc">
-        Analyzing your strengths and interests...
-      </p>
+    <p id="careerDesc"></p>
 
-      <div class="result-actions">
-
-        <button onclick="goDashboard()">
-          Go to Back →
-        </button>
-
-        <button onclick="retakeQuiz()">
-          Retake Quiz
-        </button>
-
-        <button class="main-btn" onclick="goSignup()">
-          Know more about this career →
-        </button>
-
-      </div>
-
+    <div class="extra-info">
+      <p><strong>💰 Salary:</strong> <span id="salary"></span></p>
+      <p><strong>🛤 Roadmap:</strong> <span id="roadmap"></span></p>
     </div>
+
+    <!-- CTA SECTION -->
+    <div class="cta-box">
+      <p>Want full roadmap, courses & guidance?</p>
+      <button class="cta-btn" onclick="goSignup()">
+        🚀 Create Free Account
+      </button>
+    </div>
+
+    <!-- RETAKE -->
+    <button onclick="restartQuiz()" class="main-btn">
+      🔁 Take Quiz Again
+    </button>
+
   </div>
 
-  <!-- JS -->
-  <script src="../js/features/result.js"></script>
+</div>
+
+<script src="js/features/result.js"></script>
 
 </body>
 </html>

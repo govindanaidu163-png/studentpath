@@ -1,59 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Explore Careers</title>
-  <link rel="stylesheet" href="../css/explore.css">
-  <link rel="stylesheet" href="../css/navbar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentPath | Explore Careers</title>
+    <meta name="description" content="Explore top careers, trending jobs, and salary insights on StudentPath.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/explore.css">
+  <link rel="stylesheet" href="css/transitions.css">
 </head>
 
-<body class="explore-page">
+<body>
 
+  <!-- NAVBAR -->
   <div id="navbarContainer"></div>
 
-  <section class="category-bar">
-  <div class="category-scroll">
+  <!-- MAIN PAGE -->
+  <main class="explore-main">
 
-    <button class="cat active" onclick="filterType('all')">All</button>
-    <button class="cat" onclick="filterType('tech')">Technology</button>
-    <button class="cat" onclick="filterType('health')">Healthcare</button>
-    <button class="cat" onclick="filterType('business')">Business</button>
-    <button class="cat" onclick="filterType('design')">Design</button>
-    <button class="cat" onclick="filterType('finance')">Finance</button>
-    <button class="cat" onclick="filterType('engineering')">Engineering</button>
-    <button class="cat" onclick="filterType('creative')">Creative</button>
+    <!-- ===== TRENDING SECTION ===== -->
+    <section class="trending-section">
+      <div class="section-header">
+        <h2>Trending Careers</h2>
+        <button class="dots-btn" type="button">•••</button>
+      </div>
 
-  </div>
-</section>
+      <div class="trending-viewport">
+        <div id="trendingCareers" class="trending-track"></div>
+      </div>
+    </section>
 
-  <main class="explore-page">
+    <!-- ===== TOP CAREERS SECTION ===== -->
+    <section class="top-careers-section">
 
-  <section class="trending-section">
-    <div class="section-header">
-      <h2>Trending Careers</h2>
-      <button class="dots-btn" type="button">•••</button>
-    </div>
+      <!-- Row 1: Title + Pills + View All -->
+      <div class="top-careers-header">
+        <div class="top-careers-title-row">
+          <h2>Top Careers</h2>
+          <div class="pill-row">
+            <button class="pill active" onclick="setPill(this, 'all')">Top free</button>
+            <button class="pill" onclick="setPill(this, 'high')">High Demand Careers</button>
+            <button class="pill" onclick="setPill(this, 'salary')">Top Salaries</button>
+            <button class="pill" onclick="setPill(this, 'easy')">Easy Entry</button>
+          </div>
+        </div>
+        <a href="#" class="view-all">View all &rsaquo;</a>
+      </div>
 
-    <div class="trending-viewport">
-      <div id="trendingCareers" class="trending-track"></div>
-    </div>
-  </section>
+      <!-- Row 2: Category icons -->
+      <div class="category-icon-row">
+        <button class="cat-icon active" onclick="filterType('tech', this)">
+          <span class="cat-emoji">💻</span>
+          <span>Technology</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('health', this)">
+          <span class="cat-emoji">🩺</span>
+          <span>Healthcare</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('business', this)">
+          <span class="cat-emoji">💼</span>
+          <span>Business</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('design', this)">
+          <span class="cat-emoji">🎨</span>
+          <span>Design</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('finance', this)">
+          <span class="cat-emoji">📊</span>
+          <span>Finance</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('engineering', this)">
+          <span class="cat-emoji">⚙️</span>
+          <span>Engineering</span>
+        </button>
+        <button class="cat-icon" onclick="filterType('creative', this)">
+          <span class="cat-emoji">🌱</span>
+          <span>Creative</span>
+        </button>
+      </div>
 
-  <section class="top-careers-section">
-    <div class="section-header top-careers-header">
-      <h2>Top Careers</h2>
-      <a href="#" class="view-all">View all ›</a>
-    </div>
+      <!-- Row 3: "Top Careers" label -->
+      <h3 class="grid-label">Top Careers</h3>
 
-    <div id="careerGrid" class="career-grid"></div>
-  </section>
+      <!-- Career grid -->
+      <div id="careerGrid" class="career-grid"></div>
 
-</main>
+    </section>
 
-  <script src="../js/data/careersData.js"></script>
-  <script type="module" src="../js/core/loadNavbar.js"></script>
-  <script src="../js/features/explore.js"></script>
-  
+  </main>
+
+  <script src="js/data/careersData.js"></script>
+  <script type="module" src="js/core/loadNavbar.js"></script>
+  <script src="js/features/explore.js"></script>
+  <!-- SPA Engine — enables smooth navigation between pages -->
+  <script src="js/core/spa.js"></script>
 
 </body>
 </html>

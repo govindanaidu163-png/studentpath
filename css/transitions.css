@@ -1,0 +1,56 @@
+/* ===========================
+   PAGE TRANSITION OVERLAY
+=========================== */
+
+/* The full-screen overlay that slides in/out */
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+
+  /* Split into two halves */
+  display: flex;
+}
+
+#page-transition-overlay .half {
+  flex: 1;
+  background: #1a73e8;
+  transform: scaleX(0);
+  transition: transform 0.38s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+#page-transition-overlay .half-left {
+  transform-origin: left;
+}
+
+#page-transition-overlay .half-right {
+  transform-origin: right;
+}
+
+/* === ENTER state: both halves expand inward === */
+#page-transition-overlay.enter .half-left,
+#page-transition-overlay.enter .half-right {
+  transform: scaleX(1);
+}
+
+/* === LEAVE state: both halves shrink outward === */
+#page-transition-overlay.leave .half-left {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+#page-transition-overlay.leave .half-right {
+  transform-origin: right;
+  transform: scaleX(0);
+}
+
+/* Fade the body content on transition */
+body {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+body.fading {
+  opacity: 0;
+}

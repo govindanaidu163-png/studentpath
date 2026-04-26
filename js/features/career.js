@@ -45,7 +45,7 @@ const REVIEWS = [
 // ============================================================
 // MAIN INIT
 // ============================================================
-document.addEventListener("DOMContentLoaded", () => {
+function initCareerPage() {
 
   // ---- ORIGINAL LOGIC (PRESERVED) ----
   const data = JSON.parse(localStorage.getItem("selectedCareer"));
@@ -57,9 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const roadmapList= document.getElementById("roadmapList");
 
   if (!data) {
-    titleEl.textContent = "No career selected";
-    descEl.textContent  = "Go back and choose a career.";
-    salaryEl.textContent = "--";
+    if (titleEl) titleEl.textContent = "No career selected";
+    if (descEl) descEl.textContent  = "Go back and choose a career.";
+    if (salaryEl) salaryEl.textContent = "--";
     return;
   }
 
@@ -102,8 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Stat counters data
   const successTarget = data.successRate || 60;
   const growthTarget  = data.growth       || 4;
-  document.getElementById("statSuccess").dataset.target = successTarget;
-  document.getElementById("statGrowth").dataset.target  = growthTarget;
+  const statSuccess = document.getElementById("statSuccess");
+  const statGrowth = document.getElementById("statGrowth");
+  if (statSuccess) statSuccess.dataset.target = successTarget;
+  if (statGrowth) statGrowth.dataset.target = growthTarget;
 
   // Salary bar (normalize against 100L max)
   const salaryMax = 100;
@@ -120,18 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (growthBar) growthBar.dataset.width = (growthTarget / 5) * 100;
 
   // Skills
-  skillsList.innerHTML = "";
+  if (skillsList) skillsList.innerHTML = "";
   const skills = data.skills || [];
   skills.forEach((skill, i) => {
     const pill = document.createElement("div");
     pill.className = "skill-pill";
     pill.textContent = skill;
     pill.style.transitionDelay = `${i * 80}ms`;
-    skillsList.appendChild(pill);
+    skillsList?.appendChild(pill);
   });
 
   // Roadmap
-  roadmapList.innerHTML = "";
+  if (roadmapList) roadmapList.innerHTML = "";
   const roadmap = data.roadmap || [];
   roadmap.forEach((step, i) => {
     const div = document.createElement("div");
@@ -141,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="roadmap-step-text">${step}</div>
     `;
     div.style.transitionDelay = `${i * 120}ms`;
-    roadmapList.appendChild(div);
+    roadmapList?.appendChild(div);
   });
 
   // ================= SAVE BUTTON INIT =================
@@ -165,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 👉 Click handler
-  btn.onclick = () => {
+  /* Legacy inline save handler replaced by window.saveCareer.
 
     let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
     const exists = saved.find(c => c.key === career.key);
@@ -193,6 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("savedCareers", JSON.stringify(saved));
   };
+  */
+  btn.onclick = () => window.saveCareer();
 
 })();
 
@@ -206,7 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initReviews();
   initParallax();
 
-}); // end DOMContentLoaded
+} // end initCareerPage
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCareerPage);
+} else {
+  initCareerPage();
+}
 
 
 // ============================================================
@@ -561,6 +571,49 @@ function initParallax() {
 
 window.startLearning = function () {
   alert(" Start Learning...");
+};
+
+window.goBack = function () {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else if (window.spaGo) {
+    window.spaGo("explore.html");
+  } else {
+    window.location.href = "explore.html";
+  }
+};
+
+window.saveCareer = function () {
+  const career = JSON.parse(localStorage.getItem("selectedCareer"));
+  if (!career) return;
+
+  let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
+  const exists = saved.find(c => c.key === career.key);
+
+  if (exists) {
+    saved = saved.filter(c => c.key !== career.key);
+  } else {
+    saved.push(career);
+  }
+
+  localStorage.setItem("savedCareers", JSON.stringify(saved));
+
+  document.querySelectorAll(".btn-save").forEach(btn => {
+    const icon = btn.querySelector(".btn-icon");
+    if (exists) {
+      if (icon) icon.textContent = "â™¡";
+      btn.style.color = "";
+      btn.style.borderColor = "";
+      btn.style.background = "";
+    } else {
+      if (icon) icon.textContent = "â™¥";
+      btn.style.color = "#ff6b6b";
+      btn.style.borderColor = "#ff6b6b";
+      btn.style.background = "rgba(255,107,107,0.1)";
+    }
+  });
+
+  alert(exists ? "Removed from saved" : "Career saved!");
 };
 
 function saveExam(exam) {

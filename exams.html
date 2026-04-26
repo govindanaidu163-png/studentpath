@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Explore Exams</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath | Explore Exams</title>
+  <meta name="description" content="Explore top entrance exams, trending tests, and career pathways on StudentPath.">
 
-  <link rel="stylesheet" href="../css/explore.css">
-  <link rel="stylesheet" href="../css/navbar.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/explore.css">
+  <link rel="stylesheet" href="css/transitions.css">
 </head>
 
 <body>
@@ -13,27 +21,14 @@
   <!-- NAVBAR -->
   <div id="navbarContainer"></div>
 
-  <section class="category-bar">
-  <div class="category-scroll">
+  <!-- MAIN PAGE -->
+  <main class="explore-main">
 
-    <button class="cat active" onclick="filterExam('all')">All</button>
-    <button class="cat" onclick="filterExam('engineering')">Engineering</button>
-    <button class="cat" onclick="filterExam('medical')">Medical</button>
-    <button class="cat" onclick="filterExam('government')">Government</button>
-    <button class="cat" onclick="filterExam('business')">Business</button>
-    <button class="cat" onclick="filterExam('law')">Law</button>
-    <button class="cat" onclick="filterExam('defense')">Defense</button>
-
-  </div>
-</section>
-
-  <main>
-
-    <!-- ===== TRENDING ===== -->
+    <!-- ===== TRENDING EXAMS ===== -->
     <section class="trending-section">
       <div class="section-header">
         <h2>Trending Exams</h2>
-        <button class="dots-btn">•••</button>
+        <button class="dots-btn" type="button">•••</button>
       </div>
 
       <div class="trending-viewport">
@@ -41,16 +36,59 @@
       </div>
     </section>
 
-
-    <!-- ===== TOP EXAMS ===== -->
+    <!-- ===== TOP EXAMS SECTION ===== -->
     <section class="top-careers-section">
 
-      <div class="section-header">
-        <h2>Top Exams</h2>
-        <a href="#" class="view-all">View all ›</a>
+      <!-- Row 1: Title + Pills + View All -->
+      <div class="top-careers-header">
+        <div class="top-careers-title-row">
+          <h2>Top Exams</h2>
+          <div class="pill-row">
+            <button class="pill active" onclick="setPill(this, 'all')">All Exams</button>
+            <button class="pill" onclick="setPill(this, 'hard')">High Difficulty</button>
+            <button class="pill" onclick="setPill(this, 'easy')">Easy Entry</button>
+            <button class="pill" onclick="setPill(this, 'popular')">Most Popular</button>
+          </div>
+        </div>
+        <a href="#" class="view-all">View all &rsaquo;</a>
       </div>
 
-      <!-- GRID -->
+      <!-- Row 2: Category icons -->
+      <div class="category-icon-row">
+        <button class="cat-icon active" onclick="filterExam('engineering', this)">
+          <span class="cat-emoji">⚙️</span>
+          <span>Engineering</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('medical', this)">
+          <span class="cat-emoji">🩺</span>
+          <span>Medical</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('government', this)">
+          <span class="cat-emoji">🏛️</span>
+          <span>Government</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('business', this)">
+          <span class="cat-emoji">💼</span>
+          <span>Business</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('law', this)">
+          <span class="cat-emoji">⚖️</span>
+          <span>Law</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('defense', this)">
+          <span class="cat-emoji">🛡️</span>
+          <span>Defense</span>
+        </button>
+        <button class="cat-icon" onclick="filterExam('science', this)">
+          <span class="cat-emoji">🔬</span>
+          <span>Science</span>
+        </button>
+      </div>
+
+      <!-- Row 3: "Top Exams" label -->
+      <h3 class="grid-label">Top Exams</h3>
+
+      <!-- Exam grid -->
       <div id="examGrid" class="career-grid"></div>
 
     </section>
@@ -58,9 +96,11 @@
   </main>
 
   <!-- SCRIPTS -->
-  <script src="../js/data/examData.js"></script>
-<script type="module" src="../js/core/loadNavbar.js"></script>
-  <script src="../js/features/explore-exams.js"></script>
+  <script src="js/data/examData.js"></script>
+  <script type="module" src="js/core/loadNavbar.js"></script>
+  <script src="js/features/explore-exams.js"></script>
+  <!-- SPA Engine -->
+  <script src="js/core/spa.js"></script>
 
 </body>
 </html>

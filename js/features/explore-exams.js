@@ -1,16 +1,19 @@
 const exams = window.exams || [];
 
-if (!Array.isArray(exams)) {
-  console.error("Exam data not loaded properly");
-}
-
-let currentType = "all";
+let currentSearch = "";
+let currentType = "engineering"; // default
+let currentPill = "all";
 
 /* ================= HELPERS ================= */
 
 function openExam(exam) {
   localStorage.setItem("selectedExam", JSON.stringify(exam));
-  window.location.href = "exam.html";
+  // Use SPA router if available, else normal navigation
+  if (window.spaGo) {
+    window.spaGo("exam.html");
+  } else {
+    window.location.href = "exam.html";
+  }
 }
 
 function isExamSaved(exam) {
@@ -27,29 +30,58 @@ function renderTrending(list) {
   container.innerHTML = "";
 
   const trending = [...list]
-    .map(e => ({
-      ...e,
-      score: (e.difficulty || 0) * 10
-    }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => (b.difficulty || 0) - (a.difficulty || 0))
     .slice(0, 6);
 
-  trending.forEach(e => {
+  trending.forEach((e, index) => {
     const card = document.createElement("div");
-    card.className = "trend-card";
+    card.className = "trend-card" + (index % 2 === 1 ? " spotlight" : "");
 
     card.innerHTML = `
-      <img src="${e.image}" class="trend-card-image">
+      <img src="${e.image}" class="trend-card-image" alt="${e.name}" onerror="this.style.display='none'">
       <div class="trend-card-content">
-        <h3>${e.name}</h3>
-        <p>${e.salaryLabel}</p>
+        ${index % 2 === 1 ? '<div class="trend-kicker">Spotlight</div>' : ''}
+        <div class="trend-title">
+          ${index % 2 === 1
+            ? `Crack <strong>${e.name}</strong>.<br><small style="font-size:13px;opacity:0.8">${e.salaryLabel}</small>`
+            : `<strong>${e.name}:</strong> ${e.salaryLabel}`
+          }
+        </div>
+        ${index % 2 === 0 ? `<div class="trend-salary">Difficulty: ${"⭐".repeat(e.difficulty || 3)}</div>` : ''}
+        <button class="trend-btn" type="button">View details</button>
       </div>
     `;
 
-    card.onclick = () => openExam(e);
+    const detailsBtn = card.querySelector(".trend-btn");
+    detailsBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openExam(e);
+    });
 
+    card.onclick = () => openExam(e);
     container.appendChild(card);
   });
+
+  startTrendingSlider();
+}
+
+function startTrendingSlider() {
+  const track = document.getElementById("trendingExams");
+  if (!track) return;
+
+  const cards = track.querySelectorAll(".trend-card");
+  if (cards.length <= 2) return;
+
+  let index = 0;
+  clearInterval(window._examSliderTimer);
+
+  window._examSliderTimer = setInterval(() => {
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 16;
+    const maxIndex = cards.length - 2;
+    index = index >= maxIndex ? 0 : index + 1;
+    track.style.transform = `translateX(-${index * (cardWidth + gap)}px)`;
+  }, 3500);
 }
 
 /* ================= GRID ================= */
@@ -62,36 +94,30 @@ function renderGrid(list = exams) {
 
   list.forEach(e => {
     const card = document.createElement("div");
-    card.className = "career-card"; // reuse same style
+    card.className = "career-card";
 
     const saved = isExamSaved(e);
+    const diff = e.difficulty || 3;
+    const stars = "★".repeat(diff) + "☆".repeat(5 - diff);
 
     card.innerHTML = `
-      <div class="save-btn">${saved ? "♥" : "♡"}</div>
-
-      <img src="${e.image}" class="career-image">
-
+      <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
+      <img src="${e.image}" class="career-image" alt="${e.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(e.name)}'">
       <div class="career-info">
         <h3>${e.name}</h3>
-        <p class="salary">${e.salaryLabel}</p>
-
-        <div class="meta">
-          <span>Difficulty: ${"⭐".repeat(e.difficulty || 3)}</span>
-          <span class="tag">${e.tag || "Exam"}</span>
+        <div class="salary">
+          <span class="salary-arrow">↑</span>
+          ${e.salaryLabel}
         </div>
+        <div class="stars">${stars}</div>
       </div>
     `;
 
-    // ❤️ SAVE BUTTON
     const saveBtn = card.querySelector(".save-btn");
-
     saveBtn.onclick = (ev) => {
       ev.stopPropagation();
-
       let saved = JSON.parse(localStorage.getItem("savedExams")) || [];
-
       const exists = saved.find(item => item.key === e.key);
-
       if (exists) {
         saved = saved.filter(item => item.key !== e.key);
         saveBtn.textContent = "♡";
@@ -99,28 +125,35 @@ function renderGrid(list = exams) {
         saved.push(e);
         saveBtn.textContent = "♥";
       }
-
       localStorage.setItem("savedExams", JSON.stringify(saved));
     };
 
-    // 👉 OPEN EXAM PAGE
     card.onclick = () => openExam(e);
-
     grid.appendChild(card);
   });
 }
 
-/* ================= FILTER ================= */
+/* ================= FILTERS ================= */
 
-window.filterType = function(type, e) {
+// Category icon filter
+window.filterExam = function(type, el) {
   currentType = type;
+  document.querySelectorAll(".cat-icon").forEach(btn => btn.classList.remove("active"));
+  if (el) el.classList.add("active");
+  updateUI();
+};
 
-  document.querySelectorAll(".category").forEach(btn => {
-    btn.classList.remove("active");
-  });
+// Pill filter
+window.setPill = function(el, type) {
+  currentPill = type;
+  document.querySelectorAll(".pill").forEach(btn => btn.classList.remove("active"));
+  if (el) el.classList.add("active");
+  updateUI();
+};
 
-  if (e) e.target.classList.add("active");
-
+window.searchCareer = function () {
+  const input = document.getElementById("searchInput");
+  currentSearch = (input?.value || "").trim().toLowerCase();
   updateUI();
 };
 
@@ -129,16 +162,36 @@ window.filterType = function(type, e) {
 function updateUI() {
   let filtered = [...exams];
 
-  if (currentType !== "all") {
+  if (currentSearch) {
+    filtered = filtered.filter(e =>
+      (e.name || "").toLowerCase().includes(currentSearch) ||
+      (e.salaryLabel || "").toLowerCase().includes(currentSearch)
+    );
+  }
+
+  if (currentType && !currentSearch) {
     filtered = filtered.filter(e => e.type === currentType);
   }
 
-  renderTrending(filtered);
+  if (currentPill === "hard") {
+    filtered = filtered.filter(e => (e.difficulty || 0) >= 4);
+    filtered.sort((a, b) => (b.difficulty || 0) - (a.difficulty || 0));
+  } else if (currentPill === "easy") {
+    filtered = filtered.filter(e => (e.difficulty || 0) <= 3);
+  } else if (currentPill === "popular") {
+    filtered.sort((a, b) => (b.difficulty || 0) - (a.difficulty || 0));
+  }
+
+  renderTrending(filtered.length ? filtered : exams.slice(0, 6));
   renderGrid(filtered);
 }
 
-/* ================= INIT ================= */
-
-document.addEventListener("DOMContentLoaded", () => {
+function initExamsPage() {
   updateUI();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initExamsPage);
+} else {
+  initExamsPage();
+}
