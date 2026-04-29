@@ -11,6 +11,7 @@ import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
    ELEMENT REFERENCES
 ========================= */
 const authSection = document.getElementById("authSection");
+const authModal = document.getElementById("authModal");
 const signupForm = document.getElementById("signupForm");
 const loginForm = document.getElementById("loginForm");
 const signupTab = document.getElementById("signupTab");
@@ -32,14 +33,17 @@ const toastEl = document.getElementById("toast");
    AUTH MODAL HELPERS
 ========================= */
 function openAuthSection() {
-  if (!authSection) return;
   authSection.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
-}
+  authModal.classList.remove("hidden");
 
+  document.body.style.overflow = "hidden";
+
+  // 🔥 FORCE scroll to top (fixes your bug)
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
 function closeAuthSection() {
-  if (!authSection) return;
   authSection.classList.add("hidden");
+  authModal.classList.add("hidden");
   document.body.style.overflow = "auto";
 }
 
@@ -97,10 +101,17 @@ window.startQuiz = () => {
   window.location.href = "quiz.html";
 };
 
+window.openAuthSection = openAuthSection;
+window.closeAuthSection = closeAuthSection;
+window.showLoginForm = showLoginForm;
+window.showSignupForm = showSignupForm;
+
 /* =========================
    SIGNUP LOGIC
 ========================= */
-async function handleSignup() {
+async function handleSignup(event) {
+  event?.preventDefault();
+
   const name = nameInput?.value.trim();
   const email = emailInput?.value.trim();
   const password = passwordInput?.value.trim();
@@ -122,10 +133,19 @@ async function handleSignup() {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, "users", user.uid), { name, email });
     await updateProfile(user, { displayName: name });
 
-    localStorage.setItem("user", JSON.stringify({ email, name }));
+    try {
+      await setDoc(doc(db, "users", user.uid), {
+        name,
+        email,
+        createdAt: new Date().toISOString()
+      }, { merge: true });
+    } catch (profileErr) {
+      console.warn("Account created, but profile document was not saved:", profileErr);
+    }
+
+    localStorage.setItem("user", JSON.stringify({ uid: user.uid, email, name }));
     showToast("Account created successfully!", "success");
 
     setTimeout(() => {
@@ -137,6 +157,8 @@ async function handleSignup() {
     if (err.code === "auth/email-already-in-use") msg = "This email is already in use.";
     if (err.code === "auth/invalid-email") msg = "Please enter a valid email.";
     if (err.code === "auth/weak-password") msg = "Password should be at least 6 characters.";
+    if (err.code === "auth/operation-not-allowed") msg = "Email/password signup is not enabled in Firebase Authentication.";
+    if (err.code === "auth/unauthorized-domain") msg = "This website domain is not authorized in Firebase Authentication.";
     
     showToast(msg, "error");
     signupBtn.disabled = false;
@@ -147,7 +169,9 @@ async function handleSignup() {
 /* =========================
    LOGIN LOGIC
 ========================= */
-async function handleLogin() {
+async function handleLogin(event) {
+  event?.preventDefault();
+
   const email = loginEmailInput?.value.trim();
   const password = loginPasswordInput?.value.trim();
 
@@ -163,7 +187,11 @@ async function handleLogin() {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    localStorage.setItem("user", JSON.stringify({ email: user.email, name: user.displayName }));
+    localStorage.setItem("user", JSON.stringify({
+      uid: user.uid,
+      email: user.email,
+      name: user.displayName || "User"
+    }));
     showToast("Welcome back!", "success");
 
     setTimeout(() => {
@@ -175,6 +203,8 @@ async function handleLogin() {
     if (err.code === "auth/invalid-credential") msg = "Invalid email or password.";
     if (err.code === "auth/user-not-found") msg = "No account found with this email.";
     if (err.code === "auth/wrong-password") msg = "Incorrect password.";
+    if (err.code === "auth/operation-not-allowed") msg = "Email/password login is not enabled in Firebase Authentication.";
+    if (err.code === "auth/unauthorized-domain") msg = "This website domain is not authorized in Firebase Authentication.";
     
     showToast(msg, "error");
     loginBtn.disabled = false;

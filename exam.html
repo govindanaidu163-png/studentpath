@@ -6,16 +6,25 @@
   <title>Exam Details</title>
 
   <!-- NAVBAR -->
-  <link rel="stylesheet" href="css/navbar.css">
+
 
   <!-- PAGE STYLE -->
   <link rel="stylesheet" href="css/exam.css">
+  <script src="js/core/theme.js"></script>
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <div id="navbarContainer"></div>
+  <header class="minimal-header">
+    <div class="brand">
+      <div class="brand-mark">◈</div>
+      <div class="brand-name">Student<span>Path</span></div>
+    </div>
+    <button class="back-btn" onclick="goBack()">
+      <span class="back-arrow">←</span> Back
+    </button>
+  </header>
 
   <!-- MAIN -->
   <main class="exam-page">
@@ -48,7 +57,6 @@
 
   <!-- SCRIPTS -->
   <script src="js/data/careersData.js"></script>
-  <script type="module" src="js/core/loadNavbar.js"></script>
   <script src="js/features/exam.js"></script>
 
 </body>

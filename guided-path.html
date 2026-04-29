@@ -9,11 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/guided-path.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
 </head>
 
 <body class="guided-path-page">
-  <div id="navbarContainer"></div>
   <!-- Background canvas -->
   <canvas id="bg-canvas"></canvas>
   <div class="noise"></div>
@@ -35,9 +33,12 @@
   <!-- App -->
   <div id="app">
     <header id="topbar">
-      <div class="brand">
-        <div class="brand-mark">◈</div>
-        <div class="brand-name">Student<span>Path</span></div>
+      <div class="brand" style="display: flex; align-items: center; gap: 12px;">
+        <button class="btn" id="btn-top-back" style="padding: 6px 12px; font-size: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.2);">← Back</button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="brand-mark">◈</div>
+          <div class="brand-name">Student<span>Path</span></div>
+        </div>
       </div>
 
       <div class="top-controls">
@@ -61,13 +62,13 @@
       <div class="progress-bar" id="progress-bar" style="width: 0;"></div>
 
       <div class="bottom-left">
-        <button class="btn" id="btn-back" disabled><span class="btn-icon">←</span>Back</button>
+        <button class="btn" id="btn-back" disabled><span class="btn-icon">←</span>Previous</button>
         <button class="btn" id="btn-reset"><span class="btn-icon">↺</span>Reset</button>
       </div>
 
       <div class="bottom-right">
         <button class="btn primary" id="btn-roadmap"><span class="btn-icon">◈</span>View Roadmap</button>
-        <button class="btn" id="btn-dashboard"><span class="btn-icon">⊞</span>Dashboard</button>
+        <button class="btn" id="btn-dashboard"><span class="btn-icon">⊞</span>Back</button>
         <button class="btn" id="btn-export"><span class="btn-icon">↗</span>Export</button>
       </div>
     </footer>
@@ -75,8 +76,6 @@
 
   
   <script type="module" src="js/features/guided.js"></script>
-  <script type="module" src="js/core/loadNavbar.js"></script>
-  <!-- SPA Engine -->
-  <script src="js/core/spa.js"></script>
+
 </body>
 </html>

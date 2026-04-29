@@ -4,10 +4,22 @@
   <a href="explore.html" class="logo" style="text-decoration:none;color:inherit;">StudentPath</a>
 
   <nav class="nav-center">
-    <a href="explore.html" class="nav-link">Explore Careers</a>
-    <a href="exams.html" class="nav-link">Explore Exams</a>
-    <a href="guided-path.html" class="nav-link">Guide My Path</a>
-    <a href="saved.html" class="nav-link">Saved</a>
+    <a href="explore.html" class="nav-link">
+      <span class="nav-icon">🧭</span>
+      <span class="nav-text">Explore Careers</span>
+    </a>
+    <a href="exams.html" class="nav-link">
+      <span class="nav-icon">📝</span>
+      <span class="nav-text">Explore Exams</span>
+    </a>
+    <a href="guided-path.html" class="nav-link">
+      <span class="nav-icon">🗺️</span>
+      <span class="nav-text">Guide My Path</span>
+    </a>
+    <a href="saved.html" class="nav-link">
+      <span class="nav-icon">🔖</span>
+      <span class="nav-text">Saved</span>
+    </a>
 
     <!-- sliding underline indicator -->
     <div class="nav-indicator"></div>
@@ -24,37 +36,32 @@
     <!-- Bell icon -->
     <div class="icon bell-icon" title="Notifications">🔔</div>
 
-    <!-- PROFILE avatar -->
-    <div class="icon profile-icon" id="profileBtn">
-      <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=32&rounded=true" alt="Profile" class="avatar-img">
+    <div class="profile-container" id="profileContainer">
+      <div class="icon profile-icon" id="profileBtn">
+        <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=32&rounded=true" alt="Profile" class="avatar-img">
+      </div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-user-info">
+            <span class="dropdown-name" id="userName">Loading...</span>
+            <span class="dropdown-email" id="userEmail">Loading...</span>
+          </div>
+        </div>
+        <div class="dropdown-body">
+          <button class="dropdown-item" id="settingsBtn">
+            <span class="item-icon">⚙️</span> Settings
+          </button>
+          <button class="dropdown-item" id="themeToggleBtn">
+            <span class="item-icon" id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item logout-item" id="logoutBtn">
+            <span class="item-icon">🚪</span> Log Out
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
 </header>
 
-
-<!-- ================= PROFILE SLIDER ================= -->
-
-<div class="profile-panel" id="profilePanel">
-
-  <div class="profile-content">
-
-    <div class="profile-header">
-      <h3>My Profile</h3>
-      <span id="closeProfile">&times;</span>
-    </div>
-
-    <div class="profile-body">
-      <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
-      <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
-
-      <div class="profile-about">
-        <p>About: Building my career journey 🚀</p>
-      </div>
-    </div>
-
-    <button class="logout-btn" id="logoutBtn">Logout</button>
-
-  </div>
-
-</div>

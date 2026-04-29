@@ -107,3 +107,11 @@ if (document.readyState === "loading") {
 } else {
   initExamPage();
 }
+
+window.goBack = function () {
+  if (document.referrer && document.referrer.includes(window.location.host)) {
+    window.history.back();
+  } else {
+    window.location.href = "explore.html";
+  }
+};

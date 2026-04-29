@@ -230,37 +230,33 @@
   <!-- =========================
        AUTH MODAL
   ========================== -->
-<!-- AUTH MODAL (CLEAN) -->
-<div id="authSection" class="auth-modal hidden">
-
-  <div class="auth-box">
-
+<!-- OVERLAY -->
+<div id="authSection" class="auth-overlay hidden">
+  <div id="authModal" class="auth-box hidden">
+    
     <h2>StudentPath</h2>
 
     <div class="tab-row">
-      <button id="loginTab" class="tab active">Login</button>
-      <button id="signupTab" class="tab">Signup</button>
+      <button id="loginTab" class="tab active" type="button">Login</button>
+      <button id="signupTab" class="tab" type="button">Signup</button>
     </div>
 
-    <!-- LOGIN -->
     <div id="loginForm">
       <input type="email" id="loginEmail" placeholder="Email" />
       <input type="password" id="loginPassword" placeholder="Password" />
-      <button id="loginBtn">Login</button>
+      <button id="loginBtn" type="button">Login</button>
     </div>
 
-    <!-- SIGNUP -->
     <div id="signupForm" class="hidden">
       <input type="text" id="name" placeholder="Name" />
       <input type="email" id="email" placeholder="Email" />
       <input type="password" id="password" placeholder="Password" />
-      <button id="signupBtn">Create Account</button>
+      <button id="signupBtn" type="button">Create Account</button>
     </div>
 
-    <button id="closeBtn">Close</button>
+    <button id="closeBtn" type="button">Close</button>
 
   </div>
-
 </div>
   <!-- =========================
        FOOTER
@@ -301,6 +297,6 @@
   <!-- TOAST -->
   <div id="toast" class="toast"></div>
 
-  <script type='module' src="./js/core/auth.js"></script>
+  <script type='module' src="js/core/auth.js"></script>
 </body>
 </html>

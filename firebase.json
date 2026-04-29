@@ -5,6 +5,48 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/explore",
+        "destination": "/explore.html"
+      },
+      {
+        "source": "/exams",
+        "destination": "/exams.html"
+      },
+      {
+        "source": "/saved",
+        "destination": "/saved.html"
+      },
+      {
+        "source": "/guided-path",
+        "destination": "/guided-path.html"
+      },
+      {
+        "source": "/career",
+        "destination": "/career.html"
+      },
+      {
+        "source": "/exam",
+        "destination": "/exam.html"
+      },
+      {
+        "source": "/dashboard",
+        "destination": "/dashboard.html"
+      },
+      {
+        "source": "/quiz",
+        "destination": "/quiz.html"
+      },
+      {
+        "source": "/result",
+        "destination": "/result.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }

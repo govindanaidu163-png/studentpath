@@ -612,12 +612,27 @@ roadmapBtn?.addEventListener("click", () => {
   drawer.classList.contains("open") ? closeRoadmap() : openRoadmap();
 });
 dashboardBtn?.addEventListener("click", () => {
-  window.location.href = "dashboard.html";
+  if (document.referrer && document.referrer.includes(window.location.host)) {
+    window.history.back();
+  } else {
+    window.location.href = "explore.html";
+  }
 });
 exportBtn?.addEventListener("click", exportRoadmap);
 
 drawerClose?.addEventListener("click", closeRoadmap);
 backdrop?.addEventListener("click", closeRoadmap);
+
+const topBackBtn = document.getElementById("btn-top-back");
+if (topBackBtn) {
+  topBackBtn.addEventListener("click", () => {
+    if (document.referrer && document.referrer.includes(window.location.host)) {
+      window.history.back();
+    } else {
+      window.location.href = "explore.html";
+    }
+  });
+}
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeRoadmap();

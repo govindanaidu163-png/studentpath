@@ -40,7 +40,7 @@
   };
 
   // Pages that should always do a normal full reload
-  const EXCLUDE = ['index.html', 'home.html', '404.html', 'about.html', 'quiz.html', 'result.html'];
+  const EXCLUDE = ['index.html', 'home.html', '404.html', 'about.html', 'quiz.html', 'result.html', 'guided-path.html', 'career.html', 'exam.html'];
 
   // ── State ─────────────────────────────────────────────────────────
   let isNavigating = false;
@@ -73,18 +73,15 @@
     /* Smooth content swap */
     main.__spa_out {
       opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.18s ease, transform 0.18s ease;
+      transition: opacity 0.18s ease;
     }
     main.__spa_in {
       opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.22s ease, transform 0.22s ease;
+      transition: opacity 0.22s ease;
     }
     main {
       opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.22s ease, transform 0.22s ease;
+      transition: opacity 0.22s ease;
     }
   `;
   document.head.appendChild(style);

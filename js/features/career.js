@@ -574,10 +574,8 @@ window.startLearning = function () {
 };
 
 window.goBack = function () {
-  if (window.history.length > 1) {
+  if (document.referrer && document.referrer.includes(window.location.host)) {
     window.history.back();
-  } else if (window.spaGo) {
-    window.spaGo("explore.html");
   } else {
     window.location.href = "explore.html";
   }

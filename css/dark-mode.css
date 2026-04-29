@@ -1,0 +1,92 @@
+/* ================= THEME VARIABLES ================= */
+:root {
+  --bg-main: #f8f9fa;
+  --bg-nav: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #6b7280;
+  --border-color: #eeeeee;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+html.dark-mode {
+  --bg-main: #0f172a;
+  --bg-nav: #1e293b;
+  --bg-card: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ================= GLOBAL TRANSITIONS ================= */
+body, .top-nav, .career-card, .category-card, .search-bar, .profile-dropdown, .minimal-header {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* ================= APPLY VARIABLES ================= */
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6, .logo, .brand, .section-header h2, .explore-main h2 {
+  color: var(--text-main) !important;
+}
+
+p, .dropdown-email, .nav-center a {
+  color: var(--text-muted) !important;
+}
+
+/* Cards & Containers */
+.career-card, .category-card, .dropdown-header, .exam-card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.career-card:hover, .category-card:hover, .exam-card:hover {
+  box-shadow: var(--shadow-hover) !important;
+  border-color: var(--text-muted) !important;
+}
+
+/* Nav Elements */
+.top-nav, .minimal-header, .profile-dropdown, .search-bar {
+  background-color: var(--bg-nav) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--nav-shadow) !important;
+}
+
+.dropdown-divider {
+  background-color: var(--border-color) !important;
+}
+
+.search-bar input {
+  color: var(--text-main) !important;
+}
+
+/* Buttons & Interactive */
+.dropdown-item, .back-btn {
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dropdown-item:hover, .back-btn:hover {
+  background-color: var(--border-color) !important;
+}
+
+/* Nav Active / Hover */
+.nav-center a:hover,
+.nav-center a.active {
+  color: #1a73e8 !important;
+}
+
+html.dark-mode .nav-center a:hover,
+html.dark-mode .nav-center a.active {
+  color: #60a5fa !important;
+}

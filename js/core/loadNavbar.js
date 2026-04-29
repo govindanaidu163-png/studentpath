@@ -16,7 +16,7 @@ async function loadNavbar() {
     container.innerHTML = html;
 
     initNavbar();
-    initProfilePanel();
+    initProfileDropdown();
 
   } catch (e) {
     console.error("[loadNavbar] Error:", e);
@@ -69,33 +69,66 @@ function initNavbar() {
 }
 
 
-// ================= PROFILE PANEL =================
-function initProfilePanel() {
-  const profileBtn   = document.getElementById("profileBtn");
-  const profilePanel = document.getElementById("profilePanel");
-  const closeProfile = document.getElementById("closeProfile");
-  const userNameEl   = document.getElementById("userName");
-  const userEmailEl  = document.getElementById("userEmail");
-  const logoutBtn    = document.getElementById("logoutBtn");
+// ================= PROFILE DROPDOWN =================
+function initProfileDropdown() {
+  const profileBtn = document.getElementById("profileBtn");
+  const profileDropdown = document.getElementById("profileDropdown");
+  const userNameEl = document.getElementById("userName");
+  const userEmailEl = document.getElementById("userEmail");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeText = document.getElementById("themeText");
 
-  if (!profileBtn || !profilePanel) return;
+  if (!profileBtn || !profileDropdown) return;
 
-  profileBtn.addEventListener("click", () => profilePanel.classList.add("active"));
-  closeProfile?.addEventListener("click", () => profilePanel.classList.remove("active"));
+  // Toggle Dropdown
+  profileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    profileDropdown.classList.toggle("active");
+  });
 
-  // Firebase user state
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      if (userNameEl) userNameEl.textContent = user.displayName || "User";
-      if (userEmailEl) userEmailEl.textContent = user.email;
-    } else {
-      if (userNameEl) userNameEl.textContent = "Guest";
-      if (userEmailEl) userEmailEl.textContent = "Not logged in";
+  // Click outside to close
+  document.addEventListener("click", (e) => {
+    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+      profileDropdown.classList.remove("active");
     }
   });
 
+  // Theme Toggle
+  if (themeToggleBtn && window.studentPathTheme) {
+    // Initial State
+    const isDark = window.studentPathTheme.get() === 'dark';
+    if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
+    if (themeText) themeText.textContent = isDark ? "Light Mode" : "Dark Mode";
+
+    themeToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const newTheme = window.studentPathTheme.toggle();
+      const nowDark = newTheme === 'dark';
+      if (themeIcon) themeIcon.textContent = nowDark ? "☀️" : "🌙";
+      if (themeText) themeText.textContent = nowDark ? "Light Mode" : "Dark Mode";
+    });
+  }
+
+  // Firebase user state
+  try {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (userNameEl) userNameEl.textContent = user.displayName || "User";
+        if (userEmailEl) userEmailEl.textContent = user.email;
+      } else {
+        if (userNameEl) userNameEl.textContent = "Guest";
+        if (userEmailEl) userEmailEl.textContent = "Not logged in";
+      }
+    });
+  } catch(e) {
+    console.warn("Firebase auth error:", e);
+  }
+
   // Logout
-  logoutBtn?.addEventListener("click", () => {
+  logoutBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
     signOut(auth)
       .then(() => {
         alert("Logged out successfully");
