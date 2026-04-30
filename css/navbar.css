@@ -15,6 +15,13 @@
   background: var(--bg-nav, #ffffff);
 }
 
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+
 .top-nav {
   width: 100%;
   max-width: 100%;
@@ -23,9 +30,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 0 40px;
+  padding: 10px 40px;
   background: var(--bg-nav, #ffffff);
-  border-bottom: 1px solid var(--border-color, #eeeeee);
+  border-bottom: 1px solid var(--border-color, #eeeeee);display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo {
