@@ -106,26 +106,55 @@
   <!-- =========================
        WHY SECTION
   ========================== -->
-  <section class="section">
-    <h2>Why StudentPath?</h2>
-
-    <div class="cards why-cards">
-      <div class="card why-card">
-        <img src="./assets/images/interest.png" alt="Interest">
-        <h3>Find Your True Interest</h3>
-        <p>Discover what actually suits your personality, not what others tell you.</p>
+  <!-- =========================
+       WHY STUDENTPATH (IMMERSIVE)
+  ========================== -->
+  <section class="why-immersive-section" id="whyExperience">
+    <div class="sticky-container">
+      <!-- Chaos Layer -->
+      <div class="layer chaos-layer" id="chaosLayer">
+        <div class="chaos-bg"></div>
+        <div class="chaos-words">
+          <span class="chaos-word w1" style="--top: 20%; --left: 15%; --delay: 0s;">Confusion</span>
+          <span class="chaos-word w2" style="--top: 60%; --left: 70%; --delay: 1.5s;">Wrong Choices</span>
+          <span class="chaos-word w3" style="--top: 15%; --left: 60%; --delay: 0.8s;">Pressure</span>
+          <span class="chaos-word w4" style="--top: 70%; --left: 10%; --delay: 2.2s;">Anxiety</span>
+          <span class="chaos-word w5" style="--top: 40%; --left: 45%; --delay: 3s;">No Roadmap</span>
+        </div>
+        <div class="chaos-content">
+          <h2 class="chaos-title">Struggling with the unknown?</h2>
+        </div>
       </div>
 
-      <div class="card why-card">
-        <img src="./assets/images/ai.png" alt="AI">
-        <h3>AI-Based Career Matching</h3>
-        <p>Smart system analyzes your answers and suggests best career paths.</p>
+      <!-- Transition Layer -->
+      <div class="layer transition-layer" id="transitionLayer">
+        <h2 class="transition-text">There should be a better way...</h2>
       </div>
 
-      <div class="card why-card">
-        <img src="./assets/images/roadmap.png" alt="Roadmap">
-        <h3>Clear Step-by-Step Roadmap</h3>
-        <p>No confusion. Get exact steps to reach your dream career.</p>
+      <!-- Solution Layer -->
+      <div class="layer solution-layer" id="solutionLayer">
+        <div class="solution-header">
+          <h2>We Built That Way.</h2>
+          <p>StudentPath transforms chaos into a clear, guided journey.</p>
+        </div>
+        
+        <div class="solution-grid">
+          <div class="solution-card">
+            <div class="sol-icon">🎯</div>
+            <h3>Clarity</h3>
+            <p>Know exactly where you fit in the modern world.</p>
+          </div>
+          <div class="solution-card">
+            <div class="sol-icon">🧬</div>
+            <h3>AI Guidance</h3>
+            <p>Smart mapping of your unique personality.</p>
+          </div>
+          <div class="solution-card">
+            <div class="sol-icon">🗺️</div>
+            <h3>Roadmap</h3>
+            <p>Clear milestones from day one to your dream career.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -133,73 +162,135 @@
   <!-- =========================
        HOW IT WORKS
   ========================== -->
-  <section class="section">
-    <h2>How It Works</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="circle">1</div>
-        <div class="content">
-          <h3>Take the Quiz</h3>
-          <p>Answer simple questions about your interests and strengths.</p>
+  <section class="section how-section">
+    <h2 class="fade-up">How It Works</h2>
+    
+    <div class="how-steps-container fade-up">
+      <div class="how-connector"></div>
+      
+      <div class="how-step" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <h3>Select Interests</h3>
+          <p>Share your passion and strengths.</p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="circle">2</div>
-        <div class="content">
-          <h3>Get Smart Results</h3>
-          <p>Receive top 3 career matches based on your personality.</p>
+      <div class="how-step" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <h3>AI Analysis</h3>
+          <p>Our engine maps your profile.</p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="circle">3</div>
-        <div class="content">
-          <h3>Explore Careers</h3>
-          <p>Compare options and understand each career deeply.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="circle">4</div>
-        <div class="content">
-          <h3>Build Your Future</h3>
-          <p>Follow a step-by-step roadmap and grow with confidence.</p>
+      <div class="how-step" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <h3>Get Career Path</h3>
+          <p>Unlock your personalized roadmap.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- =========================
-       CAREER CARDS
+       FUTURE OS (EXPLORE)
   ========================== -->
-  <section class="section">
-    <h2>Explore Career Paths</h2>
+  <section class="future-design-section" id="futureSection">
+    <!-- System Intro Overlay -->
+    <div class="system-intro" id="systemIntro">
+      <div class="intro-content">
+        <div class="intro-status">SYSTEM READY</div>
+        <h1 class="typing-text" id="typingText">Initializing your future...</h1>
+        <div class="intro-loader"></div>
+      </div>
+    </div>
 
-    <div class="cards">
-      <div class="card career-card">
-        <img src="./assets/images/tech.jpg" alt="Tech">
-        <h3>Tech</h3>
-        <p>Software, AI, Data</p>
+    <!-- Cursor Light Effect -->
+    <div class="cursor-light" id="cursorLight"></div>
+
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">OS V1.0</div>
+      <h2>Design Your Future</h2>
+      <p>A connected ecosystem mapping your potential.</p>
+    </div>
+
+    <div class="design-system-wrapper">
+      <div class="design-system-container" id="designContainer">
+        <!-- Connection Lines SVG -->
+        <svg class="connection-svg" viewBox="0 0 800 600">
+          <!-- Main connections to center -->
+          <line x1="400" y1="300" x2="400" y2="100" class="conn-line" id="line-careers" />
+          <line x1="400" y1="300" x2="400" y2="500" class="conn-line" id="line-exams" />
+          <line x1="400" y1="300" x2="150" y2="300" class="conn-line" id="line-skills" />
+          <line x1="400" y1="300" x2="650" y2="300" class="conn-line" id="line-roadmap" />
+          
+          <!-- Path builder lines (circular flow) -->
+          <path d="M 400 100 Q 550 100 650 300" class="path-line" id="path-c-r" fill="none" />
+          <path d="M 650 300 Q 650 500 400 500" class="path-line" id="path-r-e" fill="none" />
+          <path d="M 400 500 Q 150 500 150 300" class="path-line" id="path-e-s" fill="none" />
+        </svg>
+
+        <!-- Central Node -->
+        <div class="node central-node" id="node-you">
+          <div class="node-glow"></div>
+          <div class="node-content">
+            <span class="node-icon">👤</span>
+            <h3>YOU</h3>
+          </div>
+        </div>
+
+        <!-- Outer Nodes -->
+        <div class="node outer-node node-top" data-type="careers">
+          <div class="node-content">
+            <span class="node-icon">🚀</span>
+            <h3>Careers</h3>
+          </div>
+        </div>
+
+        <div class="node outer-node node-right" data-type="roadmap">
+          <div class="node-content">
+            <span class="node-icon">🗺️</span>
+            <h3>Roadmap</h3>
+          </div>
+        </div>
+
+        <div class="node outer-node node-bottom" data-type="exams">
+          <div class="node-content">
+            <span class="node-icon">🎓</span>
+            <h3>Exams</h3>
+          </div>
+        </div>
+
+        <div class="node outer-node node-left" data-type="skills">
+          <div class="node-content">
+            <span class="node-icon">⚡</span>
+            <h3>Skills</h3>
+          </div>
+        </div>
+
+        <!-- Floating Particles -->
+        <div class="particles-overlay">
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+        </div>
       </div>
 
-      <div class="card career-card">
-        <img src="./assets/images/medical.jpg" alt="Medical">
-        <h3>Medical</h3>
-        <p>Doctor, Healthcare</p>
-      </div>
-
-      <div class="card career-card">
-        <img src="./assets/images/creative.jpg" alt="Creative">
-        <h3>Creative</h3>
-        <p>Design, Media</p>
-      </div>
-
-      <div class="card career-card">
-        <img src="./assets/images/business.jpg" alt="Business">
-        <h3>Business</h3>
-        <p>Finance, Management</p>
+      <!-- Live Content Panel -->
+      <div class="system-details-panel" id="systemDetails">
+        <div class="details-placeholder">Awaiting input... Select a node to build your path.</div>
+        <div class="details-content hidden" id="detailsContent">
+          <div class="details-icon" id="panelIcon">🚀</div>
+          <h3 id="panelTitle">Careers</h3>
+          <p id="panelDesc">Software Engineer, UI/UX Designer, Data Scientist</p>
+          <div class="details-extra" id="panelExtra">
+            <span>Market Demand: High</span>
+            <span>Growth: +25%</span>
+          </div>
+          <button class="panel-btn" id="buildPathBtn">Visualize My Path</button>
+        </div>
       </div>
     </div>
   </section>
@@ -304,5 +395,237 @@
   <div id="toast" class="toast"></div>
 
   <script type='module' src="js/core/auth.js"></script>
+
+  <script>
+    // Future OS Logic
+    const futureSection = document.getElementById('futureSection');
+    const systemIntro = document.getElementById('systemIntro');
+    const typingText = document.getElementById('typingText');
+    const cursorLight = document.getElementById('cursorLight');
+    const designContainer = document.getElementById('designContainer');
+    
+    const detailsContent = document.getElementById('detailsContent');
+    const detailsPlaceholder = document.querySelector('.details-placeholder');
+    const panelIcon = document.getElementById('panelIcon');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelDesc = document.getElementById('panelDesc');
+    const buildPathBtn = document.getElementById('buildPathBtn');
+
+    const systemData = {
+      careers: { icon: '🚀', title: 'Careers', desc: 'Software Engineer, UI/UX Designer, Data Scientist, AI Specialist, Cloud Architect.' },
+      exams: { icon: '🎓', title: 'Exams', desc: 'JEE, UPSC, GATE, SAT, GRE, NEET, CAT, GMAT, IELTS.' },
+      skills: { icon: '⚡', title: 'Skills', desc: 'Coding, Communication, AI Literacy, Problem Solving, Leadership, Critical Thinking.' },
+      roadmap: { icon: '🗺️', title: 'Roadmap', desc: 'Step-by-step personalized path with milestones, resource links, and progress tracking.' }
+    };
+
+    // 1. System Intro Sequence
+    function initIntro() {
+      const text = "Initializing your future...";
+      let i = 0;
+      typingText.textContent = "";
+      
+      const interval = setInterval(() => {
+        typingText.textContent += text[i];
+        i++;
+        if (i === text.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            systemIntro.classList.add('hidden');
+          }, 1000);
+        }
+      }, 50);
+    }
+
+    // Trigger intro when section becomes visible
+    const introObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        initIntro();
+        introObserver.disconnect();
+      }
+    }, { threshold: 0.5 });
+    introObserver.observe(futureSection);
+
+    // 2. Cursor Light & Tilt
+    futureSection.addEventListener('mousemove', (e) => {
+      const rect = futureSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      cursorLight.style.left = `${x}px`;
+      cursorLight.style.top = `${y}px`;
+      
+      if (window.innerWidth > 1100) {
+        const rotateX = (y / rect.height - 0.5) * -10;
+        const rotateY = (x / rect.width - 0.5) * 10;
+        designContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      }
+    });
+
+    // 3. Path Builder Logic
+    async function visualizePath() {
+      const sequence = [
+        { id: 'node-you', line: null },
+        { id: 'node-careers', line: 'line-careers' },
+        { id: 'path-c-r', line: 'path-c-r', isPath: true },
+        { id: 'node-roadmap', line: 'line-roadmap' },
+        { id: 'path-r-e', line: 'path-r-e', isPath: true },
+        { id: 'node-exams', line: 'line-exams' },
+        { id: 'path-e-s', line: 'path-e-s', isPath: true },
+        { id: 'node-skills', line: 'line-skills' }
+      ];
+
+      // Reset
+      document.querySelectorAll('.node, .conn-line, .path-line').forEach(el => {
+        el.classList.remove('active', 'animating', 'active-path');
+      });
+
+      for (const step of sequence) {
+        if (step.line) {
+          const el = document.getElementById(step.line);
+          el.classList.add(step.isPath ? 'animating' : 'active');
+          await new Promise(r => setTimeout(r, 800));
+        }
+        const node = document.querySelector(`.node[data-type="${step.id.split('-')[1]}"]`) || document.getElementById(step.id);
+        node.classList.add('active-path');
+        await new Promise(r => setTimeout(r, 400));
+      }
+    }
+
+    buildPathBtn.addEventListener('click', visualizePath);
+
+    // 4. Node Interactions
+    document.querySelectorAll('.outer-node').forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const type = node.getAttribute('data-type');
+        const data = systemData[type];
+        
+        detailsPlaceholder.classList.add('hidden');
+        detailsContent.classList.remove('hidden');
+        panelIcon.textContent = data.icon;
+        panelTitle.textContent = data.title;
+        panelDesc.textContent = data.desc;
+
+        document.getElementById(`line-${type}`)?.classList.add('active');
+      });
+
+      node.addEventListener('mouseleave', () => {
+        const type = node.getAttribute('data-type');
+        document.getElementById(`line-${type}`)?.classList.remove('active');
+      });
+    });
+
+    // 5. Auto Demo
+    let idleTime = 0;
+    setInterval(() => {
+      idleTime++;
+      if (idleTime > 15) { // 15 seconds of idle
+        visualizePath();
+        idleTime = 0;
+      }
+    }, 1000);
+
+    futureSection.addEventListener('mousemove', () => idleTime = 0);
+
+    // Page Load Animation
+    window.addEventListener('load', () => {
+      document.body.classList.add('page-loaded');
+    });
+
+    // Immersive Why Experience Scroll Logic
+    const whySection = document.getElementById('whyExperience');
+    const chaosLayer = document.getElementById('chaosLayer');
+    const transitionLayer = document.getElementById('transitionLayer');
+    const solutionLayer = document.getElementById('solutionLayer');
+
+    window.addEventListener('scroll', () => {
+      if (!whySection) return;
+
+      const rect = whySection.getBoundingClientRect();
+      const sectionHeight = whySection.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      // Calculate progress (0 at top of section, 1 at bottom)
+      // We use a relative progress within the section's total height
+      const scrollPos = -rect.top;
+      const progress = Math.min(Math.max(scrollPos / (sectionHeight - windowHeight), 0), 1);
+
+      // Phase 1: Chaos (0% to 30%)
+      if (progress < 0.3) {
+        chaosLayer.style.opacity = 1;
+        transitionLayer.style.opacity = 0;
+        solutionLayer.style.opacity = 0;
+        solutionLayer.style.pointerEvents = 'none';
+        
+        // Chaos parallax words
+        const words = document.querySelectorAll('.chaos-word');
+        words.forEach((word, index) => {
+          const speed = (index + 1) * 0.1;
+          word.style.transform = `translateY(${scrollPos * speed}px)`;
+        });
+      } 
+      // Phase 2: Transition (30% to 60%)
+      else if (progress < 0.6) {
+        chaosLayer.style.opacity = 1 - (progress - 0.3) * 3.33; // Fade out chaos
+        transitionLayer.style.opacity = (progress - 0.3) * 3.33; // Fade in transition
+        solutionLayer.style.opacity = 0;
+        solutionLayer.style.pointerEvents = 'none';
+      } 
+      // Phase 3: Solution (60% to 100%)
+      else {
+        chaosLayer.style.opacity = 0;
+        transitionLayer.style.opacity = 1 - (progress - 0.6) * 2.5; // Fade out transition
+        solutionLayer.style.opacity = (progress - 0.6) * 2.5; // Fade in solution
+        solutionLayer.style.pointerEvents = 'auto';
+
+        // Solution content subtle parallax
+        const solutionGrid = document.querySelector('.solution-grid');
+        if (solutionGrid) {
+          solutionGrid.style.transform = `translateY(${(1 - progress) * 100}px)`;
+        }
+      }
+    });
+
+    // Reveal animations on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          
+          // Special handling for How section
+          if (entry.target.classList.contains('how-section')) {
+            entry.target.querySelector('.how-connector')?.classList.add('animate');
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Target sections and fade-up elements
+    document.querySelectorAll('.fade-up, .how-section, .why-section, .explore-section').forEach(el => observer.observe(el));
+
+    // Landing-specific functions
+    function startQuiz() {
+      if (window.spaGo) window.spaGo('quiz.html');
+      else window.location.href = 'quiz.html';
+    }
+
+    function showLogin() {
+      const modal = document.getElementById('authSection');
+      const box = document.getElementById('authModal');
+      if (modal) modal.classList.remove('hidden');
+      if (box) box.classList.remove('hidden');
+    }
+
+    function showSignup() {
+      const modal = document.getElementById('authSection');
+      const box = document.getElementById('authModal');
+      if (modal) modal.classList.remove('hidden');
+      if (box) box.classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
