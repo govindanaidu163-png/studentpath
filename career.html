@@ -16,12 +16,10 @@
   <div class="custom-cursor" id="cursor"></div>
   <div class="custom-cursor-dot" id="cursorDot"></div>
 
-  <!-- NAV -->
-  <header class="minimal-header">
-    <div class="brand">
-      <div class="brand-mark">◈</div>
-      <div class="brand-name">Student<span>Path</span></div>
-    </div>
+  <header class="minimal-header transparent-nav" id="careerNavbar">
+    <a href="explore.html" class="logo">
+      <img id="logo" src="assets/logo/navbar-logo.png" class="logo-img" alt="StudentPath">
+    </a>
     <button class="back-btn" onclick="goBack()">
       <span class="back-arrow">←</span> Back
     </button>
@@ -224,6 +222,32 @@
     </div>
     <p> Built by Govinda | StudentPath © 2026. All rights reserved.</p>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('careerNavbar');
+      
+      const handleScroll = () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled-nav');
+          header.classList.remove('transparent-nav');
+        } else {
+          header.classList.add('transparent-nav');
+          header.classList.remove('scrolled-nav');
+        }
+      };
+
+      // Run on load
+      handleScroll();
+      // Run on scroll
+      window.addEventListener('scroll', handleScroll);
+    });
+
+    function goBack() {
+      if (window.spaGo) window.spaGo('explore.html');
+      else window.location.href = 'explore.html';
+    }
+  </script>
 
   <script src="js/features/career.js"></script>
 </body>

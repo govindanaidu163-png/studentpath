@@ -15,12 +15,33 @@ async function loadNavbar() {
 
     container.innerHTML = html;
 
+    // Load and initialize search
+    if (!window.initGlobalSearch) {
+      await injectSearchScript();
+    }
+    if (window.initGlobalSearch) {
+      window.initGlobalSearch();
+    }
+
     initNavbar();
     initProfileDropdown();
 
   } catch (e) {
     console.error("[loadNavbar] Error:", e);
   }
+}
+
+function injectSearchScript() {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "js/core/globalSearch.js";
+    script.onload = resolve;
+    script.onerror = () => {
+      console.warn("Failed to load globalSearch.js");
+      resolve();
+    };
+    document.body.appendChild(script);
+  });
 }
 
 

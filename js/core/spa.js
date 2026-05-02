@@ -25,6 +25,7 @@
     'exam.html':         ['js/data/examData.js', 'js/data/careersData.js', 'js/features/exam.js'],
     'dashboard.html':    ['js/features/dashboard.js'],
     'compare.html':      ['js/features/compare.js'],
+    'search.html':       ['js/data/careersData.js', 'js/data/examData.js', 'js/features/searchResults.js'],
   };
 
   // ── Per-page CSS ───────────────────────────────────────────────────
@@ -37,6 +38,7 @@
     'exam.html':         'css/exam.css',
     'dashboard.html':    'css/dashboard.css',
     'compare.html':      'css/components.css',
+    'search.html':       'css/explore.css',
   };
 
   // Pages that should always do a normal full reload

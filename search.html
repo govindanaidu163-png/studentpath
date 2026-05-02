@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | StudentPath</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/explore.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <style>
+        .search-results-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .results-header {
+            margin-bottom: 40px;
+        }
+        .results-header h1 {
+            font-size: 2rem;
+            color: var(--text-main, #1a1a1a);
+        }
+        .results-header span {
+            color: var(--text-muted, #666);
+            font-weight: 400;
+        }
+        .results-group {
+            margin-bottom: 60px;
+        }
+        .group-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main, #1a1a1a);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color, #eee);
+        }
+        .no-results {
+            padding: 60px 0;
+            text-align: center;
+            color: var(--text-muted, #888);
+        }
+        .no-results-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbarContainer"></div>
+
+    <main class="search-results-main">
+        <div class="search-results-container">
+            <div class="results-header">
+                <h1>Search Results <span>for "<span id="searchQueryDisplay">...</span>"</span></h1>
+            </div>
+
+            <div id="careersResultsGroup" class="results-group" style="display: none;">
+                <h2 class="group-title">💼 Careers</h2>
+                <div id="careersGrid" class="career-grid"></div>
+            </div>
+
+            <div id="examsResultsGroup" class="results-group" style="display: none;">
+                <h2 class="group-title">📝 Exams</h2>
+                <div id="examsGrid" class="career-grid"></div>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <span class="no-results-icon">🔎</span>
+                <h3>No results found</h3>
+                <p>Try searching for something else like "Design", "Medical", or "Engineering".</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/data/careersData.js"></script>
+    <script src="js/data/examData.js"></script>
+    <script type="module" src="js/core/loadNavbar.js"></script>
+    <script src="js/features/searchResults.js"></script>
+    <script src="js/core/spa.js"></script>
+</body>
+</html>

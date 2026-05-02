@@ -4,58 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exam Details</title>
-
-  <!-- NAVBAR -->
-
-
-  <!-- PAGE STYLE -->
   <link rel="stylesheet" href="css/exam.css">
   <script src="js/core/theme.js"></script>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <header class="minimal-header">
-    <div class="brand">
-      <div class="brand-mark">◈</div>
-      <div class="brand-name">Student<span>Path</span></div>
-    </div>
+  <header class="minimal-header" id="mainHeader">
+    <a href="exams.html" class="logo">
+      <img id="logo" src="assets/logo/navbar-logo.png" class="logo-img" alt="StudentPath">
+    </a>
     <button class="back-btn" onclick="goBack()">
       <span class="back-arrow">←</span> Back
     </button>
   </header>
 
-  <!-- MAIN -->
-  <main class="exam-page">
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
-    <!-- HEADER -->
+    function goBack() {
+      if (window.spaGo) window.spaGo('exams.html');
+      else window.location.href = 'exams.html';
+    }
+  </script>
+
+  <main class="exam-page">
     <section class="exam-hero">
       <h1 id="examTitle">Exam Name</h1>
       <p id="examDesc">Description</p>
-
       <div class="exam-meta">
         <span id="examType"></span>
         <span id="examDifficulty"></span>
       </div>
-
-      <!-- SAVE BUTTON -->
       <button class="btn-save">
         <span class="btn-icon">♡</span>
         Save
       </button>
     </section>
 
-    <!-- CAREERS SECTION -->
     <section class="related-careers">
       <h2>Careers after this exam</h2>
-
       <div id="careerList" class="career-grid"></div>
     </section>
-
   </main>
 
-  <!-- SCRIPTS -->
   <script src="js/data/careersData.js"></script>
   <script src="js/features/exam.js"></script>
 

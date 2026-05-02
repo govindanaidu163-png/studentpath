@@ -28,10 +28,15 @@
 }
 
 .landing-page .logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--primary);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.landing-page .logo .logo-img {
+  height: 38px;
+  width: auto;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .landing-page .nav-links {
@@ -864,4 +869,3 @@
     font-size: 1.4rem;
   }
 }
-If you want, I can next clean your index.html auth section too so it matches this CSS exactly and nothing fights each other.

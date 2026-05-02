@@ -16,9 +16,30 @@
 }
 
 .logo-img {
-  height: 50px;
+  height: 36px;
   width: auto;
   object-fit: contain;
+  display: block;
+  /* Fix sharpness */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* Remove sticker effect (ensure no background/shadow from CSS) */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Improve visibility on light backgrounds if needed */
+[data-theme="light"] .logo-img,
+body:not(.dark-mode) .logo-img {
+  filter: contrast(1.1) drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+}
+
+.logo-img:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
 }
 
 
@@ -339,7 +360,8 @@
     justify-content: center;
   }
 
-  .search-bar:focus-within {
+  .search-bar:focus-within,
+  .search-bar.mobile-active {
     width: min(220px, calc(100vw - 28px));
     max-width: calc(100vw - 28px);
     padding: 6px 14px;
@@ -349,7 +371,8 @@
     width: 0;
   }
 
-  .search-bar:focus-within input {
+  .search-bar:focus-within input,
+  .search-bar.mobile-active input {
     width: 100%;
   }
 
@@ -417,5 +440,125 @@
   /* Make room for bottom nav */
   body {
     padding-bottom: 60px;
+  }
+}
+/* ================= SEARCH DROPDOWN ================= */
+
+.sg-dropdown {
+  position: absolute;
+  z-index: 3000;
+  background: var(--bg-nav, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--border-color, rgba(0,0,0,0.05));
+  border: 1px solid var(--border-color, rgba(0,0,0,0.1));
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.sg-dropdown.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sg-section {
+  padding: 8px 0;
+}
+
+.sg-header {
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted, #888);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  background: var(--bg-main, #f8f9fa);
+  border-bottom: 1px solid var(--border-color, #eee);
+  margin-bottom: 4px;
+}
+
+.sg-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sg-item:hover {
+  background: var(--bg-main, #f1f3f4);
+}
+
+.sg-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.sg-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sg-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main, #1a1a1a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sg-sub {
+  font-size: 12px;
+  color: var(--text-muted, #666);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sg-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background: #eee;
+}
+
+.sg-badge.career {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.sg-badge.exam {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.sg-empty {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-muted, #888);
+  font-size: 14px;
+}
+
+/* Mobile Search Fixes */
+@media (max-width: 560px) {
+  .sg-dropdown {
+    position: fixed;
+    top: 64px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px - 60px);
+    border-radius: 0;
+    max-height: none;
   }
 }
