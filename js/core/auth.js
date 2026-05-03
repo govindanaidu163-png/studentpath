@@ -32,9 +32,11 @@ const toastEl = document.getElementById("toast");
 /* =========================
    AUTH MODAL HELPERS
 ========================= */
+const authToggle = document.getElementById("authToggle");
+const authFormsWrapper = document.getElementById("authFormsWrapper");
+
 function openAuthSection() {
   authSection.classList.remove("hidden");
-  authModal.classList.remove("hidden");
 
   document.body.style.overflow = "hidden";
 
@@ -43,24 +45,49 @@ function openAuthSection() {
 }
 function closeAuthSection() {
   authSection.classList.add("hidden");
-  authModal.classList.add("hidden");
   document.body.style.overflow = "auto";
+  if (authModal) authModal.style.transform = "";
 }
 
 function showLoginForm() {
-  if (!loginForm || !signupForm || !loginTab || !signupTab) return;
-  loginForm.classList.remove("hidden");
-  signupForm.classList.add("hidden");
+  if (!authToggle || !authFormsWrapper || !loginTab || !signupTab) return;
+  authToggle.setAttribute("data-active", "login");
+  authFormsWrapper.setAttribute("data-active", "login");
   loginTab.classList.add("active");
   signupTab.classList.remove("active");
 }
 
 function showSignupForm() {
-  if (!loginForm || !signupForm || !loginTab || !signupTab) return;
-  signupForm.classList.remove("hidden");
-  loginForm.classList.add("hidden");
+  if (!authToggle || !authFormsWrapper || !loginTab || !signupTab) return;
+  authToggle.setAttribute("data-active", "signup");
+  authFormsWrapper.setAttribute("data-active", "signup");
   signupTab.classList.add("active");
   loginTab.classList.remove("active");
+}
+
+/* =========================
+   3D TILT EFFECT
+========================= */
+if (authSection && authModal) {
+  authSection.addEventListener("mousemove", (e) => {
+    if (window.innerWidth < 768) return;
+    
+    const rect = authModal.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotateY = (x / (rect.width / 2)) * 5;
+    const rotateX = -(y / (rect.height / 2)) * 5;
+
+    const clampedY = Math.max(-5, Math.min(5, rotateY));
+    const clampedX = Math.max(-5, Math.min(5, rotateX));
+
+    authModal.style.transform = `scale(1) rotateX(${clampedX}deg) rotateY(${clampedY}deg)`;
+  });
+
+  authSection.addEventListener("mouseleave", () => {
+    authModal.style.transform = ``;
+  });
 }
 
 function showToast(message, type = "success") {
@@ -163,6 +190,11 @@ async function handleSignup(event) {
     showToast(msg, "error");
     signupBtn.disabled = false;
     signupBtn.innerText = "Create Account";
+    if (signupForm) {
+      signupForm.classList.remove("shake");
+      void signupForm.offsetWidth;
+      signupForm.classList.add("shake");
+    }
   }
 }
 
@@ -209,6 +241,11 @@ async function handleLogin(event) {
     showToast(msg, "error");
     loginBtn.disabled = false;
     loginBtn.innerText = "Login";
+    if (loginForm) {
+      loginForm.classList.remove("shake");
+      void loginForm.offsetWidth;
+      loginForm.classList.add("shake");
+    }
   }
 }
 

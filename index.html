@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="google-site-verification" content="4YqOx5FXa4twZWcUAPXaUI77_U4n_vxS59wT6zYxsHE" />
   <link rel="stylesheet" href="./css/base.css">
   <link rel="stylesheet" href="./css/components.css">
   <link rel="stylesheet" href="./css/landing.css">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudentPath - AI Career Guidance Platform</title>
 
-  <meta name="description" content="Discover the best career path using AI. Get personalized career recommendations, roadmaps, and guidance for your future.">
-  <meta name="keywords" content="career guidance, AI career test, career path, software engineer roadmap, career finder">
+  <meta name="description"
+    content="Discover the best career path using AI. Get personalized career recommendations, roadmaps, and guidance for your future.">
+  <meta name="keywords"
+    content="career guidance, AI career test, career path, software engineer roadmap, career finder">
   <link rel="canonical" href="https://studentpath.vercel.app/">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
@@ -21,13 +26,14 @@
 </head>
 
 <body class="landing-page light">
+  <canvas id="particleCanvas"></canvas>
 
   <!-- =========================
        NAVBAR
   ========================== -->
   <div class="navbar">
     <a href="index.html" class="logo">
-      <img src="assets/logo/navbar-logo.png" class="logo-img" alt="StudentPath Logo">
+      <img src="assets/logo/logo-light.png" id="mainLogo" class="logo-img" alt="StudentPath Logo">
     </a>
 
     <div class="nav-links">
@@ -45,7 +51,7 @@
   <!-- =========================
        HERO
   ========================== -->
-  <div class="hero">
+  <div class="hero" data-section-theme="dark">
     <video autoplay muted loop class="hero-video">
       <source src="./assets/videos/hero.mp4" type="video/mp4">
     </video>
@@ -62,16 +68,17 @@
   <!-- =========================
        INTRO
   ========================== -->
-  <section class="intro-section">
+  <section class="intro-section" data-section-theme="light">
     <h2 class="intro-text" id="introText">
-      StudentPath helps students move from confusion to clarity with smart career guidance, simple exploration, and step-by-step roadmap support.
+      StudentPath helps students move from confusion to clarity with smart career guidance, simple exploration, and
+      step-by-step roadmap support.
     </h2>
   </section>
 
   <!-- =========================
        MARQUEE
   ========================== -->
-  <section class="marquee-section">
+  <section class="marquee-section" data-section-theme="light">
     <div class="marquee-track">
       <div class="marquee-group">
         <div class="marquee-item">⚡ 60 sec smart career quiz</div>
@@ -109,7 +116,7 @@
   <!-- =========================
        WHY STUDENTPATH (IMMERSIVE)
   ========================== -->
-  <section class="why-immersive-section" id="whyExperience">
+  <section class="why-immersive-section" id="whyExperience" data-section-theme="dynamic">
     <div class="sticky-container">
       <!-- Chaos Layer -->
       <div class="layer chaos-layer" id="chaosLayer">
@@ -137,7 +144,7 @@
           <h2>We Built That Way.</h2>
           <p>StudentPath transforms chaos into a clear, guided journey.</p>
         </div>
-        
+
         <div class="solution-grid">
           <div class="solution-card">
             <div class="sol-icon">🎯</div>
@@ -162,12 +169,12 @@
   <!-- =========================
        HOW IT WORKS
   ========================== -->
-  <section class="section how-section">
-    <h2 class="fade-up">How It Works</h2>
-    
-    <div class="how-steps-container fade-up">
+  <section id="how-it-works" class="section how-section" data-section-theme="light">
+    <h2>How It Works</h2>
+
+    <div class="how-steps-container">
       <div class="how-connector"></div>
-      
+
       <div class="how-step" data-step="1">
         <div class="step-circle">1</div>
         <div class="step-content">
@@ -197,7 +204,7 @@
   <!-- =========================
        FUTURE OS (EXPLORE)
   ========================== -->
-  <section class="future-design-section" id="futureSection">
+  <section class="future-design-section" id="futureSection" data-section-theme="dark">
     <!-- System Intro Overlay -->
     <div class="system-intro" id="systemIntro">
       <div class="intro-content">
@@ -225,7 +232,7 @@
           <line x1="400" y1="300" x2="400" y2="500" class="conn-line" id="line-exams" />
           <line x1="400" y1="300" x2="150" y2="300" class="conn-line" id="line-skills" />
           <line x1="400" y1="300" x2="650" y2="300" class="conn-line" id="line-roadmap" />
-          
+
           <!-- Path builder lines (circular flow) -->
           <path d="M 400 100 Q 550 100 650 300" class="path-line" id="path-c-r" fill="none" />
           <path d="M 650 300 Q 650 500 400 500" class="path-line" id="path-r-e" fill="none" />
@@ -298,7 +305,7 @@
   <!-- =========================
        REVIEW SECTION
   ========================== -->
-  <div class="review-box" id="reviewBox">
+  <div class="review-box" id="reviewBox" data-section-theme="light">
     <p id="reviewText">“This platform changed my career direction.”</p>
     <span id="reviewUser">— Student</span>
   </div>
@@ -306,7 +313,7 @@
   <!-- =========================
        FINAL CTA
   ========================== -->
-  <section class="section final-cta">
+  <section class="section final-cta" data-section-theme="light">
     <div class="cta-box">
       <h2>
         Your future is waiting.<br>
@@ -325,40 +332,65 @@
   </section>
 
   <!-- =========================
-       AUTH MODAL
+       PREMIUM AUTH MODAL
   ========================== -->
-<!-- OVERLAY -->
-<div id="authSection" class="auth-overlay hidden">
-  <div id="authModal" class="auth-box hidden">
-    
-    <h2>StudentPath</h2>
+  <div id="authSection" class="auth-overlay hidden">
+    <div id="authModal" class="auth-box">
+      <div class="auth-glow"></div>
+      
+      <div class="auth-header">
+        <h2>StudentPath</h2>
+      </div>
 
-    <div class="tab-row">
-      <button id="loginTab" class="tab active" type="button">Login</button>
-      <button id="signupTab" class="tab" type="button">Signup</button>
+      <div class="auth-toggle" id="authToggle">
+        <div class="auth-toggle-slider" id="authToggleSlider"></div>
+        <button id="loginTab" class="auth-toggle-btn active" type="button">Log in</button>
+        <button id="signupTab" class="auth-toggle-btn" type="button">Sign up</button>
+      </div>
+
+      <div class="auth-forms-container">
+        <div class="auth-forms-wrapper" id="authFormsWrapper">
+          
+          <div id="loginForm" class="auth-form">
+            <div class="input-group">
+              <input type="email" id="loginEmail" placeholder="Enter your email" />
+              <label for="loginEmail">Email</label>
+            </div>
+            <div class="input-group">
+              <input type="password" id="loginPassword" placeholder="Enter your password" />
+              <label for="loginPassword">Password</label>
+            </div>
+            <button id="loginBtn" class="auth-main-btn" type="button">Log in</button>
+          </div>
+
+          <div id="signupForm" class="auth-form">
+            <div class="input-group">
+              <input type="text" id="name" placeholder="Enter your name" />
+              <label for="name">Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Enter your email" />
+              <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+              <input type="password" id="password" placeholder="Enter your password" />
+              <label for="password">Password</label>
+            </div>
+            <button id="signupBtn" class="auth-main-btn" type="button">Create Account</button>
+          </div>
+
+        </div>
+      </div>
+
+      <button id="closeBtn" class="auth-close-btn" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
-
-    <div id="loginForm">
-      <input type="email" id="loginEmail" placeholder="Email" />
-      <input type="password" id="loginPassword" placeholder="Password" />
-      <button id="loginBtn" type="button">Login</button>
-    </div>
-
-    <div id="signupForm" class="hidden">
-      <input type="text" id="name" placeholder="Name" />
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="signupBtn" type="button">Create Account</button>
-    </div>
-
-    <button id="closeBtn" type="button">Close</button>
-
   </div>
-</div>
   <!-- =========================
        FOOTER
   ========================== -->
-  <section class="footer-premium">
+  <section class="footer-premium" data-section-theme="dark">
     <div class="footer-top">
       <h1>Build Your Future.</h1>
     </div>
@@ -403,7 +435,7 @@
     const typingText = document.getElementById('typingText');
     const cursorLight = document.getElementById('cursorLight');
     const designContainer = document.getElementById('designContainer');
-    
+
     const detailsContent = document.getElementById('detailsContent');
     const detailsPlaceholder = document.querySelector('.details-placeholder');
     const panelIcon = document.getElementById('panelIcon');
@@ -423,7 +455,7 @@
       const text = "Initializing your future...";
       let i = 0;
       typingText.textContent = "";
-      
+
       const interval = setInterval(() => {
         typingText.textContent += text[i];
         i++;
@@ -450,10 +482,10 @@
       const rect = futureSection.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       cursorLight.style.left = `${x}px`;
       cursorLight.style.top = `${y}px`;
-      
+
       if (window.innerWidth > 1100) {
         const rotateX = (y / rect.height - 0.5) * -10;
         const rotateY = (x / rect.width - 0.5) * 10;
@@ -498,7 +530,7 @@
       node.addEventListener('mouseenter', () => {
         const type = node.getAttribute('data-type');
         const data = systemData[type];
-        
+
         detailsPlaceholder.classList.add('hidden');
         detailsContent.classList.remove('hidden');
         panelIcon.textContent = data.icon;
@@ -525,6 +557,61 @@
     }, 1000);
 
     futureSection.addEventListener('mousemove', () => idleTime = 0);
+
+    // Logo Visibility & Dynamic Switching
+    const logoImg = document.getElementById('mainLogo');
+    const navbarElement = document.querySelector('.navbar');
+    let currentLogoTheme = ''; // start empty so the first observer fire always sets it
+
+    function setLogoTheme(sectionTheme, force = false) {
+      if (currentLogoTheme === sectionTheme && !force) return;
+      currentLogoTheme = sectionTheme;
+      
+      // If section is dark, we need the white logo (logo-light) and white text (nav-dark)
+      const src = (sectionTheme === 'dark') ? 'assets/logo/logo-dark.png' : 'assets/logo/logo-light.png';
+
+      // Update Navbar Class for Adaptive UI
+      if (sectionTheme === 'dark') {
+        navbarElement.classList.add('nav-dark');
+        navbarElement.classList.remove('nav-light');
+      } else {
+        navbarElement.classList.add('nav-light');
+        navbarElement.classList.remove('nav-dark');
+      }
+
+      logoImg.style.opacity = '0';
+      setTimeout(() => {
+        logoImg.src = src;
+        logoImg.style.opacity = '1';
+      }, 150);
+    }
+
+    const themeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const theme = entry.target.getAttribute('data-section-theme');
+          if (theme === 'dynamic') {
+            updateWhyTheme();
+          } else if (theme) {
+            setLogoTheme(theme);
+          }
+        }
+      });
+    }, {
+      rootMargin: '-10% 0px -85% 0px', // Detects section entering navbar area
+      threshold: 0
+    });
+
+    document.querySelectorAll('[data-section-theme]').forEach(s => themeObserver.observe(s));
+
+    function updateWhyTheme() {
+      const whySection = document.getElementById('whyExperience');
+      if (!whySection) return;
+      const rect = whySection.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / (whySection.offsetHeight - window.innerHeight), 0), 1);
+      // Dark (Problem) until 60% progress, then Light (Solution)
+      setLogoTheme(progress < 0.6 ? 'dark' : 'light');
+    }
 
     // Page Load Animation
     window.addEventListener('load', () => {
@@ -555,21 +642,21 @@
         transitionLayer.style.opacity = 0;
         solutionLayer.style.opacity = 0;
         solutionLayer.style.pointerEvents = 'none';
-        
+
         // Chaos parallax words
         const words = document.querySelectorAll('.chaos-word');
         words.forEach((word, index) => {
           const speed = (index + 1) * 0.1;
           word.style.transform = `translateY(${scrollPos * speed}px)`;
         });
-      } 
+      }
       // Phase 2: Transition (30% to 60%)
       else if (progress < 0.6) {
         chaosLayer.style.opacity = 1 - (progress - 0.3) * 3.33; // Fade out chaos
         transitionLayer.style.opacity = (progress - 0.3) * 3.33; // Fade in transition
         solutionLayer.style.opacity = 0;
         solutionLayer.style.pointerEvents = 'none';
-      } 
+      }
       // Phase 3: Solution (60% to 100%)
       else {
         chaosLayer.style.opacity = 0;
@@ -583,6 +670,11 @@
           solutionGrid.style.transform = `translateY(${(1 - progress) * 100}px)`;
         }
       }
+
+      // Update logo if we are inside the Why section
+      if (rect.top <= 0 && rect.bottom >= 0) {
+        updateWhyTheme();
+      }
     });
 
     // Reveal animations on scroll
@@ -595,7 +687,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
-          
+
           // Special handling for How section
           if (entry.target.classList.contains('how-section')) {
             entry.target.querySelector('.how-connector')?.classList.add('animate');
@@ -607,6 +699,221 @@
     // Target sections and fade-up elements
     document.querySelectorAll('.fade-up, .how-section, .why-section, .explore-section').forEach(el => observer.observe(el));
 
+    // --- Anti-Gravity Particle System ---
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let targetMouse = { x: -1000, y: -1000 };
+    let mouse = { x: -1000, y: -1000, active: false };
+    let sections = [];
+
+    // Particle Config
+    // Particle Config (Ultra-Smooth)
+    const PARTICLE_COUNT = 90;
+    const REPEL_RADIUS = 160;
+    const REPEL_STRENGTH = 0.4; // Controlled repulsion
+    const RETURN_STRENGTH = 0.015;
+    const FRICTION = 0.95; // Smooth easing
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.originX = x;
+        this.originY = y;
+        this.vx = 0;
+        this.vy = 0;
+
+        // Size Hierarchy: 70% small, 25% medium, 5% large
+        const rand = Math.random();
+        if (rand < 0.7) this.size = Math.random() * 1 + 1;
+        else if (rand < 0.95) this.size = Math.random() * 1 + 2;
+        else this.size = Math.random() * 1.5 + 3;
+
+        this.colorIndex = Math.floor(Math.random() * 3);
+        this.fadeOffset = Math.random() * Math.PI * 2;
+        this.fadeSpeed = 0.001 + Math.random() * 0.002;
+      }
+
+      update() {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < REPEL_RADIUS && mouse.active && !disableParticles) {
+          const force = (REPEL_RADIUS - dist) / REPEL_RADIUS;
+
+          // Balanced Push + Pull for magnetic feel
+          const push = 6;
+          const pull = 1.2;
+          const combinedForce = (push - pull) * force * REPEL_STRENGTH;
+
+          this.vx -= (dx / dist) * combinedForce;
+          this.vy -= (dy / dist) * combinedForce;
+        }
+
+        // Return factor based on size for depth illusion (larger = faster/closer)
+        const returnFactor = RETURN_STRENGTH + (this.size * 0.004);
+        this.vx += (this.originX - this.x) * returnFactor;
+        this.vy += (this.originY - this.y) * returnFactor;
+
+        this.vx *= FRICTION;
+        this.vy *= FRICTION;
+
+        // Velocity Clamp for controlled premium motion
+        const maxV = 4;
+        this.vx = Math.max(-maxV, Math.min(maxV, this.vx));
+        this.vy = Math.max(-maxV, Math.min(maxV, this.vy));
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Dynamic Color based on section
+        this.updateColor();
+      }
+
+      updateColor() {
+        const screenY = this.y;
+        let sectionTheme = 'dark';
+
+        for (const s of sections) {
+          if (screenY >= s.top && screenY <= s.bottom) {
+            sectionTheme = s.theme;
+            break;
+          }
+        }
+
+        // Random pulse factor for depth (Slow & Subtle)
+        const pulse = 0.75 + Math.sin(Date.now() * this.fadeSpeed + this.fadeOffset) * 0.25;
+
+        if (sectionTheme === 'dark' || sectionTheme === 'dynamic') {
+          const colors = [
+            `rgba(150, 180, 255, ${0.7 * pulse})`,
+            `rgba(120, 150, 255, ${0.6 * pulse})`,
+            `rgba(180, 200, 255, ${0.65 * pulse})`
+          ];
+          this.color = colors[this.colorIndex];
+        } else {
+          const colors = [
+            `rgba(40, 80, 180, ${0.5 * pulse})`,
+            `rgba(60, 100, 200, ${0.6 * pulse})`,
+            `rgba(30, 70, 150, ${0.45 * pulse})`
+          ];
+          this.color = colors[this.colorIndex];
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+        // Subtle glow for high-end feel
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = this.color;
+
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function initParticles() {
+      // Sync internal dimensions with viewport
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      particles = [];
+      // Evenly distribute particles across the full calculated area
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        particles.push(new Particle(x, y));
+      }
+      refreshSections();
+    }
+
+    function refreshSections() {
+      sections = Array.from(document.querySelectorAll('[data-section-theme]')).map(el => {
+        const rect = el.getBoundingClientRect();
+        return {
+          top: rect.top,
+          bottom: rect.bottom,
+          theme: el.getAttribute('data-section-theme')
+        };
+      });
+    }
+
+    function animate() {
+      // Interpolate cursor for liquid movement
+      const lerp = 0.08;
+      mouse.x += (targetMouse.x - mouse.x) * lerp;
+      mouse.y += (targetMouse.y - mouse.y) * lerp;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    let disableParticles = false;
+
+    window.addEventListener('mousemove', e => {
+      const section = document.querySelector(".how-it-works");
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        const isInside =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
+
+        disableParticles = isInside;
+      }
+
+      targetMouse.x = e.clientX;
+      targetMouse.y = e.clientY;
+      mouse.active = !disableParticles;
+    });
+
+    // Handle Navbar Scrolled State
+    function updateNavbar() {
+      const nav = document.querySelector('.navbar');
+      if (nav) {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', updateNavbar);
+    window.addEventListener('load', updateNavbar);
+    document.addEventListener('DOMContentLoaded', updateNavbar);
+
+    // How It Works Reveal
+    const howObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    const howSection = document.querySelector("#how-it-works");
+    if (howSection) howObserver.observe(howSection);
+
+    window.addEventListener('mouseleave', () => mouse.active = false);
+    window.addEventListener('resize', initParticles);
+    window.addEventListener('scroll', refreshSections);
+
+    initParticles();
+    animate();
+
     // Landing-specific functions
     function startQuiz() {
       if (window.spaGo) window.spaGo('quiz.html');
@@ -615,17 +922,44 @@
 
     function showLogin() {
       const modal = document.getElementById('authSection');
-      const box = document.getElementById('authModal');
-      if (modal) modal.classList.remove('hidden');
-      if (box) box.classList.remove('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      const authToggle = document.getElementById('authToggle');
+      const authFormsWrapper = document.getElementById('authFormsWrapper');
+      const loginTab = document.getElementById('loginTab');
+      const signupTab = document.getElementById('signupTab');
+      
+      if (authToggle && authFormsWrapper && loginTab && signupTab) {
+        authToggle.setAttribute('data-active', 'login');
+        authFormsWrapper.setAttribute('data-active', 'login');
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+      }
     }
 
     function showSignup() {
       const modal = document.getElementById('authSection');
-      const box = document.getElementById('authModal');
-      if (modal) modal.classList.remove('hidden');
-      if (box) box.classList.remove('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      const authToggle = document.getElementById('authToggle');
+      const authFormsWrapper = document.getElementById('authFormsWrapper');
+      const loginTab = document.getElementById('loginTab');
+      const signupTab = document.getElementById('signupTab');
+      
+      if (authToggle && authFormsWrapper && loginTab && signupTab) {
+        authToggle.setAttribute('data-active', 'signup');
+        authFormsWrapper.setAttribute('data-active', 'signup');
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+      }
     }
   </script>
 </body>
+
 </html>
