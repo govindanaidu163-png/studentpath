@@ -1,7 +1,7 @@
 const careers = window.careers || [];
 
 let currentSearch = "";
-let currentType = "tech"; // default to Tech like reference image
+let currentType = window.innerWidth <= 720 ? "" : "tech"; // default to Tech on desktop, but show all on mobile
 let currentSort = "high";
 let currentPill = "all";
 
@@ -47,9 +47,9 @@ function renderTrending(list) {
         ${index % 2 === 1 ? '<div class="trend-kicker">Spotlight</div>' : ''}
         <div class="trend-title">
           ${index % 2 === 1
-            ? `Learn about <strong>${c.name}</strong>.<br><small style="font-size:13px;opacity:0.8">High demand, lucrative salaries</small>`
-            : `<strong>${c.name}:</strong> Shape the Future`
-          }
+        ? `Learn about <strong>${c.name}</strong>.<br><small style="font-size:13px;opacity:0.8">High demand, lucrative salaries</small>`
+        : `<strong>${c.name}:</strong> Shape the Future`
+      }
         </div>
         ${index % 2 === 0 ? `<div class="trend-salary">&#8377; ${c.salaryLabel}</div>` : ''}
         <button class="trend-btn" type="button">View details</button>
@@ -91,54 +91,116 @@ function startTrendingSlider() {
   trendingTimer = setInterval(slideNext, 3500);
 }
 
-/* ================= GRID ================= */
+/* ================= GRID / EXPLORE RENDER ================= */
 
-function renderGrid(list = careers) {
+function renderExplore(list = window.careers) {
   const grid = document.getElementById("careerGrid");
   if (!grid) return;
 
+  if (!list || list.length === 0) {
+    grid.innerHTML = "<p style='padding: 20px; text-align: center; color: var(--text-muted);'>No data available</p>";
+    return;
+  }
+
   grid.innerHTML = "";
 
-  list.forEach(c => {
-    const card = document.createElement("div");
-    card.className = "career-card";
+  const isMobile = window.innerWidth <= 720;
+  const isDefaultView = !currentSearch && currentPill === "all";
 
-    const saved = isSaved(c);
-    const rating = Math.round(c.rating || 4);
-    const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+  if (isMobile && isDefaultView) {
+    grid.classList.add('netflix-layout');
 
-    card.innerHTML = `
-      <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
-      <img src="${c.image}" class="career-image" alt="${c.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(c.name)}'">
-      <div class="career-info">
-        <h3>${c.name}</h3>
-        <div class="salary">
-          <span class="salary-arrow">↑</span>
-          ${c.salaryLabel}
-        </div>
-        <div class="stars">${stars}</div>
-      </div>
-    `;
-
-    const saveBtn = card.querySelector(".save-btn");
-
-    saveBtn.onclick = (e) => {
-      e.stopPropagation();
-      let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
-      const exists = saved.find(item => item.key === c.key);
-      if (exists) {
-        saved = saved.filter(item => item.key !== c.key);
-        saveBtn.textContent = "♡";
-      } else {
-        saved.push(c);
-        saveBtn.textContent = "♥";
+    const groupedCareers = {};
+    list.forEach(career => {
+      if (!career.category) return;
+      if (!groupedCareers[career.category]) {
+        groupedCareers[career.category] = [];
       }
-      localStorage.setItem("savedCareers", JSON.stringify(saved));
-    };
+      groupedCareers[career.category].push(career);
+    });
 
-    card.onclick = () => openCareer(c);
-    grid.appendChild(card);
-  });
+    const categoryOrder = [
+      "Engineering",
+      "Medical",
+      "Business",
+      "Sports",
+      "Creativity",
+      "Government"
+    ];
+
+    categoryOrder.forEach(cat => {
+      if (groupedCareers[cat] && groupedCareers[cat].length > 0) {
+        const catItems = groupedCareers[cat];
+        
+        const rowWrap = document.createElement("div");
+        rowWrap.className = "netflix-row-wrap category-section";
+        rowWrap.innerHTML = `
+          <div class="netflix-row-header section-header">
+            <h3>${cat} <span>${catItems.length}+ Paths</span></h3>
+            <a href="#" class="view-all-btn view-all">View all &rsaquo;</a>
+          </div>
+          <div class="netflix-row-scroll horizontal-scroll"></div>
+        `;
+
+        const scrollContainer = rowWrap.querySelector(".netflix-row-scroll");
+
+        catItems.forEach(c => {
+          const card = createCard(c);
+          scrollContainer.appendChild(card);
+        });
+
+        grid.appendChild(rowWrap);
+      }
+    });
+  } else {
+    grid.classList.remove('netflix-layout');
+    list.forEach(c => {
+      grid.appendChild(createCard(c));
+    });
+  }
+}
+
+function createCard(c) {
+  const card = document.createElement("div");
+  card.className = "career-card";
+
+  const saved = isSaved(c);
+  const isHighDemand = (c.growth || 0) >= 4;
+  const rating = Math.round(c.rating || 4);
+  const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+  card.innerHTML = `
+    <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
+    <img src="${c.image}" class="career-image" alt="${c.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(c.name)}'">
+    <div class="career-info">
+      <h3>${c.name}</h3>
+      <div class="card-tag ${isHighDemand ? 'high-demand' : ''}">${isHighDemand ? 'High Demand' : (c.stream || c.type || '').toUpperCase()}</div>
+      <div class="salary">
+        <span class="salary-arrow">↑</span>
+        ${c.salaryLabel}
+      </div>
+      <div class="stars">${stars}</div>
+    </div>
+  `;
+
+  const saveBtn = card.querySelector(".save-btn");
+
+  saveBtn.onclick = (e) => {
+    e.stopPropagation();
+    let saved = JSON.parse(localStorage.getItem("savedCareers")) || [];
+    const exists = saved.find(item => item.key === c.key);
+    if (exists) {
+      saved = saved.filter(item => item.key !== c.key);
+      saveBtn.textContent = "♡";
+    } else {
+      saved.push(c);
+      saveBtn.textContent = "♥";
+    }
+    localStorage.setItem("savedCareers", JSON.stringify(saved));
+  };
+
+  card.onclick = () => openCareer(c);
+  return card;
 }
 
 /* ================= FILTERS ================= */
@@ -150,7 +212,7 @@ window.searchCareer = function () {
 };
 
 // Type filter from icon row
-window.filterType = function(type, el) {
+window.filterType = function (type, el) {
   currentType = type;
   document.querySelectorAll(".cat-icon").forEach(btn => btn.classList.remove("active"));
   if (el) el.classList.add("active");
@@ -158,7 +220,7 @@ window.filterType = function(type, el) {
 };
 
 // Pill filter (top free, high demand, etc.)
-window.setPill = function(el, type) {
+window.setPill = function (el, type) {
   currentPill = type;
   document.querySelectorAll(".pill").forEach(btn => btn.classList.remove("active"));
   if (el) el.classList.add("active");
@@ -211,7 +273,7 @@ function updateUI() {
   }
 
   renderTrending(filtered);
-  renderGrid(filtered);
+  renderExplore(filtered);
 }
 
 function initExplorePage() {

@@ -1,0 +1,144 @@
+.profile-page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 40px;
+}
+
+/* HEADER CARD */
+.profile-header-card {
+  background: var(--bg-card, #ffffff);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-soft, 0 4px 12px rgba(0,0,0,0.08));
+  margin-top: 20px;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-info h2 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--text-main, #1a1a1a);
+}
+.profile-info p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--text-muted, #6b7280);
+}
+
+/* SECTION */
+.profile-section {
+  margin-top: 32px;
+}
+.profile-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  margin-left: 8px;
+}
+
+/* SETTINGS LIST */
+.settings-list {
+  background: var(--bg-card, #ffffff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft, 0 4px 12px rgba(0,0,0,0.08));
+  overflow: hidden;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+.settings-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-main, #1a1a1a);
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.settings-item:last-child {
+  border-bottom: none;
+}
+.settings-item:hover {
+  background: var(--border-color, #f3f4f6);
+}
+.settings-item .item-icon {
+  font-size: 20px;
+}
+.settings-item.logout {
+  color: #ef4444;
+}
+
+/* MOBILE OVERRIDES */
+@media (max-width: 720px) {
+  /* Hide search and tabs on profile page */
+  .page-profile .search-bar,
+  .page-profile .mobile-tabs,
+  .profile-page-active .search-bar,
+  .profile-page-active .mobile-tabs {
+    display: none !important;
+  }
+  
+  /* Ensure header is simple flexbox */
+  .page-profile .top-nav,
+  .profile-page-active .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    gap: 0;
+  }
+  
+  .page-profile .bell-icon,
+  .profile-page-active .bell-icon {
+    position: static;
+    margin: 0;
+  }
+
+  .profile-page {
+    padding: 16px;
+    padding-bottom: 90px; /* space for bottom nav */
+  }
+  
+  .profile-header-card {
+    margin-top: 8px;
+    padding: 20px;
+  }
+}
+
+/* DARK THEME */
+.dark .profile-page {
+  background: #0f172a;
+  color: white;
+}
+
+.dark .profile-card {
+  background: rgba(255,255,255,0.05) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: white;
+}
+
+.dark .profile-card h2,
+.dark .profile-card p,
+.dark .profile-card h3,
+.dark .profile-card button {
+  color: white;
+}

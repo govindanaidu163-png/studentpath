@@ -16,7 +16,8 @@ window.careers = [
     desc: "Build apps and systems",
     skills: ["Programming", "DSA"],
     roadmap: ["PCM", "B.Tech", "Projects"],
-    future: "Very high demand"
+    future: "Very high demand",
+    category: "Engineering",
   },
 
   {
@@ -33,7 +34,8 @@ window.careers = [
     desc: "Analyze data and build AI models",
     skills: ["Python", "Statistics", "ML"],
     roadmap: ["PCM", "B.Tech", "Data Science"],
-    future: "Very high demand"
+    future: "Very high demand",
+    category: "Engineering",
   },
 
   {
@@ -50,7 +52,8 @@ window.careers = [
     desc: "Build AI systems",
     skills: ["Python", "ML", "Deep Learning"],
     roadmap: ["PCM", "CSE", "AI"],
-    future: "Future-proof"
+    future: "Future-proof",
+    category: "Engineering",
   },
 
   {
@@ -67,7 +70,8 @@ window.careers = [
     desc: "Protect systems",
     skills: ["Networking", "Security"],
     roadmap: ["PCM", "CSE"],
-    future: "Very high demand"
+    future: "Very high demand",
+    category: "Engineering",
   },
 
   {
@@ -84,7 +88,8 @@ window.careers = [
     desc: "Fly aircraft",
     skills: ["Focus"],
     roadmap: ["PCM", "Flying School"],
-    future: "Stable"
+    future: "Stable",
+    category: "Engineering",
   },
 
   {
@@ -101,7 +106,8 @@ window.careers = [
     desc: "Build robots",
     skills: ["Programming"],
     roadmap: ["PCM", "Engineering"],
-    future: "Future tech"
+    future: "Future tech",
+    category: "Engineering",
   },
 
   {
@@ -118,7 +124,8 @@ window.careers = [
     desc: "Work in space",
     skills: ["Physics"],
     roadmap: ["Engineering"],
-    future: "Elite"
+    future: "Elite",
+    category: "Engineering",
   },
 
 
@@ -138,7 +145,8 @@ window.careers = [
     desc: "Treat patients",
     skills: ["Biology"],
     roadmap: ["PCB", "NEET", "MBBS"],
-    future: "Highly respected"
+    future: "Highly respected",
+    category: "Medical",
   },
 
   {
@@ -155,7 +163,8 @@ window.careers = [
     desc: "Work in genetics",
     skills: ["Biology"],
     roadmap: ["PCB", "Biotech"],
-    future: "Growing"
+    future: "Growing",
+    category: "Engineering",
   },
 
   {
@@ -172,7 +181,8 @@ window.careers = [
     desc: "Assist doctors",
     skills: ["Care"],
     roadmap: ["PCB", "Nursing"],
-    future: "High demand"
+    future: "High demand",
+    category: "Medical",
   },
 
   {
@@ -189,7 +199,8 @@ window.careers = [
     desc: "Work with medicines",
     skills: ["Chemistry"],
     roadmap: ["PCB", "Pharmacy"],
-    future: "Stable"
+    future: "Stable",
+    category: "Medical",
   },
 
 
@@ -209,7 +220,8 @@ window.careers = [
     desc: "Start business",
     skills: ["Business"],
     roadmap: ["Start small"],
-    future: "High risk reward"
+    future: "High risk reward",
+    category: "Business",
   },
 
   {
@@ -226,7 +238,8 @@ window.careers = [
     desc: "Finance deals",
     skills: ["Finance"],
     roadmap: ["MBA"],
-    future: "High earning"
+    future: "High earning",
+    category: "Business",
   },
 
   {
@@ -243,7 +256,8 @@ window.careers = [
     desc: "Trade stocks",
     skills: ["Market"],
     roadmap: ["Learn trading"],
-    future: "Risky"
+    future: "Risky",
+    category: "Business",
   },
 
   {
@@ -260,7 +274,8 @@ window.careers = [
     desc: "Manage accounts",
     skills: ["Accounting"],
     roadmap: ["Commerce"],
-    future: "Stable"
+    future: "Stable",
+    category: "Business",
   },
 
   {
@@ -277,7 +292,8 @@ window.careers = [
     desc: "Online marketing",
     skills: ["SEO"],
     roadmap: ["Learn marketing"],
-    future: "High demand"
+    future: "High demand",
+    category: "Business",
   },
 
 
@@ -297,7 +313,8 @@ window.careers = [
     desc: "Legal advisor",
     skills: ["Law"],
     roadmap: ["CLAT"],
-    future: "Strong"
+    future: "Strong",
+    category: "Creativity",
   },
 
   {
@@ -314,7 +331,8 @@ window.careers = [
     desc: "Design apps",
     skills: ["Figma"],
     roadmap: ["Portfolio"],
-    future: "Growing"
+    future: "Growing",
+    category: "Creativity",
   },
 
   {
@@ -331,7 +349,8 @@ window.careers = [
     desc: "Work in films",
     skills: ["Acting"],
     roadmap: ["Auditions"],
-    future: "Competitive"
+    future: "Competitive",
+    category: "Creativity",
   },
 
   {
@@ -348,7 +367,8 @@ window.careers = [
     desc: "Write content",
     skills: ["Writing"],
     roadmap: ["Practice"],
-    future: "Growing"
+    future: "Growing",
+    category: "Creativity",
   },
 
   {
@@ -365,7 +385,8 @@ window.careers = [
     desc: "Take photos",
     skills: ["Camera"],
     roadmap: ["Learn photography"],
-    future: "Freelance"
+    future: "Freelance",
+    category: "Creativity",
   },
 
   // 🚀 TECH / EMERGING
@@ -384,7 +405,8 @@ window.careers = [
   desc: "Build decentralized apps",
   skills: ["Solidity", "Web3"],
   roadmap: ["PCM", "CSE", "Blockchain"],
-  future: "Growing fast"
+  future: "Growing fast",
+    category: "Engineering",
 },
 {
   key: "cloud_engineer",
@@ -400,7 +422,8 @@ window.careers = [
   desc: "Manage cloud systems",
   skills: ["AWS", "Azure"],
   roadmap: ["PCM", "CSE"],
-  future: "High demand"
+  future: "High demand",
+    category: "Engineering",
 },
 {
   key: "game_dev",
@@ -416,7 +439,8 @@ window.careers = [
   desc: "Build games",
   skills: ["Unity", "C#"],
   roadmap: ["PCM", "Game Dev"],
-  future: "Growing"
+  future: "Growing",
+    category: "Engineering",
 },
 
 // 🧬 MEDICAL / HEALTH
@@ -435,7 +459,8 @@ window.careers = [
   desc: "Help recovery from injuries",
   skills: ["Therapy"],
   roadmap: ["PCB", "BPT"],
-  future: "Stable"
+  future: "Stable",
+    category: "Medical",
 },
 {
   key: "nutritionist",
@@ -451,7 +476,8 @@ window.careers = [
   desc: "Guide healthy diet",
   skills: ["Health"],
   roadmap: ["PCB", "Nutrition"],
-  future: "Growing"
+  future: "Growing",
+    category: "Medical",
 },
 
 // 💼 BUSINESS / FINANCE
@@ -470,7 +496,8 @@ window.careers = [
   desc: "Manage products",
   skills: ["Strategy"],
   roadmap: ["MBA"],
-  future: "High demand"
+  future: "High demand",
+    category: "Business",
 },
 {
   key: "business_analyst",
@@ -486,7 +513,8 @@ window.careers = [
   desc: "Analyze business data",
   skills: ["Excel"],
   roadmap: ["Commerce"],
-  future: "Growing"
+  future: "Growing",
+    category: "Business",
 },
 {
   key: "hr_manager",
@@ -502,7 +530,8 @@ window.careers = [
   desc: "Manage employees",
   skills: ["Communication"],
   roadmap: ["MBA HR"],
-  future: "Stable"
+  future: "Stable",
+    category: "Business",
 },
 
 // 🎨 CREATIVE
@@ -521,7 +550,8 @@ window.careers = [
   desc: "Design visuals",
   skills: ["Photoshop"],
   roadmap: ["Design"],
-  future: "Growing"
+  future: "Growing",
+    category: "Creativity",
 },
 {
   key: "video_editor",
@@ -537,7 +567,8 @@ window.careers = [
   desc: "Edit videos",
   skills: ["Premiere Pro"],
   roadmap: ["Practice"],
-  future: "High demand"
+  future: "High demand",
+    category: "Creativity",
 },
 
 // ⚙️ ENGINEERING
@@ -556,7 +587,8 @@ window.careers = [
   desc: "Build infrastructure",
   skills: ["AutoCAD"],
   roadmap: ["B.Tech"],
-  future: "Stable"
+  future: "Stable",
+    category: "Engineering",
 },
 {
   key: "mechanical_engineer",
@@ -572,7 +604,8 @@ window.careers = [
   desc: "Work with machines",
   skills: ["Design"],
   roadmap: ["B.Tech"],
-  future: "Stable"
+  future: "Stable",
+    category: "Engineering",
 },
 
 // 🧠 OTHER UNIQUE
@@ -591,7 +624,8 @@ window.careers = [
   desc: "Educate students",
   skills: ["Teaching"],
   roadmap: ["B.Ed"],
-  future: "Stable"
+  future: "Stable",
+    category: "Creativity",
 },
 {
   key: "journalist",
@@ -607,7 +641,8 @@ window.careers = [
   desc: "Report news",
   skills: ["Writing"],
   roadmap: ["Mass Comm"],
-  future: "Dynamic"
+  future: "Dynamic",
+    category: "Creativity",
 },
 {
   key: "chef",
@@ -623,7 +658,8 @@ window.careers = [
   desc: "Cook professionally",
   skills: ["Cooking"],
   roadmap: ["Hotel Mgmt"],
-  future: "Growing"
+  future: "Growing",
+    category: "Creativity",
 },
 {
   key: "event_manager",
@@ -639,7 +675,8 @@ window.careers = [
   desc: "Organize events",
   skills: ["Management"],
   roadmap: ["Event Mgmt"],
-  future: "Growing"
+  future: "Growing",
+    category: "Business",
 },
 
 // 🔥 ADVANCED TECH
@@ -658,7 +695,8 @@ window.careers = [
   desc: "Automate deployment systems",
   skills: ["Docker", "CI/CD"],
   roadmap: ["PCM", "CSE"],
-  future: "High demand"
+  future: "High demand",
+    category: "Engineering",
 },
 {
   key: "full_stack_dev",
@@ -674,7 +712,8 @@ window.careers = [
   desc: "Build frontend & backend",
   skills: ["React", "Node"],
   roadmap: ["PCM", "CSE"],
-  future: "Very high demand"
+  future: "Very high demand",
+    category: "Engineering",
 },
 {
   key: "ar_vr_dev",
@@ -690,7 +729,8 @@ window.careers = [
   desc: "Build virtual experiences",
   skills: ["Unity", "3D"],
   roadmap: ["PCM", "Game Dev"],
-  future: "Future tech"
+  future: "Future tech",
+    category: "Engineering",
 },
 
 // 🧬 HEALTH + SPECIALIZED
@@ -709,7 +749,8 @@ window.careers = [
   desc: "Treat dental problems",
   skills: ["Dental Science"],
   roadmap: ["PCB", "BDS"],
-  future: "Stable"
+  future: "Stable",
+    category: "Medical",
 },
 {
   key: "psychologist",
@@ -725,7 +766,8 @@ window.careers = [
   desc: "Study human behavior",
   skills: ["Psychology"],
   roadmap: ["PCB", "Psychology"],
-  future: "Growing fast"
+  future: "Growing fast",
+    category: "Medical",
 },
 
 // 💼 HIGH-END BUSINESS
@@ -744,7 +786,8 @@ window.careers = [
   desc: "Advise companies",
   skills: ["Strategy"],
   roadmap: ["MBA"],
-  future: "Elite"
+  future: "Elite",
+    category: "Business",
 },
 {
   key: "supply_chain_manager",
@@ -760,7 +803,8 @@ window.careers = [
   desc: "Manage logistics",
   skills: ["Operations"],
   roadmap: ["MBA"],
-  future: "Stable"
+  future: "Stable",
+    category: "Business",
 },
 
 // 🎨 CREATIVE + MODERN
@@ -779,7 +823,8 @@ window.careers = [
   desc: "Create online content",
   skills: ["Creativity"],
   roadmap: ["Social Media"],
-  future: "High growth"
+  future: "High growth",
+    category: "Creativity",
 },
 {
   key: "fashion_designer",
@@ -795,7 +840,8 @@ window.careers = [
   desc: "Design clothing",
   skills: ["Design"],
   roadmap: ["Fashion Design"],
-  future: "Creative field"
+  future: "Creative field",
+    category: "Creativity",
 },
 
 // ⚙️ CORE ENGINEERING
@@ -814,7 +860,8 @@ window.careers = [
   desc: "Work with electrical systems",
   skills: ["Circuits"],
   roadmap: ["B.Tech"],
-  future: "Stable"
+  future: "Stable",
+    category: "Engineering",
 },
 {
   key: "chemical_engineer",
@@ -830,7 +877,8 @@ window.careers = [
   desc: "Work in chemical industries",
   skills: ["Chemistry"],
   roadmap: ["B.Tech"],
-  future: "Industrial demand"
+  future: "Industrial demand",
+    category: "Engineering",
 },
 
 // 🌍 UNIQUE CAREERS
@@ -849,7 +897,8 @@ window.careers = [
   desc: "Represent country abroad",
   skills: ["Diplomacy"],
   roadmap: ["UPSC"],
-  future: "Elite"
+  future: "Elite",
+    category: "Creativity",
 },
 {
   key: "sports_manager",
@@ -865,7 +914,8 @@ window.careers = [
   desc: "Manage sports teams",
   skills: ["Management"],
   roadmap: ["Sports Mgmt"],
-  future: "Growing"
+  future: "Growing",
+    category: "Business",
 },
 {
   key: "interior_designer",
@@ -881,7 +931,8 @@ window.careers = [
   desc: "Design spaces",
   skills: ["Creativity"],
   roadmap: ["Design"],
-  future: "Growing"
+  future: "Growing",
+    category: "Creativity",
 },
 {
   key: "pilot_drone",
@@ -897,7 +948,8 @@ window.careers = [
   desc: "Operate drones",
   skills: ["Navigation"],
   roadmap: ["Training"],
-  future: "Future tech"
+  future: "Future tech",
+    category: "Engineering",
 },
 
 // 🔥 DEEP TECH / ELITE
@@ -916,7 +968,8 @@ window.careers = [
   desc: "Deploy and manage ML systems",
   skills: ["ML", "DevOps"],
   roadmap: ["CSE", "AI"],
-  future: "Exploding demand"
+  future: "Exploding demand",
+    category: "Engineering",
 },
 {
   key: "quantitative_analyst",
@@ -932,7 +985,8 @@ window.careers = [
   desc: "Use math for trading strategies",
   skills: ["Math", "Python"],
   roadmap: ["IIT", "Finance"],
-  future: "Elite"
+  future: "Elite",
+    category: "Engineering",
 },
 {
   key: "edge_ai_engineer",
@@ -948,7 +1002,8 @@ window.careers = [
   desc: "Run AI on devices",
   skills: ["Embedded", "AI"],
   roadmap: ["ECE", "AI"],
-  future: "Future tech"
+  future: "Future tech",
+    category: "Engineering",
 },
 
 // 💰 FINANCE ELITE
@@ -967,7 +1022,8 @@ window.careers = [
   desc: "Analyze financial risks",
   skills: ["Finance"],
   roadmap: ["MBA", "CFA"],
-  future: "High demand"
+  future: "High demand",
+    category: "Business",
 },
 {
   key: "actuary",
@@ -983,7 +1039,8 @@ window.careers = [
   desc: "Predict financial risks",
   skills: ["Statistics"],
   roadmap: ["Actuarial Exams"],
-  future: "Elite niche"
+  future: "Elite niche",
+    category: "Business",
 },
 
 // 🧠 SCIENCE + RESEARCH
@@ -1002,7 +1059,8 @@ window.careers = [
   desc: "Combine biology + data",
   skills: ["Bio", "Python"],
   roadmap: ["Biotech"],
-  future: "Future science"
+  future: "Future science",
+    category: "Medical",
 },
 {
   key: "neuroscientist",
@@ -1018,7 +1076,8 @@ window.careers = [
   desc: "Study brain systems",
   skills: ["Biology"],
   roadmap: ["Research"],
-  future: "High impact"
+  future: "High impact",
+    category: "Medical",
 },
 
 // 🌍 FUTURE GLOBAL ROLES
@@ -1037,7 +1096,8 @@ window.careers = [
   desc: "Work on climate solutions",
   skills: ["Data"],
   roadmap: ["Environmental"],
-  future: "Critical future"
+  future: "Critical future",
+    category: "Creativity",
 },
 {
   key: "sustainability_manager",
@@ -1053,7 +1113,8 @@ window.careers = [
   desc: "Manage green strategies",
   skills: ["Strategy"],
   roadmap: ["MBA"],
-  future: "Rising fast"
+  future: "Rising fast",
+    category: "Business",
 },
 
 // 🎮 DIGITAL ECONOMY
@@ -1072,7 +1133,8 @@ window.careers = [
   desc: "Manage gaming teams",
   skills: ["Gaming"],
   roadmap: ["Sports Mgmt"],
-  future: "Exploding"
+  future: "Exploding",
+    category: "Business",
 },
 {
   key: "streaming_specialist",
@@ -1088,7 +1150,8 @@ window.careers = [
   desc: "Work in OTT industry",
   skills: ["Media"],
   roadmap: ["Media"],
-  future: "Growing"
+  future: "Growing",
+    category: "Creativity",
 },
 
 // 🛰️ SPACE / DEFENSE
@@ -1107,7 +1170,8 @@ window.careers = [
   desc: "Build space tech",
   skills: ["Physics"],
   roadmap: ["Aerospace"],
-  future: "Elite"
+  future: "Elite",
+    category: "Engineering",
 },
 {
   key: "defense_analyst",
@@ -1123,7 +1187,144 @@ window.careers = [
   desc: "Analyze defense strategy",
   skills: ["Analysis"],
   roadmap: ["UPSC"],
-  future: "Strategic"
+  future: "Strategic",
+    category: "Creativity",
+},
+{
+  "key": "sports_manager",
+  "name": "Sports Manager",
+  "stream": "any",
+  "type": "commerce",
+  "salary": 20,
+  "salaryLabel": "₹5L - ₹30L",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 3,
+  "successRate": 50,
+  "growth": 4,
+  "desc": "Manage sports teams",
+  "skills": [
+    "Management"
+  ],
+  "roadmap": [
+    "Any",
+    "BBA"
+  ],
+  "future": "Growing",
+  "category": "Sports"
+},
+{
+  "key": "athlete",
+  "name": "Professional Athlete",
+  "stream": "any",
+  "type": "arts",
+  "salary": 50,
+  "salaryLabel": "₹5L - ₹100L+",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 5,
+  "successRate": 10,
+  "growth": 4,
+  "desc": "Compete in professional sports",
+  "skills": [
+    "Physical Fitness",
+    "Dedication"
+  ],
+  "roadmap": [
+    "Any",
+    "Sports Academy"
+  ],
+  "future": "Stable",
+  "category": "Sports"
+},
+{
+  "key": "sports_coach",
+  "name": "Sports Coach",
+  "stream": "any",
+  "type": "arts",
+  "salary": 15,
+  "salaryLabel": "₹3L - ₹20L",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 3,
+  "successRate": 60,
+  "growth": 3,
+  "desc": "Train athletes",
+  "skills": [
+    "Leadership",
+    "Sports Knowledge"
+  ],
+  "roadmap": [
+    "Any",
+    "B.P.Ed"
+  ],
+  "future": "Stable",
+  "category": "Sports"
+},
+{
+  "key": "ias_officer",
+  "name": "IAS Officer",
+  "stream": "any",
+  "type": "defence",
+  "salary": 30,
+  "salaryLabel": "₹10L - ₹30L",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 5,
+  "successRate": 1,
+  "growth": 5,
+  "desc": "Top civil service",
+  "skills": [
+    "General Knowledge",
+    "Leadership"
+  ],
+  "roadmap": [
+    "Any",
+    "UPSC"
+  ],
+  "future": "Very High",
+  "category": "Government"
+},
+{
+  "key": "ips_officer",
+  "name": "IPS Officer",
+  "stream": "any",
+  "type": "defence",
+  "salary": 28,
+  "salaryLabel": "₹9L - ₹28L",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 5,
+  "successRate": 1,
+  "growth": 5,
+  "desc": "Top police service",
+  "skills": [
+    "Fitness",
+    "Leadership"
+  ],
+  "roadmap": [
+    "Any",
+    "UPSC"
+  ],
+  "future": "Very High",
+  "category": "Government"
+},
+{
+  "key": "army_officer",
+  "name": "Army Officer",
+  "stream": "any",
+  "type": "defence",
+  "salary": 25,
+  "salaryLabel": "₹8L - ₹25L",
+  "image": "assets/images/placeholder.jpg",
+  "difficulty": 5,
+  "successRate": 5,
+  "growth": 4,
+  "desc": "Serve in the army",
+  "skills": [
+    "Discipline",
+    "Fitness"
+  ],
+  "roadmap": [
+    "Any",
+    "NDA"
+  ],
+  "future": "High",
+  "category": "Government"
 }
-
 ];

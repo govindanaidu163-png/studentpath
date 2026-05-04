@@ -25,6 +25,10 @@ async function loadNavbar() {
 
     initNavbar();
     initProfileDropdown();
+    initMobileBottomNavScroll();
+
+    // Run isolation check initially
+    isolateProfilePage();
 
   } catch (e) {
     console.error("[loadNavbar] Error:", e);
@@ -76,6 +80,16 @@ function initNavbar() {
     });
   });
 
+  // Handle mobile bottom nav active states
+  const mobileLinks = document.querySelectorAll(".bottom-nav-link");
+  mobileLinks.forEach(link => {
+    const linkPage = link.getAttribute("href");
+    const currentPage = window.location.pathname.split("/").pop() || "explore.html";
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
+  });
+
   // Re-run active check whenever SPA navigates
   document.addEventListener("spa-navigated", (e) => {
     const page = e.detail?.page;
@@ -86,64 +100,124 @@ function initNavbar() {
         requestAnimationFrame(() => moveIndicator(link));
       }
     });
+    
+    mobileLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === page) {
+        link.classList.add("active");
+      }
+    });
   });
 }
 
+
+// ================= PROFILE DATA LOADER =================
+window.loadUserProfile = function () {
+  const nameEl = document.querySelector("#userName");
+  const avatarEl = document.querySelector("#userAvatar");
+  const userEmailEl = document.querySelector("#userEmail");
+
+  if (!nameEl) return;
+
+  try {
+    const userStr = localStorage.getItem("user");
+    // Fallback to Firebase user if available
+    const authUser = auth.currentUser;
+
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      nameEl.textContent = user.name || user.displayName || "User";
+      if (userEmailEl) userEmailEl.textContent = user.email || "";
+      if (avatarEl) avatarEl.textContent = nameEl.textContent.charAt(0).toUpperCase();
+    } else if (authUser) {
+      nameEl.textContent = authUser.displayName || "User";
+      if (userEmailEl) userEmailEl.textContent = authUser.email || "";
+      if (avatarEl) avatarEl.textContent = nameEl.textContent.charAt(0).toUpperCase();
+    } else {
+      nameEl.textContent = "Guest";
+      if (userEmailEl) userEmailEl.textContent = "Not logged in";
+      if (avatarEl) avatarEl.textContent = "G";
+    }
+  } catch (e) {
+    console.error("Error loading user profile:", e);
+  }
+};
+
+window.addEventListener("load", window.loadUserProfile);
+document.addEventListener("DOMContentLoaded", window.loadUserProfile);
+
+// ================= PAGE DETECTION & ISOLATION =================
+function isolateProfilePage(pageUrl) {
+  const currentPage = pageUrl || window.location.pathname;
+
+  if (currentPage.includes("profile")) {
+    document.querySelector(".search-bar")?.remove();
+    document.querySelector(".mobile-tabs")?.remove(); // Also known as tabs-container
+    document.querySelector(".explore-sections")?.remove();
+  }
+}
+
+// Re-run on SPA navigation to ensure profile data updates and UI isolation
+document.addEventListener("spa-navigated", (e) => {
+  const page = e.detail?.page;
+  // Use requestAnimationFrame to ensure the new DOM is fully rendered
+  requestAnimationFrame(() => {
+    window.loadUserProfile();
+    isolateProfilePage(page);
+  });
+});
 
 // ================= PROFILE DROPDOWN =================
 function initProfileDropdown() {
   const profileBtn = document.getElementById("profileBtn");
   const profileDropdown = document.getElementById("profileDropdown");
-  const userNameEl = document.getElementById("userName");
-  const userEmailEl = document.getElementById("userEmail");
   const logoutBtn = document.getElementById("logoutBtn");
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   const themeIcon = document.getElementById("themeIcon");
   const themeText = document.getElementById("themeText");
 
-  if (!profileBtn || !profileDropdown) return;
-
-  // Toggle Dropdown
-  profileBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    profileDropdown.classList.toggle("active");
-  });
-
-  // Click outside to close
-  document.addEventListener("click", (e) => {
-    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-      profileDropdown.classList.remove("active");
-    }
-  });
-
-  // Theme Toggle
-  if (themeToggleBtn && window.studentPathTheme) {
-    // Initial State
-    const isDark = window.studentPathTheme.get() === 'dark';
-    if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
-    if (themeText) themeText.textContent = isDark ? "Light Mode" : "Dark Mode";
-
-    themeToggleBtn.addEventListener("click", (e) => {
+  // Toggle Dropdown (only if exists)
+  if (profileBtn && profileDropdown) {
+    profileBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      const newTheme = window.studentPathTheme.toggle();
-      const nowDark = newTheme === 'dark';
-      if (themeIcon) themeIcon.textContent = nowDark ? "☀️" : "🌙";
-      if (themeText) themeText.textContent = nowDark ? "Light Mode" : "Dark Mode";
+      if (window.loadProfile) window.loadProfile(); // Reload profile data on click
+      profileDropdown.classList.toggle("active");
+    });
+
+    // Click outside to close
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove("active");
+      }
+    });
+  } else if (profileBtn) {
+    // If it's just a button (e.g. desktop link to profile.html)
+    profileBtn.addEventListener("click", () => {
+      if (window.loadProfile) window.loadProfile();
     });
   }
 
-  // Firebase user state
+  const mobileProfileBtn = document.getElementById("mobileProfileBtn");
+  if (mobileProfileBtn) {
+    mobileProfileBtn.addEventListener("click", () => {
+      if (window.loadProfile) window.loadProfile();
+    });
+  }
+
+  // Theme toggle is handled globally in theme.js
   try {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (userNameEl) userNameEl.textContent = user.displayName || "User";
-        if (userEmailEl) userEmailEl.textContent = user.email;
-      } else {
-        if (userNameEl) userNameEl.textContent = "Guest";
-        if (userEmailEl) userEmailEl.textContent = "Not logged in";
+      if (user && window.APP_STATE) {
+        APP_STATE.user = {
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid
+        };
+        localStorage.setItem("user", JSON.stringify(APP_STATE.user));
       }
+      if (window.loadProfile) window.loadProfile();
     });
-  } catch(e) {
+  } catch (e) {
     console.warn("Firebase auth error:", e);
   }
 
@@ -159,6 +233,35 @@ function initProfileDropdown() {
   });
 }
 
+
+// ================= MOBILE BOTTOM NAV SCROLL =================
+function initMobileBottomNavScroll() {
+  let lastScroll = 0;
+  // Get the mobile bottom navigation element.
+  const bottomNav = document.querySelector(".mobile-bottom-nav");
+  if (!bottomNav) return;
+
+  // Ensure scroll listener is not duplicated.
+  if (window._bottomNavScrollListener) {
+    window.removeEventListener("scroll", window._bottomNavScrollListener);
+  }
+
+  window._bottomNavScrollListener = () => {
+    let currentScroll = window.pageYOffset;
+
+    if (currentScroll > lastScroll && currentScroll > 50) {
+      // Scroll down -> hide
+      bottomNav.style.transform = "translate(-50%, 120%)";
+    } else {
+      // Scroll up -> show
+      bottomNav.style.transform = "translate(-50%, 0)";
+    }
+
+    lastScroll = currentScroll;
+  };
+
+  window.addEventListener("scroll", window._bottomNavScrollListener);
+}
 
 // ================= START =================
 loadNavbar();

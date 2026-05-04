@@ -261,6 +261,9 @@
       // Update nav indicator
       updateNav(page);
 
+      // Dispatch event for other scripts to react
+      document.dispatchEvent(new CustomEvent('spa-navigated', { detail: { page } }));
+
       // Update page title
       const newTitle = doc.querySelector('title');
       if (newTitle) document.title = newTitle.textContent;

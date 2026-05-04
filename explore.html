@@ -1,19 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentPath | Explore Careers</title>
-    <meta name="description" content="Explore top careers, trending jobs, and salary insights on StudentPath.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath | Explore Careers</title>
+  <meta name="description" content="Explore top careers, trending jobs, and salary insights on StudentPath.">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/explore.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/explore.css">
   <link rel="stylesheet" href="css/transitions.css">
+  <link rel="stylesheet" href="css/saved.css">
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg-main, #f8f9fa);
+      color: var(--text-main, #1a1a1a);
+    }
+    
+    .profile-page {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 40px;
+    }
+
+    /* HEADER CARD */
+    .profile-header-card {
+      background: var(--bg-card, #ffffff);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--shadow-soft, 0 4px 12px rgba(0,0,0,0.08));
+      margin-top: 20px;
+      border: 1px solid var(--border-color, #e5e7eb);
+    }
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .profile-info h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--text-main, #1a1a1a);
+    }
+    .profile-info p {
+      margin: 4px 0 0;
+      font-size: 15px;
+      color: var(--text-muted, #6b7280);
+    }
+
+    /* SECTION */
+    .profile-section {
+      margin-top: 32px;
+    }
+    .profile-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted, #6b7280);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      margin-left: 8px;
+    }
+
+    /* SETTINGS LIST */
+    .settings-list {
+      background: var(--bg-card, #ffffff);
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft, 0 4px 12px rgba(0,0,0,0.08));
+      overflow: hidden;
+      border: 1px solid var(--border-color, #e5e7eb);
+    }
+    .settings-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-main, #1a1a1a);
+      border-bottom: 1px solid var(--border-color, #e5e7eb);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .settings-item:last-child {
+      border-bottom: none;
+    }
+    .settings-item:hover {
+      background: var(--border-color, #f3f4f6);
+    }
+    .settings-item .item-icon {
+      font-size: 20px;
+    }
+    .settings-item.logout {
+      color: #ef4444;
+    }
+
+    /* MOBILE OVERRIDES */
+    @media (max-width: 720px) {
+      /* Hide search and tabs on profile page */
+      .page-profile .search-bar,
+      .page-profile .mobile-tabs {
+        display: none !important;
+      }
+      
+      /* Ensure header is simple flexbox */
+      .page-profile .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        gap: 0;
+      }
+      
+      .page-profile .bell-icon {
+        position: static;
+        margin: 0;
+      }
+
+      .profile-page {
+        padding: 16px;
+        padding-bottom: 90px; /* space for bottom nav */
+      }
+      
+      .profile-header-card {
+        margin-top: 8px;
+        padding: 20px;
+      }
+    }
+
+    /* DARK THEME */
+    .dark .profile-page {
+      background: #0f172a;
+      color: white;
+    }
+
+    .dark .profile-card {
+      background: rgba(255,255,255,0.05) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      color: white;
+    }
+
+    .dark .profile-card h2,
+    .dark .profile-card p,
+    .dark .profile-card h3,
+    .dark .profile-card button {
+      color: white;
+    }
+  </style>
+  <style>
+    #explore-page,
+    #wishlist-page,
+    #profile-page {
+      display: none;
+    }
+  </style>
+
   <script src="js/core/theme.js"></script>
 </head>
 
@@ -23,7 +183,9 @@
   <div id="navbarContainer"></div>
 
   <!-- MAIN PAGE -->
-  <main class="explore-main">
+  
+  <div id="explore-page">
+<main class="explore-main">
 
     <!-- ===== TRENDING SECTION ===== -->
     <section class="trending-section">
@@ -41,7 +203,7 @@
     <section class="top-careers-section">
 
       <!-- Row 1: Title + Pills + View All -->
-      <div class="top-careers-header">
+      <div class="top-careers-header desktop-only">
         <div class="top-careers-title-row">
           <h2>Top Careers</h2>
           <div class="pill-row">
@@ -55,7 +217,7 @@
       </div>
 
       <!-- Row 2: Category icons -->
-      <div class="category-icon-row">
+      <div class="category-icon-row desktop-only">
         <button class="cat-icon active" onclick="filterType('tech', this)">
           <span class="cat-emoji">💻</span>
           <span>Technology</span>
@@ -87,7 +249,7 @@
       </div>
 
       <!-- Row 3: "Top Careers" label -->
-      <h3 class="grid-label">Top Careers</h3>
+      <h3 class="grid-label desktop-only">Top Careers</h3>
 
       <!-- Career grid -->
       <div id="careerGrid" class="career-grid"></div>
@@ -95,13 +257,110 @@
     </section>
 
   </main>
+  </div>
+  
+  <div id="wishlist-page">
+<main class="saved-page">
+
+    <!-- HEADER -->
+    <div class="saved-header">
+      <h1>Saved</h1>
+      <p>Your personalized collection</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('careers', event)">
+        Careers
+      </button>
+      <button class="tab" onclick="showTab('exams', event)">
+        Exams
+      </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="savedCareers" class="tab-content"></div>
+    <div id="savedExams" class="tab-content" style="display: none;"></div>
+
+  </main>
+  </div>
+  
+  <div id="profile-page">
+<main class="profile-page">
+    
+    <!-- USER DETAILS -->
+    <div class="profile-header-card profile-card">
+      <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=100&rounded=true" alt="Profile" class="profile-avatar">
+      <div class="profile-info">
+        <h2 id="userName" class="user-name"></h2>
+        <p id="userEmail" class="user-email"></p>
+      </div>
+    </div>
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="profile-section profile-card" style="background: transparent; border: none; backdrop-filter: none; box-shadow: none;">
+      <h3>Account Info / Settings</h3>
+      <div class="settings-list profile-card">
+        <button class="settings-item" id="settingsBtn">
+          <span class="item-icon">⚙️</span> Preferences
+        </button>
+        <button class="settings-item theme-toggle" id="themeToggleBtn">
+          <span class="item-icon" id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+        </button>
+        <button class="settings-item logout" id="logoutBtn">
+          <span class="item-icon">🚪</span> Log Out
+        </button>
+      </div>
+    </div>
+
+  </main>
+  </div>
+
 
   <script src="js/data/careersData.js"></script>
   <script type="module" src="js/core/loadNavbar.js"></script>
   <script src="js/features/explore.js"></script>
+  <script src="js/features/saved.js"></script>
+  <script>
+    function showPage(pageId) {
+      const pages = ["explore-page", "wishlist-page", "profile-page"];
+      pages.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+
+      const activePage = document.getElementById(pageId);
+      if (activePage) activePage.style.display = "block";
+
+      afterRender();
+      
+      // Update bottom nav active state if it exists
+      document.querySelectorAll('.bottom-nav-link').forEach(link => link.classList.remove('active'));
+      if (pageId === 'explore-page') document.getElementById('bottomExplore')?.classList.add('active');
+      if (pageId === 'wishlist-page') document.getElementById('bottomWishlist')?.classList.add('active');
+      if (pageId === 'profile-page') document.getElementById('mobileProfileBtn')?.classList.add('active');
+      
+      // Update desktop nav
+      document.querySelectorAll('.nav-center a').forEach(link => link.classList.remove('active'));
+      if (pageId === 'explore-page') document.querySelector('a[onclick*="explore-page"]')?.classList.add('active');
+      if (pageId === 'wishlist-page') document.querySelector('a[onclick*="wishlist-page"]')?.classList.add('active');
+    }
+
+    function afterRender() {
+      if (typeof loadAppState === "function") loadAppState();
+      if (typeof applyTheme === "function") applyTheme();
+      if (typeof loadProfile === "function") loadProfile();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      showPage("explore-page");
+    });
+  </script>
+
   <!-- SPA Engine — enables smooth navigation between pages -->
-  <script src="js/core/spa.js"></script>
+  
   <script src="js/core/theme.js"></script>
 
 </body>
+
 </html>

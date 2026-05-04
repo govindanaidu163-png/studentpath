@@ -43,9 +43,9 @@ function renderTrending(list) {
         ${index % 2 === 1 ? '<div class="trend-kicker">Spotlight</div>' : ''}
         <div class="trend-title">
           ${index % 2 === 1
-            ? `Crack <strong>${e.name}</strong>.<br><small style="font-size:13px;opacity:0.8">${e.salaryLabel}</small>`
-            : `<strong>${e.name}:</strong> ${e.salaryLabel}`
-          }
+        ? `Crack <strong>${e.name}</strong>.<br><small style="font-size:13px;opacity:0.8">${e.salaryLabel}</small>`
+        : `<strong>${e.name}:</strong> ${e.salaryLabel}`
+      }
         </div>
         ${index % 2 === 0 ? `<div class="trend-salary">Difficulty: ${"⭐".repeat(e.difficulty || 3)}</div>` : ''}
         <button class="trend-btn" type="button">View details</button>
@@ -92,51 +92,96 @@ function renderGrid(list = exams) {
 
   grid.innerHTML = "";
 
-  list.forEach(e => {
-    const card = document.createElement("div");
-    card.className = "career-card";
+  const isMobile = window.innerWidth <= 720;
+  const isDefaultView = !currentSearch && currentPill === "all";
 
-    const saved = isExamSaved(e);
-    const diff = e.difficulty || 3;
-    const stars = "★".repeat(diff) + "☆".repeat(5 - diff);
+  if (isMobile && isDefaultView) {
+    grid.classList.add('netflix-layout');
 
-    card.innerHTML = `
-      <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
-      <img src="${e.image}" class="career-image" alt="${e.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(e.name)}'">
-      <div class="career-info">
-        <h3>${e.name}</h3>
-        <div class="salary">
-          <span class="salary-arrow">↑</span>
-          ${e.salaryLabel}
+    const categories = [
+      { id: "engineering", title: "Engineering Exams", suffix: "15+ Exams", filterFn: e => e.type === "engineering" },
+      { id: "medical", title: "Medical Exams", suffix: "10+ Exams", filterFn: e => e.type === "medical" },
+      { id: "government", title: "Government Exams", suffix: "20+ Exams", filterFn: e => e.type === "government" },
+      { id: "management", title: "Management Exams", suffix: "12+ Exams", filterFn: e => e.type === "management" }
+    ];
+
+    categories.forEach(cat => {
+      const catItems = list.filter(cat.filterFn).slice(0, 8);
+      if (catItems.length === 0) return;
+
+      const rowWrap = document.createElement("div");
+      rowWrap.className = "netflix-row-wrap";
+      rowWrap.innerHTML = `
+        <div class="netflix-row-header">
+          <h3>${cat.title} <span>${cat.suffix}</span></h3>
+          <a href="#" class="view-all-btn">View all &rsaquo;</a>
         </div>
-        <div class="stars">${stars}</div>
+        <div class="netflix-row-scroll"></div>
+      `;
+
+      const scrollContainer = rowWrap.querySelector(".netflix-row-scroll");
+
+      catItems.forEach(e => {
+        const card = createExamCard(e);
+        scrollContainer.appendChild(card);
+      });
+
+      grid.appendChild(rowWrap);
+    });
+  } else {
+    grid.classList.remove('netflix-layout');
+    list.forEach(e => {
+      grid.appendChild(createExamCard(e));
+    });
+  }
+}
+
+function createExamCard(e) {
+  const card = document.createElement("div");
+  card.className = "career-card";
+
+  const saved = isExamSaved(e);
+  const diff = e.difficulty || 3;
+  const stars = "★".repeat(diff) + "☆".repeat(5 - diff);
+  const isHard = diff >= 4;
+
+  card.innerHTML = `
+    <button class="save-btn" title="Save">${saved ? "♥" : "♡"}</button>
+    <img src="${e.image}" class="career-image" alt="${e.name}" onerror="this.src='https://placehold.co/300x140/e0e7ef/888?text=${encodeURIComponent(e.name)}'">
+    <div class="career-info">
+      <h3>${e.name}</h3>
+      <div class="card-tag ${isHard ? 'high-demand' : ''}">${isHard ? 'Tough Exam' : (e.type || '').toUpperCase()}</div>
+      <div class="salary">
+        <span class="salary-arrow">↑</span>
+        ${e.salaryLabel}
       </div>
-    `;
+      <div class="stars">${stars}</div>
+    </div>
+  `;
 
-    const saveBtn = card.querySelector(".save-btn");
-    saveBtn.onclick = (ev) => {
-      ev.stopPropagation();
-      let saved = JSON.parse(localStorage.getItem("savedExams")) || [];
-      const exists = saved.find(item => item.key === e.key);
-      if (exists) {
-        saved = saved.filter(item => item.key !== e.key);
-        saveBtn.textContent = "♡";
-      } else {
-        saved.push(e);
-        saveBtn.textContent = "♥";
-      }
-      localStorage.setItem("savedExams", JSON.stringify(saved));
-    };
+  const saveBtn = card.querySelector(".save-btn");
+  saveBtn.onclick = (ev) => {
+    ev.stopPropagation();
+    let saved = JSON.parse(localStorage.getItem("savedExams")) || [];
+    const exists = saved.find(item => item.key === e.key);
+    if (exists) {
+      saved = saved.filter(item => item.key !== e.key);
+      saveBtn.textContent = "♡";
+    } else {
+      saved.push(e);
+      saveBtn.textContent = "♥";
+    }
+    localStorage.setItem("savedExams", JSON.stringify(saved));
+  };
 
-    card.onclick = () => openExam(e);
-    grid.appendChild(card);
-  });
+  card.onclick = () => openExam(e);
+  return card;
 }
 
 /* ================= FILTERS ================= */
 
 // Category icon filter
-window.filterExam = function(type, el) {
+window.filterExam = function (type, el) {
   currentType = type;
   document.querySelectorAll(".cat-icon").forEach(btn => btn.classList.remove("active"));
   if (el) el.classList.add("active");
@@ -144,7 +189,7 @@ window.filterExam = function(type, el) {
 };
 
 // Pill filter
-window.setPill = function(el, type) {
+window.setPill = function (el, type) {
   currentPill = type;
   document.querySelectorAll(".pill").forEach(btn => btn.classList.remove("active"));
   if (el) el.classList.add("active");

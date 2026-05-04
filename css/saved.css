@@ -2,6 +2,8 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   overflow-x: hidden;
+  background: var(--bg-main, #f8f9fa);
+  color: var(--text-main, #1a1a1a);
 }
 .saved-page {
   width: 100%;
@@ -14,10 +16,11 @@ body {
 .saved-header h1 {
   margin: 0;
   font-size: 28px;
+  color: var(--text-main, #1a1a1a);
 }
 
 .saved-header p {
-  color: #666;
+  color: var(--text-muted, #6b7280);
   margin-top: 6px;
 }
 
@@ -31,16 +34,20 @@ body {
 .tab {
   padding: 8px 18px;
   border-radius: 999px;
-  border: none;
-  background: #eee;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background: var(--bg-card, #ffffff);
+  color: var(--text-muted, #4b5563);
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.2s ease;
 }
 
 .tab.active {
-  background: #d1fae5;
-  color: #065f46;
-  font-weight: 500;
+  background: rgba(79, 70, 229, 0.1);
+  border-color: #4f46e5;
+  color: #4f46e5;
+  font-weight: 600;
 }
 
 /* GRID */
@@ -52,10 +59,11 @@ body {
 
 /* CARD */
 .saved-card {
-  background: white;
+  background: var(--bg-card, #ffffff);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-soft, 0 4px 12px rgba(0,0,0,0.08));
+  border: 1px solid var(--border-color, transparent);
   cursor: pointer;
   transition: 0.3s;
 }
@@ -77,17 +85,18 @@ body {
 .saved-info h3 {
   margin: 0;
   font-size: 15px;
+  color: var(--text-main, #1a1a1a);
 }
 
 .saved-info p {
   font-size: 13px;
-  color: #555;
+  color: var(--text-muted, #6b7280);
 }
 
 /* EMPTY STATE */
 .empty {
   font-size: 16px;
-  color: #777;
+  color: var(--text-muted, #777);
 }
 
 @media (max-width: 960px) {
@@ -97,8 +106,43 @@ body {
 }
 
 @media (max-width: 720px) {
+  /* HIDE NAVBAR ELEMENTS NOT NEEDED ON WISHLIST */
+  .page-saved .search-bar,
+  .page-saved .mobile-tabs {
+    display: none !important;
+  }
+
+  .page-saved .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    gap: 0; /* Clear gap added globally */
+  }
+
+  .page-saved .bell-icon {
+    position: static; /* Revert absolute positioning to align center with logo */
+    margin: 0;
+  }
+
   .saved-page {
-    padding: 24px 16px 40px;
+    padding: 24px 16px 80px; /* Add padding for bottom nav */
+  }
+
+  .saved-header {
+    margin-top: 8px;
+  }
+
+  .saved-header h1 {
+    font-size: 24px;
+  }
+
+  .saved-header p {
+    font-size: 14px;
+  }
+
+  .tabs {
+    margin: 16px 0 24px;
   }
 
   .tab-content {

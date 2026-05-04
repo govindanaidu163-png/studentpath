@@ -57,6 +57,7 @@
     'explore.html': ['css/explore.css'],
     'exams.html':   ['css/explore.css'],
     'saved.html':   ['css/saved.css'],
+    'profile.html': ['css/profile.css'],
     'guided-path.html': ['css/guided-path.css'],
     'career.html':  ['css/career.css'],
     'exam.html':    ['css/exam.css'],

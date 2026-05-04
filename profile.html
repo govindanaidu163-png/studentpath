@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentPath | Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/navbar.css">
+  <script src="js/core/theme.js"></script>
+
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body class="page-profile">
+
+  <!-- NAVBAR -->
+  <div id="navbarContainer"></div>
+
+  <!-- MAIN -->
+  <main class="profile-page">
+    
+    <!-- USER DETAILS -->
+    <div class="profile-header-card profile-card">
+      <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=100&rounded=true" alt="Profile" class="profile-avatar">
+      <div class="profile-info">
+        <h2 id="userName" class="user-name"></h2>
+        <p id="userEmail" class="user-email"></p>
+      </div>
+    </div>
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="profile-section profile-card" style="background: transparent; border: none; backdrop-filter: none; box-shadow: none;">
+      <h3>Account Info / Settings</h3>
+      <div class="settings-list profile-card">
+        <button class="settings-item" id="settingsBtn">
+          <span class="item-icon">⚙️</span> Preferences
+        </button>
+        <button class="settings-item theme-toggle" id="themeToggleBtn">
+          <span class="item-icon" id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+        </button>
+        <button class="settings-item logout" id="logoutBtn">
+          <span class="item-icon">🚪</span> Log Out
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script type="module" src="js/core/loadNavbar.js"></script>
+  <!-- SPA Engine -->
+  <script src="js/core/spa.js"></script>
+
+</body>
+</html>

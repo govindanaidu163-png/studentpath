@@ -1,11 +1,11 @@
 <header class="top-nav">
 
-  <!-- LOGO — links to explore via SPA -->
+  <!-- TOP HEADER ROW -->
   <a href="explore.html" class="logo">
-  <img id="logo" src="/assets/logo/navbar-logo.png" class="logo-img">
-</a>
+    <img id="logo" src="/assets/logo/navbar-logo.png" class="logo-img">
+  </a>
 
-  <nav class="nav-center">
+  <nav class="nav-center desktop-only">
     <a href="explore.html" class="nav-link">
       <span class="nav-icon">🧭</span>
       <span class="nav-text">Explore Careers</span>
@@ -22,47 +22,49 @@
       <span class="nav-icon">🔖</span>
       <span class="nav-text">Saved</span>
     </a>
-
-    <!-- sliding underline indicator -->
     <div class="nav-indicator"></div>
   </nav>
 
   <div class="nav-right">
-    <!-- Search bar -->
+    <!-- Search bar (Single instance for both desktop and mobile) -->
     <div class="search-bar">
-      <span class="search-icon" id="mobileSearchBtn">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search..." />
+      <span class="search-icon" id="searchBtn">🔍</span>
+      <input type="text" id="searchInput" placeholder="Start your search" />
     </div>
 
     <!-- Bell icon -->
     <div class="icon bell-icon" title="Notifications">🔔</div>
 
-    <div class="profile-container" id="profileContainer">
-      <div class="icon profile-icon" id="profileBtn">
+    <!-- Desktop Profile Link -->
+    <a href="profile.html" class="profile-container desktop-only" style="text-decoration: none;">
+      <div class="icon profile-icon">
         <img src="https://ui-avatars.com/api/?name=User&background=4285f4&color=fff&size=32&rounded=true" alt="Profile" class="avatar-img">
       </div>
-      <div class="profile-dropdown" id="profileDropdown">
-        <div class="dropdown-header">
-          <div class="dropdown-user-info">
-            <span class="dropdown-name" id="userName">Loading...</span>
-            <span class="dropdown-email" id="userEmail">Loading...</span>
-          </div>
-        </div>
-        <div class="dropdown-body">
-          <button class="dropdown-item" id="settingsBtn">
-            <span class="item-icon">⚙️</span> Settings
-          </button>
-          <button class="dropdown-item" id="themeToggleBtn">
-            <span class="item-icon" id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
-          </button>
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item logout-item" id="logoutBtn">
-            <span class="item-icon">🚪</span> Log Out
-          </button>
-        </div>
-      </div>
-    </div>
+    </a>
+
   </div>
 
-</header>
+  <!-- Mobile Tabs -->
+  <nav class="mobile-tabs mobile-only">
+    <a href="explore.html" class="mobile-tab-link" id="tabCareer">Career</a>
+    <a href="exams.html" class="mobile-tab-link" id="tabExam">Exam</a>
+    <a href="guided-path.html" class="mobile-tab-link" id="tabGuide">Guide Path</a>
+  </nav>
 
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav mobile-only">
+    <a href="explore.html" class="bottom-nav-link" id="bottomExplore">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-text">Explore</span>
+    </a>
+    <a href="saved.html" class="bottom-nav-link" id="bottomWishlist">
+      <span class="nav-icon">♡</span>
+      <span class="nav-text">Wishlist</span>
+    </a>
+    <a href="profile.html" class="bottom-nav-link" id="mobileProfileBtn">
+      <span class="nav-icon">👤</span>
+      <span class="nav-text">Profile</span>
+    </a>
+  </nav>
+
+</header>

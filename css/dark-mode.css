@@ -90,3 +90,19 @@ html.dark-mode .nav-center a:hover,
 html.dark-mode .nav-center a.active {
   color: #60a5fa !important;
 }
+
+/* ================= EXPLICIT .DARK OVERRIDES ================= */
+body.dark {
+  background-color: #0f172a !important;
+  color: white !important;
+}
+
+body.dark .card, 
+body.dark .career-card, 
+body.dark .category-card, 
+body.dark .exam-card,
+body.dark .trend-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}

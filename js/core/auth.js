@@ -176,7 +176,7 @@ async function handleSignup(event) {
     showToast("Account created successfully!", "success");
 
     setTimeout(() => {
-      window.location.href = "explore.html";
+      window.location.href = "app.html";
     }, 1000);
   } catch (err) {
     console.error(err);
@@ -227,7 +227,7 @@ async function handleLogin(event) {
     showToast("Welcome back!", "success");
 
     setTimeout(() => {
-      window.location.href = "explore.html";
+      window.location.href = "app.html";
     }, 1000);
   } catch (err) {
     console.error(err);
@@ -269,7 +269,7 @@ onAuthStateChanged(auth, (user) => {
     
     if (isLanding) {
       isRedirecting = true;
-      window.location.href = "explore.html";
+      window.location.href = "app.html";
     }
   }
 });
@@ -289,18 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showLoginForm();
   }
 });
-
-/* =========================
-   THEME TOGGLE
-========================= */
-window.toggleTheme = () => {
-  document.body.classList.toggle("light");
-  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
-};
-
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light");
-}
 
 /* =========================
    INTRO TEXT ANIMATION
